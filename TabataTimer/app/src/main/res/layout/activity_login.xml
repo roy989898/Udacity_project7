@@ -62,7 +62,7 @@
         android:id="@+id/btVreate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/loginbtnbackground2"
+        android:background="@drawable/loginbtnbackground"
         android:text="@string/create_ACC"
         android:textColor="@color/loginPageText"
         android:textSize="18dp" />
@@ -71,7 +71,7 @@
         android:id="@+id/btLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/loginbtnbackground2"
+        android:background="@drawable/loginbtnbackground"
         android:text="@string/login"
         android:textColor="@color/loginPageText"
         android:textSize="18dp" />

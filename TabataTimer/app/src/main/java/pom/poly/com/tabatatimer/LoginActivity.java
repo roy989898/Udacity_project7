@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -38,11 +37,20 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         tvAppname.setTypeface(font);
 
 
+        btVreate.setOnClickListener(this);
+        btLogin.setOnClickListener(this);
+
 
     }
 
     @Override
     public void onClick(View v) {
-        Toast.makeText(this, "click!", Toast.LENGTH_SHORT).show();
+        switch (v.getId()) {
+            case R.id.btLogin:
+                break;
+
+            case R.id.btVreate:
+                break;
+        }
     }
 }
