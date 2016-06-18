@@ -104,12 +104,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //check the email
         String email = edtUserID.getText().toString();
         if (TextUtils.isEmpty(email)) {
-            edtUserID.setError("Required.");
+            String required = getResources().getString(R.string.emptyMessage);
+            edtUserID.setError(required);
             valid = false;
         } else {
             edtUserID.setError(null);
             if (!isAEmail(email)) {
-                edtUserID.setError("is not a email.");
+                String notaEmail = getResources().getString(R.string.notAemail);
+                edtUserID.setError(notaEmail);
                 valid = false;
             } else {
                 edtUserID.setError(null);
@@ -120,12 +122,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //check the password
         String password = edtPassW.getText().toString();
         if (TextUtils.isEmpty(password)) {
-            edtPassW.setError("Required.");
+            String required = getResources().getString(R.string.emptyMessage);
+            edtPassW.setError(required);
             valid = false;
         } else {
             edtPassW.setError(null);
             if (!isaValidPassw(password)) {
-                edtPassW.setError("The password should be longer than 6 unit.Can include number,letter,@,~and !");
+                String passwordErrorMessage = getResources().getString(R.string.passwordErrorMessage);
+                edtPassW.setError(passwordErrorMessage);
                 valid = false;
             } else {
                 edtPassW.setError(null);
@@ -158,7 +162,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         hideProgressDialog();
                         // [END_EXCLUDE]
                         if (!task.isSuccessful()) {
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            String authenticationFailed = getResources().getString(R.string.authenticationFailed);
+                            Toast.makeText(LoginActivity.this, authenticationFailed,
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             signIn(email, password);
@@ -190,7 +195,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
-                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            String authenticationFailed = getResources().getString(R.string.authenticationFailed);
+                            Toast.makeText(LoginActivity.this, authenticationFailed,
                                     Toast.LENGTH_SHORT).show();
                         }
 
