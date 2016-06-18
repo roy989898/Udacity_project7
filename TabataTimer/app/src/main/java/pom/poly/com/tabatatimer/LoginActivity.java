@@ -1,6 +1,7 @@
 package pom.poly.com.tabatatimer;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -203,9 +204,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // [START_EXCLUDE]
                         hideProgressDialog();
                         // [END_EXCLUDE]
-                        //TODO go to next page?
-                        Toast.makeText(LoginActivity.this, "Login success",
-                                Toast.LENGTH_SHORT).show();
+
 
                     }
                 });
