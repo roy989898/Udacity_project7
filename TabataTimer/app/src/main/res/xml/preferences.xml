@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <EditTextPreference
+        android:defaultValue="@string/preference_name_defaultvalue"
+        android:dialogTitle="@string/preference_name_dialogTitle"
+        android:key="@string/preference_name_key"
+        android:title="@string/preference_name_title" />
+    <SwitchPreference
+        android:defaultValue="@string/preference_nofe_defaultvalue"
+        android:key="@string/preference_nof_key"
+        android:title="@string/preference_nof_title" />
 
 
 </PreferenceScreen>

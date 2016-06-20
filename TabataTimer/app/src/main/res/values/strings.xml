@@ -12,6 +12,16 @@
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
+    <!--preference_name_string-->
+    <string name="preference_name_key">pkeyName</string>
+    <string name="preference_name_title">User name</string>
+    <string name="preference_name_dialogTitle">Input your name</string>
+    <string name="preference_name_defaultvalue">user</string>
+
+    <!--preference_name_string-->
+    <string name="preference_nof_key">pkeyNOF</string>
+    <string name="preference_nof_title">Notification ON/OFF</string>
+    <string name="preference_nofe_defaultvalue">false</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
