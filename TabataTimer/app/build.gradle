@@ -47,6 +47,9 @@ dependencies {
 
     //circulat image view
     compile 'de.hdodenhof:circleimageview:2.0.0'
+
+    //image crop
+    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
 }
 
 apply plugin: 'com.google.gms.google-services'
