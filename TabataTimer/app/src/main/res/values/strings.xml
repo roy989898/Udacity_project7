@@ -29,7 +29,13 @@
     <string name="preference_timePick_defaultvalue">00:00</string>
 
     <!--preference_uploadPicture_string-->
-    <string name="preference_uploadPicture_title">Profile Picture</string>
+    <string name="preference_uploadPicture_url">gs://tabata-timer-capstone.appspot.com</string>
+
+    <!--upload picture unsuccess message-->
+    <string name="unSuccessUploadMessage">Upload unsuccess.Please check your Internet connection</string>
+    <!--the URL  use in Image store in Firemase-->
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="imageStoreURL">Hello blank fragment</string>
+    <string name="hello_blank_fragment">HI</string>
+    <string name="preference_uploadPicture_title">Profile Picture</string>
 </resources>
