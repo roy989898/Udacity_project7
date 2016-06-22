@@ -1,6 +1,7 @@
 package pom.poly.com.tabatatimer;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -38,6 +39,29 @@ public class profilePictureSetingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_picture_seting);
         ButterKnife.bind(this);
+
+        //Load the profile picture
+        String profilePURL = getPreferences(MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), "");
+        if (!profilePURL.equals("")) {
+            Picasso picasso = Picasso.with(this);
+            picasso.load(profilePURL).into(new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    imProfile.setImageBitmap(bitmap);
+                }
+
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable) {
+
+                }
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+                }
+            });
+        }
+
     }
 
     @OnClick(R.id.imProfile)
@@ -114,7 +138,7 @@ public class profilePictureSetingActivity extends AppCompatActivity {
         // FirebaseUser.getToken() instead.
         String uid = user.getUid();
         // Create a reference to 'images/mountains.jpg'
-        StorageReference profileIMG = storageRef.child("images/TabataTimer/"+uid+"/profile.jpg");
+        StorageReference profileIMG = storageRef.child("images/TabataTimer/" + uid + "/profile.jpg");
 
 //        Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
 //        StorageReference riversRef = storageRef.child("images/" + file.getLastPathSegment());
@@ -133,9 +157,17 @@ public class profilePictureSetingActivity extends AppCompatActivity {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 Log.d("downloadUrl", downloadUrl.toString());
+                saveTheLinkinSP(downloadUrl.toString());
             }
         });
 
+    }
+
+    private void saveTheLinkinSP(String downloadUrl) {
+        SharedPreferences preference = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = preference.edit();
+        editor.putString(getString(R.string.SharePreferenceDownloadLinkKey), downloadUrl);
+        editor.commit();
     }
 
 

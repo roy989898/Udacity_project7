@@ -37,6 +37,9 @@
     <!--upload picture unsuccess message,because no ogin-->
     <string name="unSuccessUploadMessageNoSigin">Upload unsuccess.Please Login again.</string>
 
+    <!--Key of save the profile picture dowload link in Sharepreference-->
+    <string name="SharePreferenceDownloadLinkKey">spDownloadLinkKey</string>
+
     <!--the URL  use in Image store in Firemase-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="imageStoreURL">Hello blank fragment</string>
