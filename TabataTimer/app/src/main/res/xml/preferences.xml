@@ -15,9 +15,12 @@
     <!--TODO set the time picker default value-->
 
     <pom.poly.com.tabatatimer.Preference.TimePickerPreference
-
         android:key="@string/preference_timePick_key"
         android:title="@string/preference_timePick_title" />
+
+    <Preference android:title="@string/preference_logout_title">
+        <intent android:action="com.example.myapp.activities.profilePictureSetingActivity"/>
+    </Preference>
 
 
 </PreferenceScreen>
