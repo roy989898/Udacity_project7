@@ -20,7 +20,11 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"></activity>
-        <activity android:name=".SettingActivity" />
+        <activity android:name=".SettingActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity android:name=".profilePictureSetingActivity">
             <intent-filter>
                 <action android:name="com.example.myapp.activities.profilePictureSetingActivity" />

@@ -56,6 +56,9 @@
 
     <!--Name of SharedPreference-->
     <string name="name_sharepreference">TimerPreferenceName</string>
+
+    <!--Setting Activity title-->
+    <string name="title_settingActivity">Setting</string>
     <!--the URL  use in Image store in Firemase-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="imageStoreURL">Hello blank fragment</string>
