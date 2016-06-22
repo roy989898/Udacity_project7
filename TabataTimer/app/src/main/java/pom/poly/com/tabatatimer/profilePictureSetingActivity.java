@@ -41,7 +41,7 @@ public class profilePictureSetingActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         //Load the profile picture
-        String profilePURL = getPreferences(MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), "");
+        String profilePURL = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), "");
         if (!profilePURL.equals("")) {
             Picasso picasso = Picasso.with(this);
             picasso.load(profilePURL).into(new Target() {
@@ -164,7 +164,7 @@ public class profilePictureSetingActivity extends AppCompatActivity {
     }
 
     private void saveTheLinkinSP(String downloadUrl) {
-        SharedPreferences preference = getPreferences(MODE_PRIVATE);
+        SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE);
         SharedPreferences.Editor editor = preference.edit();
         editor.putString(getString(R.string.SharePreferenceDownloadLinkKey), downloadUrl);
         editor.commit();

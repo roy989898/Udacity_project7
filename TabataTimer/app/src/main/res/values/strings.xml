@@ -54,9 +54,12 @@
     <!--Key of save the auto-->
     <string name="sharedPreference_autologin_key">spautoLogin</string>
 
+    <!--Name of SharedPreference-->
+    <string name="name_sharepreference">TimerPreferenceName</string>
     <!--the URL  use in Image store in Firemase-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="imageStoreURL">Hello blank fragment</string>
     <string name="hello_blank_fragment">HI</string>
     <string name="preference_uploadPicture_title">Profile Picture</string>
+    <string name="bt_lagout_string">Logout</string>
 </resources>

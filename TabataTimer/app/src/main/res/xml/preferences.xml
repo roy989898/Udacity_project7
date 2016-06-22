@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <Preference android:title="@string/preference_uploadPicture_title">
-        <intent android:action="com.example.myapp.activities.profilePictureSetingActivity"/>
+        <intent android:action="com.example.myapp.activities.profilePictureSetingActivity" />
     </Preference>
     <EditTextPreference
         android:defaultValue="@string/preference_name_defaultvalue"
@@ -19,7 +19,7 @@
         android:title="@string/preference_timePick_title" />
 
     <Preference android:title="@string/preference_logout_title">
-        <intent android:action="com.example.myapp.activities.profilePictureSetingActivity"/>
+        <intent android:action="com.example.myapp.activities.LogoutActivity" />
     </Preference>
 
 

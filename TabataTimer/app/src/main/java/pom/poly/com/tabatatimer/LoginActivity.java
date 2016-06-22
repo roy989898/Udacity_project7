@@ -181,7 +181,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void saveEmailAndPassword(String email, String password) {
-        SharedPreferences preference = getPreferences(MODE_PRIVATE);
+        SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference),MODE_PRIVATE);
         SharedPreferences.Editor editor = preference.edit();
         editor.putString(getString(R.string.sharedpreference_email_key), email);
         editor.putString(getString(R.string.sharedPreference_password_key), password);
@@ -189,14 +189,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void enableAutoLogin() {
-        SharedPreferences preference = getPreferences(MODE_PRIVATE);
+        SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference),MODE_PRIVATE);
         SharedPreferences.Editor editor = preference.edit();
         editor.putBoolean(getString(R.string.sharedPreference_autologin_key), true);
         editor.commit();
     }
 
     private boolean canAutoLogin() {
-        SharedPreferences preference = getPreferences(MODE_PRIVATE);
+        SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference),MODE_PRIVATE);
         return preference.getBoolean(getString(R.string.sharedPreference_autologin_key), false);
     }
 
@@ -222,17 +222,19 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // signed in user can be handled in the listener.
 
                         //after login,ho to the Main Activity
-                        saveEmailAndPassword(email, password);
-                        enableAutoLogin();
 
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(intent);
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
                             String authenticationFailed = getResources().getString(R.string.authenticationFailed);
                             Toast.makeText(LoginActivity.this, authenticationFailed,
                                     Toast.LENGTH_SHORT).show();
+                        } else {
+                            saveEmailAndPassword(email, password);
+                            enableAutoLogin();
+
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
                         }
 
                         // [START_EXCLUDE]
@@ -292,10 +294,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         };
 
         if (canAutoLogin()) {
-            SharedPreferences preference = getPreferences(MODE_PRIVATE);
+            SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference),MODE_PRIVATE);
             String email = preference.getString(getString(R.string.sharedpreference_email_key), "");
             String password = preference.getString(getString(R.string.sharedPreference_password_key), "");
-            signIn(email,password);
+            Log.d("LoginActivity",canAutoLogin()+" "+email+" "+password);
+            signIn(email, password);
         }
 
 
