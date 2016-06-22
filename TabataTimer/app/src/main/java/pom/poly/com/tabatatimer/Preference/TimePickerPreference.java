@@ -53,11 +53,12 @@ public class TimePickerPreference extends DialogPreference {
     @Override
     protected void onDialogClosed(boolean positiveResult) {
         super.onDialogClosed(positiveResult);
-        if (true) {
+        if (positiveResult) {
             hour = timePicker.getCurrentHour();
             minutes = timePicker.getCurrentMinute();
             String time = hour + ":" + minutes;
             //save the value
+            callChangeListener(time);
             persistString(time);
 
         }
