@@ -2,6 +2,7 @@ package pom.poly.com.tabatatimer;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -98,12 +99,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return m.matches();
     }
 
-    private boolean validateForm() {
+    private boolean validateForm(String email, String password) {
         boolean valid = true;
         //TODO put all the String into xml
 
         //check the email
-        String email = edtUserID.getText().toString();
+
         if (TextUtils.isEmpty(email)) {
             String required = getResources().getString(R.string.emptyMessage);
             edtUserID.setError(required);
@@ -121,7 +122,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         //check the password
-        String password = edtPassW.getText().toString();
+
         if (TextUtils.isEmpty(password)) {
             String required = getResources().getString(R.string.emptyMessage);
             edtPassW.setError(required);
@@ -143,7 +144,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void createAccount(final String email, final String password) {
         Log.d(TAG, "createAccount:" + email);
-        if (!validateForm()) {
+        if (!validateForm(email, password)) {
             return;
         }
 
@@ -160,6 +161,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.
                         // [START_EXCLUDE]
+
+                        //Finish create account
+
                         hideProgressDialog();
                         // [END_EXCLUDE]
                         if (!task.isSuccessful()) {
@@ -176,9 +180,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // [END create_user_with_email]
     }
 
-    private void signIn(String email, String password) {
+    private void saveEmailAndPassword(String email, String password) {
+        SharedPreferences preference = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = preference.edit();
+        editor.putString(getString(R.string.sharedpreference_email_key), email);
+        editor.putString(getString(R.string.sharedPreference_password_key), password);
+        editor.commit();
+    }
+
+    private void enableAutoLogin() {
+        SharedPreferences preference = getPreferences(MODE_PRIVATE);
+        SharedPreferences.Editor editor = preference.edit();
+        editor.putBoolean(getString(R.string.sharedPreference_autologin_key), true);
+        editor.commit();
+    }
+
+    private boolean canAutoLogin() {
+        SharedPreferences preference = getPreferences(MODE_PRIVATE);
+        return preference.getBoolean(getString(R.string.sharedPreference_autologin_key), false);
+    }
+
+
+    private void signIn(final String email, final String password) {
         Log.d(TAG, "signIn:" + email);
-        if (!validateForm()) {
+        if (!validateForm(email, password)) {
             return;
         }
 
@@ -187,6 +212,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         Log.d(TAG, "signInWithEmail:onComplete:" + task.isSuccessful());
@@ -196,9 +222,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // signed in user can be handled in the listener.
 
                         //after login,ho to the Main Activity
-                        Intent intent=new Intent(LoginActivity.this, MainActivity.class);
+                        saveEmailAndPassword(email, password);
+                        enableAutoLogin();
+
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        startActivity(intent);
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
                             String authenticationFailed = getResources().getString(R.string.authenticationFailed);
@@ -244,6 +273,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Firebase auth
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
+
+
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user = firebaseAuth.getCurrentUser();
@@ -256,7 +287,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
 
             }
+
+
         };
+
+        if (canAutoLogin()) {
+            SharedPreferences preference = getPreferences(MODE_PRIVATE);
+            String email = preference.getString(getString(R.string.sharedpreference_email_key), "");
+            String password = preference.getString(getString(R.string.sharedPreference_password_key), "");
+            signIn(email,password);
+        }
 
 
     }

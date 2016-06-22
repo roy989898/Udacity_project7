@@ -46,6 +46,9 @@
     <!--Key of save the password-->
     <string name="sharedPreference_password_key">sppasswordKey</string>
 
+    <!--Key of save the auto-->
+    <string name="sharedPreference_autologin_key">spautoLogin</string>
+
     <!--the URL  use in Image store in Firemase-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="imageStoreURL">Hello blank fragment</string>
