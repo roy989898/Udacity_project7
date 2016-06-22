@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -95,12 +97,28 @@ public class profilePictureSetingActivity extends AppCompatActivity {
         String url = getString(R.string.preference_uploadPicture_url);
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReferenceFromUrl(url);
+
+        //get the user ID
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user == null) {
+            Toast.makeText(this, getString(R.string.unSuccessUploadMessageNoSigin), Toast.LENGTH_SHORT);
+            return;
+
+        }
+        String name = user.getDisplayName();
+        String email = user.getEmail();
+        Uri photoUrl = user.getPhotoUrl();
+
+        // The user's ID, unique to the Firebase project. Do NOT use this value to
+        // authenticate with your backend server, if you have one. Use
+        // FirebaseUser.getToken() instead.
+        String uid = user.getUid();
         // Create a reference to 'images/mountains.jpg'
-        StorageReference profileIMG = storageRef.child("images/profile.jpg");
+        StorageReference profileIMG = storageRef.child("images/TabataTimer/"+uid+"/profile.jpg");
 
 //        Uri file = Uri.fromFile(new File("path/to/images/rivers.jpg"));
-        StorageReference riversRef = storageRef.child("images/" + file.getLastPathSegment());
-        UploadTask uploadTask = riversRef.putFile(file);
+//        StorageReference riversRef = storageRef.child("images/" + file.getLastPathSegment());
+        UploadTask uploadTask = profileIMG.putFile(file);
 
         // Register observers to listen for when the download is done or if it fails
         uploadTask.addOnFailureListener(new OnFailureListener() {

@@ -32,7 +32,11 @@
     <string name="preference_uploadPicture_url">gs://tabata-timer-capstone.appspot.com</string>
 
     <!--upload picture unsuccess message-->
-    <string name="unSuccessUploadMessage">Upload unsuccess.Please check your Internet connection</string>
+    <string name="unSuccessUploadMessage">Upload unsuccess.Please check your Internet connection.</string>
+
+    <!--upload picture unsuccess message,because no ogin-->
+    <string name="unSuccessUploadMessageNoSigin">Upload unsuccess.Please Login again.</string>
+
     <!--the URL  use in Image store in Firemase-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="imageStoreURL">Hello blank fragment</string>
