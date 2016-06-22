@@ -2,7 +2,6 @@ package pom.poly.com.tabatatimer;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -177,7 +176,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // [END create_user_with_email]
     }
 
-    private void signIn(final String email, final String password) {
+    private void signIn(String email, String password) {
         Log.d(TAG, "signIn:" + email);
         if (!validateForm()) {
             return;
@@ -197,11 +196,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         // signed in user can be handled in the listener.
 
                         //after login,ho to the Main Activity
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                        Intent intent=new Intent(LoginActivity.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                        saveTheEmailAndPassword(email,password);
-                        enableAutoLogin();
-                        startActivity(intent);
+                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         if (!task.isSuccessful()) {
                             Log.w(TAG, "signInWithEmail", task.getException());
                             String authenticationFailed = getResources().getString(R.string.authenticationFailed);
@@ -219,17 +216,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // [END sign_in_with_email]
     }
 
-    private void enableAutoLogin() {
-    }
-
-    private void saveTheEmailAndPassword(String email,String password){
-        SharedPreferences preference = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor editor = preference.edit();
-        editor.putString(getString(R.string.sharedpreference_email_key),email);
-        editor.putString(getString(R.string.sharedPreference_password_key),password);
-        editor.commit();
-        
-    }
     private void showProgressDialog() {
         progress = ProgressDialog.show(this, "",
                 "", true);

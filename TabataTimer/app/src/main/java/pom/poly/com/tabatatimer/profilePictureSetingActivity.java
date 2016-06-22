@@ -42,16 +42,9 @@ public class profilePictureSetingActivity extends AppCompatActivity {
 
         //Load the profile picture
         String profilePURL = getPreferences(MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), "");
-        loadProfilePicture(profilePURL);
-
-
-    }
-
-    private void loadProfilePicture(String downloadLink) {
-
-        if (!downloadLink.equals("")) {
+        if (!profilePURL.equals("")) {
             Picasso picasso = Picasso.with(this);
-            picasso.load(downloadLink).into(new Target() {
+            picasso.load(profilePURL).into(new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     imProfile.setImageBitmap(bitmap);
@@ -68,6 +61,7 @@ public class profilePictureSetingActivity extends AppCompatActivity {
                 }
             });
         }
+
     }
 
     @OnClick(R.id.imProfile)
@@ -174,7 +168,6 @@ public class profilePictureSetingActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = preference.edit();
         editor.putString(getString(R.string.SharePreferenceDownloadLinkKey), downloadUrl);
         editor.commit();
-        //TODO save the link on firebase later?
     }
 
 

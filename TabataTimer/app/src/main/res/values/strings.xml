@@ -45,6 +45,7 @@
 
     <!--Key of save the password-->
     <string name="sharedPreference_password_key">sppasswordKey</string>
+
     <!--the URL  use in Image store in Firemase-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="imageStoreURL">Hello blank fragment</string>
