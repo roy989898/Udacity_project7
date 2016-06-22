@@ -40,6 +40,11 @@
     <!--Key of save the profile picture dowload link in Sharepreference-->
     <string name="SharePreferenceDownloadLinkKey">spDownloadLinkKey</string>
 
+    <!--Key of save the email-->
+    <string name="sharedpreference_email_key">spemailKey</string>
+
+    <!--Key of save the password-->
+    <string name="sharedPreference_password_key">sppasswordKey</string>
     <!--the URL  use in Image store in Firemase-->
     <!-- TODO: Remove or change this placeholder text -->
     <string name="imageStoreURL">Hello blank fragment</string>
