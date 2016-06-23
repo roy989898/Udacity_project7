@@ -1,0 +1,8 @@
+<resources>
+    <declare-styleable name="myBallView">
+        <attr name="onColor" format="reference" />
+        <attr name="offColor" format="reference" />
+        <attr name="setOnOff" format="boolean" />
+        <attr name="circularRadius" format="dimension" />
+    </declare-styleable>
+</resources>
