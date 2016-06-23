@@ -7,10 +7,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import pom.poly.com.tabatatimer.R;
+import pom.poly.com.tabatatimer.View.myBallView;
 
 
 public class TimerFragment extends Fragment {
+
+
+    @BindView(R.id.ball1)
+    myBallView ball1;
+    @BindView(R.id.ball2)
+    myBallView ball2;
+    @BindView(R.id.ball3)
+    myBallView ball3;
+    @BindView(R.id.ball4)
+    myBallView ball4;
+    @BindView(R.id.ball5)
+    myBallView ball5;
+    @BindView(R.id.ball6)
+    myBallView ball6;
+    @BindView(R.id.ball7)
+    myBallView ball7;
+    @BindView(R.id.ball8)
+    myBallView ball8;
+
 
 
     public TimerFragment() {
@@ -40,7 +62,9 @@ public class TimerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_ime, container, false);
+        View view = inflater.inflate(R.layout.fragment_ime, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
 }

@@ -16,13 +16,14 @@ import pom.poly.com.tabatatimer.R;
 public class myBallView extends View {
 
 
-    private int mOnColor;
-    private int mOffColor;
+
     private boolean mSetOnOff;
 
 
     private Paint mBallPaint;
     private float mCircleRadius;
+    private int mOffColor;
+    private int mOnColor;
 
     public myBallView(Context context) {
         super(context);
@@ -44,7 +45,7 @@ public class myBallView extends View {
         return mCircleRadius;
     }
 
-    public void setmCircleRadius(float mCircleRadius) {
+    public void setmCircleRadius(int mCircleRadius) {
         this.mCircleRadius = mCircleRadius;
         invalidate();
         requestLayout();
@@ -86,8 +87,8 @@ public class myBallView extends View {
                 attrs, R.styleable.myBallView, defStyle, 0);
 
         try {
-            mOffColor = a.getResourceId(R.styleable.myBallView_offColor, Color.BLUE);
-            mOnColor = a.getResourceId(R.styleable.myBallView_onColor, Color.RED);
+             mOffColor = a.getColor(R.styleable.myBallView_offColor, Color.WHITE);
+             mOnColor = a.getColor(R.styleable.myBallView_onColor, Color.RED);
 
             mSetOnOff = a.getBoolean(R.styleable.myBallView_setOnOff, false);
             mCircleRadius = a.getDimension(R.styleable.myBallView_circularRadius, 0);

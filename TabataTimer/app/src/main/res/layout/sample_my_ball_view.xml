@@ -11,6 +11,8 @@
         android:paddingLeft="40dp"
         app:setOnOff="false"
         android:paddingRight="40dp"
+        app:onColor="@color/colorAccent"
+        app:offColor="@color/colorAccent"
         android:paddingTop="100dp"
         app:circularRadius="-100dp"
         android:layout_gravity="center" />
