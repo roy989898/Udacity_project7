@@ -60,6 +60,11 @@
     <!--Setting Activity title-->
     <string name="title_settingActivity">Setting</string>
     <!--the URL  use in Image store in Firemase-->
+
+    <!--String in timerFragment layout-->
+    <string name="string_pause">Pause</string>
+    <string name="string_action">Action</string>
+    <string name="timer_startnumber">00:00</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="imageStoreURL">Hello blank fragment</string>
     <string name="hello_blank_fragment">HI</string>
