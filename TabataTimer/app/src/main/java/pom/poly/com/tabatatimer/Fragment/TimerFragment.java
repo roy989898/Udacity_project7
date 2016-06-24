@@ -21,6 +21,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pom.poly.com.tabatatimer.R;
+import pom.poly.com.tabatatimer.Utility.SoundLibrary;
 import pom.poly.com.tabatatimer.View.myBallView;
 
 
@@ -59,6 +60,7 @@ public class TimerFragment extends Fragment {
     private int timerCount = 0;
     private Handler mHandler;
     private Timer timer;
+    private SoundLibrary sound;
 
 
     public TimerFragment() {
@@ -130,6 +132,8 @@ public class TimerFragment extends Fragment {
                 }
             }
         };
+
+        sound = new SoundLibrary(getContext());
     }
 
     @Override
@@ -244,6 +248,13 @@ public class TimerFragment extends Fragment {
                 actionTimer++;
             }
 
+            if (pauseTimer > 7 && pauseTimer <= 10) {
+                sound.playStartSound();
+            }
+            if (actionTimer == 20) {
+                sound.playEndSound();
+            }
+
             if (pauseTimer > 10) {
                 pauseTimerOn = false;
                 pauseTimer = 0;
@@ -252,7 +263,7 @@ public class TimerFragment extends Fragment {
                 actionTimer = 0;
                 timerCount++;
             }
-            if(timerCount>=9){
+            if (timerCount >= 9) {
                 //TODO stop and make a Congratulation page
             }
             Message message = new Message();
