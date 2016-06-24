@@ -130,6 +130,8 @@ public class TimerFragment extends Fragment {
 
                     showTheTimerandCount(pauseTime, actionTime, count, isStartButton);
 
+                } else if (msg.what == 2) {
+                    stopNadResetTimerandCount();
                 }
             }
         };
@@ -267,17 +269,21 @@ public class TimerFragment extends Fragment {
                 actionTimer = 0;
                 timerCount++;
             }
-            if (timerCount >= 9) {
-                //TODO stop and make a Congratulation page
+            if (timerCount >= 8) {
+                Message message = new Message();
+                message.what = 2;
+                mHandler.sendMessage(message);
+            } else {
+                Message message = new Message();
+                Bundle databundle = new Bundle();
+                databundle.putInt(getString(R.string.bundle_key_pause), pauseTimer);
+                databundle.putInt(getString(R.string.bundle_key_action), actionTimer);
+                databundle.putInt(getString(R.string.bundle_key_count), timerCount);
+                message.setData(databundle);
+                message.what = 1;
+                mHandler.sendMessage(message);
             }
-            Message message = new Message();
-            Bundle databundle = new Bundle();
-            databundle.putInt(getString(R.string.bundle_key_pause), pauseTimer);
-            databundle.putInt(getString(R.string.bundle_key_action), actionTimer);
-            databundle.putInt(getString(R.string.bundle_key_count), timerCount);
-            message.setData(databundle);
-            message.what = 1;
-            mHandler.sendMessage(message);
+
 
             Log.d("Timer", "action " + actionTimer + " pause " + pauseTimer + " count " + timerCount);
 
