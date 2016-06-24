@@ -92,8 +92,9 @@ public class TimerFragment extends Fragment {
 
     @Override
     public void onPause() {
-        super.onPause();
         pauseAndSaveTimerandCount();
+        super.onPause();
+
     }
 
     private void setTheBallOn(int index, myBallView[] ballArray) {
@@ -182,9 +183,10 @@ public class TimerFragment extends Fragment {
     private void pauseAndSaveTimerandCount() {
         if (timer != null) {
             timer.cancel();
-            saveTimerAndCount();
+
             timer = null;
         }
+        saveTimerAndCount();
 
     }
 
@@ -240,7 +242,7 @@ public class TimerFragment extends Fragment {
 
         @Override
         public void run() {
-            //TODO play sound!!!!
+
 
             if (pauseTimerOn) {
                 pauseTimer++;
