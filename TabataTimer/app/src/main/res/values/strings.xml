@@ -77,6 +77,7 @@
     <string name="sharedpreferencekey_action">spAction</string>
     <string name="sharedpreferencekey_pause">spPause</string>
     <string name="sharedpreferencekey_count">spCount</string>
+    <string name="sharedpreferencekey_isPauseTimerON">spPausetimeron</string>
     <string name="sharedpreferencekey_isStartButton">spstartButton</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="imageStoreURL">Hello blank fragment</string>

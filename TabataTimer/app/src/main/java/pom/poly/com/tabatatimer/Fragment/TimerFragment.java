@@ -196,6 +196,7 @@ public class TimerFragment extends Fragment {
         editor.putInt(getString(R.string.sharedpreferencekey_action), actionTimer);
         editor.putInt(getString(R.string.sharedpreferencekey_pause), pauseTimer);
         editor.putInt(getString(R.string.sharedpreferencekey_count), timerCount);
+        editor.putBoolean(getString(R.string.sharedpreferencekey_isPauseTimerON), pauseTimerOn);
 //        editor.putBoolean(getString(R.string.sharedpreferencekey_isStartButton), isStartButton);
         editor.commit();
     }
@@ -205,6 +206,7 @@ public class TimerFragment extends Fragment {
         actionTimer = sharedPreference.getInt(getString(R.string.sharedpreferencekey_action), 0);
         pauseTimer = sharedPreference.getInt(getString(R.string.sharedpreferencekey_pause), 0);
         timerCount = sharedPreference.getInt(getString(R.string.sharedpreferencekey_count), 0);
+        pauseTimerOn = sharedPreference.getBoolean(getString(R.string.sharedpreferencekey_isPauseTimerON), true);
 
 
     }
