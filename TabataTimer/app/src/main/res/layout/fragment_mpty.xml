@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     tools:context="pom.poly.com.tabatatimer.Fragment.mptyFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+
 
     <pom.poly.com.tabatatimer.View.myBallView
         android:layout_width="match_parent"

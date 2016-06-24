@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimaryLight"
     android:orientation="vertical"
     tools:context="pom.poly.com.tabatatimer.Fragment.TimerFragment">
@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="2"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -37,75 +37,79 @@
         android:layout_weight="1"
         android:background="@color/colorPrimaryDark"
         android:orientation="horizontal">
-        <View android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:background="@drawable/circle"/>
+
 
         <pom.poly.com.tabatatimer.View.myBallView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
             android:id="@+id/ball1"
-            app:offColor="@color/colorPrimaryLight"
-            app:onColor="@color/colorAccent"
-            android:padding="@dimen/ball_padding"
-            android:layout_weight="1" />
-        <pom.poly.com.tabatatimer.View.myBallView
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:id="@+id/ball2"
-            app:offColor="@color/colorPrimaryLight"
-            app:onColor="@color/colorAccent"
+            android:layout_weight="1"
             android:padding="@dimen/ball_padding"
-            android:layout_weight="1" />
-        <pom.poly.com.tabatatimer.View.myBallView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/ball3"
             app:offColor="@color/colorPrimaryLight"
-            app:onColor="@color/colorAccent"
-            android:padding="@dimen/ball_padding"
-            android:layout_weight="1" />
-        <pom.poly.com.tabatatimer.View.myBallView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/ball4"
-            app:offColor="@color/colorPrimaryLight"
-            app:onColor="@color/colorAccent"
-            android:padding="@dimen/ball_padding"
-            android:layout_weight="1" />
-        <pom.poly.com.tabatatimer.View.myBallView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/ball5"
-            app:offColor="@color/colorPrimaryLight"
-            app:onColor="@color/colorAccent"
-            android:padding="@dimen/ball_padding"
-            android:layout_weight="1" />
-        <pom.poly.com.tabatatimer.View.myBallView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/ball6"
-            app:offColor="@color/colorPrimaryLight"
-            app:onColor="@color/colorAccent"
-            android:padding="@dimen/ball_padding"
-            android:layout_weight="1" />
-        <pom.poly.com.tabatatimer.View.myBallView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/ball7"
-            app:offColor="@color/colorPrimaryLight"
-            app:onColor="@color/colorAccent"
-            android:padding="@dimen/ball_padding"
-            android:layout_weight="1" />
-        <pom.poly.com.tabatatimer.View.myBallView
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:id="@+id/ball8"
-            app:offColor="@color/colorPrimaryLight"
-            app:onColor="@color/colorAccent"
-            android:padding="@dimen/ball_padding"
-            android:layout_weight="1" />
+            app:onColor="@color/colorAccent" />
 
+        <pom.poly.com.tabatatimer.View.myBallView
+            android:id="@+id/ball2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/ball_padding"
+            app:offColor="@color/colorPrimaryLight"
+            app:onColor="@color/colorAccent" />
+
+        <pom.poly.com.tabatatimer.View.myBallView
+            android:id="@+id/ball3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/ball_padding"
+            app:offColor="@color/colorPrimaryLight"
+            app:onColor="@color/colorAccent" />
+
+        <pom.poly.com.tabatatimer.View.myBallView
+            android:id="@+id/ball4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/ball_padding"
+            app:offColor="@color/colorPrimaryLight"
+            app:onColor="@color/colorAccent" />
+
+        <pom.poly.com.tabatatimer.View.myBallView
+            android:id="@+id/ball5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/ball_padding"
+            app:offColor="@color/colorPrimaryLight"
+            app:onColor="@color/colorAccent" />
+
+        <pom.poly.com.tabatatimer.View.myBallView
+            android:id="@+id/ball6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/ball_padding"
+            app:offColor="@color/colorPrimaryLight"
+            app:onColor="@color/colorAccent" />
+
+        <pom.poly.com.tabatatimer.View.myBallView
+            android:id="@+id/ball7"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/ball_padding"
+            app:offColor="@color/colorPrimaryLight"
+            app:onColor="@color/colorAccent" />
+
+        <pom.poly.com.tabatatimer.View.myBallView
+            android:id="@+id/ball8"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:padding="@dimen/ball_padding"
+            app:offColor="@color/colorPrimaryLight"
+            app:onColor="@color/colorAccent" />
 
 
     </LinearLayout>
@@ -114,7 +118,7 @@
         android:layout_width="match_parent"
 
         android:layout_height="0dp"
-        android:layout_weight="5"
+        android:layout_weight="2"
         android:background="@color/colorPrimaryDark"
         android:gravity="center"
         android:orientation="vertical">
@@ -140,5 +144,25 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:orientation="horizontal"></LinearLayout>
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/loginbtnbackground"
+            android:layout_margin="10dp"
+            android:text="@string/bt_start"
+            android:textColor="@color/loginPageText" />
+
+        <Button
+            android:id="@+id/btReset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/loginbtnbackground"
+            android:layout_margin="10dp"
+            android:text="@string/bt_reset"
+            android:textColor="@color/loginPageText" />
+    </LinearLayout>
 </LinearLayout>

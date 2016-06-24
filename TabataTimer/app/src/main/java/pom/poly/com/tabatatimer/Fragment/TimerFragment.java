@@ -1,14 +1,25 @@
 package pom.poly.com.tabatatimer.Fragment;
 
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pom.poly.com.tabatatimer.R;
 import pom.poly.com.tabatatimer.View.myBallView;
 
@@ -32,23 +43,70 @@ public class TimerFragment extends Fragment {
     myBallView ball7;
     @BindView(R.id.ball8)
     myBallView ball8;
-
+    @BindView(R.id.tvPauseTimer)
+    TextView tvPauseTimer;
+    @BindView(R.id.tvActionTimer)
+    TextView tvActionTimer;
+    @BindView(R.id.btStart)
+    Button btStart;
+    @BindView(R.id.btReset)
+    Button btReset;
+    private myBallView[] ballArray;
+    private boolean isStartButton = true;
+    private boolean pauseTimerOn = true;
+    private int pauseTimer = 0;
+    private int actionTimer = 0;
+    private int timerCount = 0;
+    private Handler mHandler;
+    private Timer timer;
 
 
     public TimerFragment() {
         // Required empty public constructor
+
+
     }
 
+    private myBallView[] initialBallArray() {
+        myBallView[] ballArray = new myBallView[8];
+        ballArray[0] = ball1;
+        ballArray[1] = ball2;
+        ballArray[2] = ball3;
+        ballArray[3] = ball4;
+        ballArray[4] = ball5;
+        ballArray[5] = ball6;
+        ballArray[6] = ball7;
+        ballArray[7] = ball8;
 
-    // TODO: Rename and change types and number of parameters
-    /*public static TimerFragment newInstance(String param1, String param2) {
-        TimerFragment fragment = new TimerFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }*/
+        return ballArray;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        restoreTimerandCount();
+        showTheTimerandCount(pauseTimer, actionTimer, timerCount, isStartButton);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        pauseAndSaveTimerandCount();
+    }
+
+    private void setTheBallOn(int index, myBallView[] ballArray) {
+        if (index < ballArray.length && index >= 0) {
+            for (myBallView ball : ballArray) {
+                ball.setmSetOnOff(false); //set all off first
+            }
+            ballArray[index].setmSetOnOff(true); //set a specific on On
+        } else {
+            for (myBallView ball : ballArray) {
+                ball.setmSetOnOff(false); //set all off
+            }
+        }
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -56,6 +114,22 @@ public class TimerFragment extends Fragment {
         if (getArguments() != null) {
 
         }
+        mHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                super.handleMessage(msg);
+
+                if (msg.what == 1) {
+                    Bundle bundle = msg.getData();
+                    int pauseTime = bundle.getInt(getString(R.string.bundle_key_pause));
+                    int actionTime = bundle.getInt(getString(R.string.bundle_key_action));
+                    int count = bundle.getInt(getString(R.string.bundle_key_count));
+
+                    showTheTimerandCount(pauseTime, actionTime, count, isStartButton);
+
+                }
+            }
+        };
     }
 
     @Override
@@ -64,7 +138,135 @@ public class TimerFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_ime, container, false);
         ButterKnife.bind(this, view);
+        ballArray = initialBallArray();
         return view;
     }
 
+    @OnClick({R.id.btStart, R.id.btReset})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btStart:
+                if (isStartButton) {
+                    //start button
+                    startTimerandCount();
+                    setStartbuttonToPauseButton();
+                } else {
+                    //pause button
+                    setPausePuttontoStartButton();
+                    pauseAndSaveTimerandCount();
+                }
+
+                break;
+            case R.id.btReset:
+                stopNadResetTimerandCount();
+
+                break;
+        }
+    }
+
+    private void setStartbuttonToPauseButton() {
+        isStartButton = false;
+        btStart.setText(getString(R.string.bt_start_pause));
+    }
+
+    private void setPausePuttontoStartButton() {
+        isStartButton = true;
+        btStart.setText(getString(R.string.bt_start));
+    }
+
+
+    private void pauseAndSaveTimerandCount() {
+        if (timer != null) {
+            timer.cancel();
+            saveTimerAndCount();
+            timer = null;
+        }
+
+    }
+
+    private void saveTimerAndCount() {
+        SharedPreferences sharedPreference = getActivity().getSharedPreferences(getString(R.string.timer_fragment_sharedPreference_name), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreference.edit();
+        editor.putInt(getString(R.string.sharedpreferencekey_action), actionTimer);
+        editor.putInt(getString(R.string.sharedpreferencekey_pause), pauseTimer);
+        editor.putInt(getString(R.string.sharedpreferencekey_count), timerCount);
+//        editor.putBoolean(getString(R.string.sharedpreferencekey_isStartButton), isStartButton);
+        editor.commit();
+    }
+
+    private void restoreTimerandCount() {
+        SharedPreferences sharedPreference = getActivity().getSharedPreferences(getString(R.string.timer_fragment_sharedPreference_name), Context.MODE_PRIVATE);
+        actionTimer = sharedPreference.getInt(getString(R.string.sharedpreferencekey_action), 0);
+        pauseTimer = sharedPreference.getInt(getString(R.string.sharedpreferencekey_pause), 0);
+        timerCount = sharedPreference.getInt(getString(R.string.sharedpreferencekey_count), 0);
+
+
+    }
+
+    private void startTimerandCount() {
+        if (timer == null) {
+            timer = new Timer(true);
+            timer.schedule(new myTimerTask(), 1000, 1000);
+        }
+    }
+
+    private void stopNadResetTimerandCount() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+        actionTimer = pauseTimer = timerCount = 0;
+        isStartButton = true;
+        showTheTimerandCount(pauseTimer, actionTimer, timerCount, isStartButton);
+    }
+
+    private void showTheTimerandCount(int pauseTimer, int ActionTimer, int count, Boolean isStartButton) {
+        tvPauseTimer.setText(pauseTimer + "");
+        tvActionTimer.setText(ActionTimer + "");
+        setTheBallOn(count, ballArray);
+        if (isStartButton) {
+            setPausePuttontoStartButton();
+        } else {
+            setStartbuttonToPauseButton();
+        }
+
+    }
+
+    private class myTimerTask extends TimerTask {
+
+        @Override
+        public void run() {
+            //TODO play sound!!!!
+
+            if (pauseTimerOn) {
+                pauseTimer++;
+            } else {
+                actionTimer++;
+            }
+
+            if (pauseTimer > 10) {
+                pauseTimerOn = false;
+                pauseTimer = 0;
+            } else if (actionTimer > 20) {
+                pauseTimerOn = true;
+                actionTimer = 0;
+                timerCount++;
+            }
+            if(timerCount>=9){
+                //TODO stop and make a Congratulation page
+            }
+            Message message = new Message();
+            Bundle databundle = new Bundle();
+            databundle.putInt(getString(R.string.bundle_key_pause), pauseTimer);
+            databundle.putInt(getString(R.string.bundle_key_action), actionTimer);
+            databundle.putInt(getString(R.string.bundle_key_count), timerCount);
+            message.setData(databundle);
+            message.what = 1;
+            mHandler.sendMessage(message);
+
+            Log.d("Timer", "action " + actionTimer + " pause " + pauseTimer + " count " + timerCount);
+
+
+        }
+    }
 }
