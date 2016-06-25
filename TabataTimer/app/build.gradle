@@ -34,12 +34,15 @@ dependencies {
     //image crop
 
 
+    
+
+
     compile 'com.google.firebase:firebase-core:9.0.2'
     compile 'com.google.firebase:firebase-database:9.0.2'
     compile 'com.google.firebase:firebase-storage:9.0.2'
     compile 'com.google.firebase:firebase-auth:9.0.2'
     compile 'de.hdodenhof:circleimageview:2.0.0'
-    compile 'com.soundcloud.android:android-crop:1.0.1@aar'
+    compile'com.soundcloud.android:android-crop:1.0.1@aar'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.squareup.retrofit2:retrofit:2.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
@@ -48,6 +51,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.1.0'
     compile 'com.android.support:design:23.4.0'
     compile 'com.android.support:support-v4:23.4.0'
+    compile 'com.roomorama:caldroid:3.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

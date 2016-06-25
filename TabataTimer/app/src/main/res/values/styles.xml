@@ -17,4 +17,39 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+
+
+    <!-- Yellow theme. -->
+    <style name="CaldroidDefaultYellow" parent="CaldroidDefault">
+        <item name="styleCaldroidViewLayout">@style/CaldroidDefaultYellowCalendarViewLayout</item>
+        <item name="styleCaldroidMonthName">@style/CaldroidDefaultYellowMonthName</item>
+        <item name="styleCaldroidNormalCell">@style/CaldroidYellowNormalCell</item>
+        <item name="styleCaldroidSquareCell">@style/CaldroidYellowSquareCell</item>
+        <item name="styleCaldroidGridView">@style/CaldroidDefaultYellowGridView</item>
+    </style>
+
+    <style name="CaldroidDefaultYellowCalendarViewLayout">
+        <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="CaldroidDefaultYellowMonthName" parent="CaldroidDefaultMonthName">
+        <item name="android:textColor">@color/caldroid_white</item>
+    </style>
+
+    <style name="CaldroidDefaultYellowGridView" parent="CaldroidDefaultGridView">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="CaldroidYellowDarkCell" parent="CaldroidDefaultCell">
+        <item name="android:textColor">@color/cell_text_color_dark</item>
+        <item name="android:background">@drawable/cell_bg_yellow</item>
+    </style>
+
+    <style name="CaldroidYellowNormalCell" parent="CaldroidYellowDarkCell">
+        <item name="android:padding">5dp</item>
+    </style>
+
+    <style name="CaldroidYellowSquareCell" parent="CaldroidYellowDarkCell" />
+
+
 </resources>

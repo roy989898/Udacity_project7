@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:bottom="0dp"
+        android:left="0dp"
+        android:right="0dp"
+        android:top="0dp">
+        <shape android:shape="rectangle" >
+            <stroke
+                android:width="4dp"
+                android:color="@color/today_border" />
+
+            <solid android:color="@color/this_month_date" />
+        </shape>
+    </item>
+
+</layer-list>

@@ -2,8 +2,6 @@ package pom.poly.com.tabatatimer;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import pom.poly.com.tabatatimer.Fragment.CalenderFragment;
 import pom.poly.com.tabatatimer.Fragment.TimerFragment;
 import pom.poly.com.tabatatimer.Fragment.mptyFragment;
 
@@ -142,10 +141,12 @@ public class MainActivity extends AppCompatActivity {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
-                case 0:
-                    return new mptyFragment();
+
                 case 1:
                     return new TimerFragment();
+
+                case 2:
+                    return new CalenderFragment();
 
                 default:
                     return PlaceholderFragment.newInstance(position + 1);
