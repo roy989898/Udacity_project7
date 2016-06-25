@@ -44,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private FirebaseAuth.AuthStateListener mAuthListener;
     private String TAG = "LoginActivity";
     private ProgressDialog progress;
+    private FirebaseUser currentuser;
 
 
     @Override
@@ -68,11 +69,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onStart() {
         super.onStart();
         mAuth.addAuthStateListener(mAuthListener);
+
+        currentuser = mAuth.getCurrentUser();
+        if (currentuser != null) {
+            Log.d("getCurrentUser", currentuser.getEmail());
+        }
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if (currentuser != null) {//already login
+            goToTheMainActivity();
+        } else {
+            //need to login again
+            Toast.makeText(this, "Need to login again", Toast.LENGTH_SHORT).show();//TODO  put in xml
+        }
     }
 
     @Override
@@ -180,25 +194,22 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // [END create_user_with_email]
     }
 
-    private void saveEmailAndPassword(String email, String password) {
-        SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference),MODE_PRIVATE);
+    private void saveEmail(String email) {
+        SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE);
         SharedPreferences.Editor editor = preference.edit();
         editor.putString(getString(R.string.sharedpreference_email_key), email);
-        editor.putString(getString(R.string.sharedPreference_password_key), password);
         editor.commit();
     }
 
-    private void enableAutoLogin() {
-        SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference),MODE_PRIVATE);
-        SharedPreferences.Editor editor = preference.edit();
-        editor.putBoolean(getString(R.string.sharedPreference_autologin_key), true);
-        editor.commit();
-    }
 
-    private boolean canAutoLogin() {
+
+
+
+    /*private boolean canAutoLogin() {
         SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference),MODE_PRIVATE);
         return preference.getBoolean(getString(R.string.sharedPreference_autologin_key), false);
-    }
+
+    }*/
 
 
     private void signIn(final String email, final String password) {
@@ -229,12 +240,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LoginActivity.this, authenticationFailed,
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            saveEmailAndPassword(email, password);
-                            enableAutoLogin();
+                            saveEmail(email);
 
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+                            goToTheMainActivity();
                         }
 
                         // [START_EXCLUDE]
@@ -245,6 +253,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 });
         // [END sign_in_with_email]
+    }
+
+    private void goToTheMainActivity() {
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
     private void showProgressDialog() {
@@ -293,16 +307,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         };
 
-        if (canAutoLogin()) {
-            SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference),MODE_PRIVATE);
-            String email = preference.getString(getString(R.string.sharedpreference_email_key), "");
-            String password = preference.getString(getString(R.string.sharedPreference_password_key), "");
-            Log.d("LoginActivity",canAutoLogin()+" "+email+" "+password);
-            signIn(email, password);
+        //recover the saved email
+        SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE);
+        String email = preference.getString(getString(R.string.sharedpreference_email_key), "");
+        if (email.equals("empty")) {
+            edtUserID.setText("");
+        } else {
+            edtUserID.setText(email);
         }
 
 
+        /*if (canAutoLogin()) {
+
+            String password = preference.getString(getString(R.string.sharedPreference_password_key), "");
+            Log.d("LoginActivity",canAutoLogin()+" "+email+" "+password);
+            signIn(email, password);
+        }*/
+
+
     }
+
 
     @Override
     public void onClick(View v) {

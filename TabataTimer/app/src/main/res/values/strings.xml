@@ -49,10 +49,10 @@
     <string name="sharedpreference_email_key">spemailKey</string>
 
     <!--Key of save the password-->
-    <string name="sharedPreference_password_key">sppasswordKey</string>
+    <!--<string name="sharedPreference_password_key">sppasswordKey</string>-->
 
     <!--Key of save the auto-->
-    <string name="sharedPreference_autologin_key">spautoLogin</string>
+    <!--<string name="sharedPreference_autologin_key">spautoLogin</string>-->
 
     <!--Name of SharedPreference-->
     <string name="name_sharepreference">TimerPreferenceName</string>
