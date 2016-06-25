@@ -61,6 +61,9 @@ public class TimerFragment extends Fragment {
     private Handler mHandler;
     private Timer timer;
     private SoundLibrary sound;
+    private int pauseDeadline = 10;
+    private int actionDeadLine = 20;
+    private int countDeadLine = 8;
 
 
     public TimerFragment() {
@@ -254,22 +257,23 @@ public class TimerFragment extends Fragment {
                 actionTimer++;
             }
 
-            if (pauseTimer > 7 && pauseTimer <= 10) {
+            if (pauseTimer > pauseDeadline - 3 && pauseTimer <= pauseDeadline) {
                 sound.playStartSound();
             }
-            if (actionTimer == 20) {
+            if (actionTimer == actionDeadLine) {
                 sound.playEndSound();
             }
 
-            if (pauseTimer > 10) {
+            if (pauseTimer > pauseDeadline) {
                 pauseTimerOn = false;
                 pauseTimer = 0;
-            } else if (actionTimer > 20) {
+            } else if (actionTimer > actionDeadLine) {
                 pauseTimerOn = true;
                 actionTimer = 0;
                 timerCount++;
             }
-            if (timerCount >= 8) {
+            if (timerCount >= countDeadLine) {
+                //send message to the handler,tell ot to sop the timer and reset
                 Message message = new Message();
                 message.what = 2;
                 mHandler.sendMessage(message);
