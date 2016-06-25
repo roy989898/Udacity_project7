@@ -41,6 +41,7 @@
             </intent-filter>
         </activity>
 
+
         <!--Sugar ORM config-->
         <meta-data
             android:name="DATABASE"

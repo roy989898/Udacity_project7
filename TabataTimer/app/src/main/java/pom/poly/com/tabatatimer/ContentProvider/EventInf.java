@@ -1,13 +1,8 @@
 package pom.poly.com.tabatatimer.ContentProvider;
 
-import android.net.Uri;
-
 import com.orm.SugarRecord;
-import com.orm.dsl.Ignore;
 
-/**
- * Created by User on 25/6/2016.
- */
+
 public class eventinf extends SugarRecord {
     /*The date
     The start time
@@ -20,18 +15,19 @@ public class eventinf extends SugarRecord {
     String date;
     String start_time;
     String finish_time;
-    String action_time;
-    String pause_time;
-    String round;
-
+    int action_time;
+    int pause_time;
+    int round;
+    boolean finish;
 
 
     public eventinf() {
     }
 
-    public eventinf(String action_time, String date, String finish_time, String pause_time, String round, String start_time) {
+    public eventinf(int action_time, String date, boolean finish, String finish_time, int pause_time, int round, String start_time) {
         this.action_time = action_time;
         this.date = date;
+        this.finish = finish;
         this.finish_time = finish_time;
         this.pause_time = pause_time;
         this.round = round;
