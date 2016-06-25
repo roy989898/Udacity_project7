@@ -1,6 +1,9 @@
 package pom.poly.com.tabatatimer.ContentProvider;
 
+import android.net.Uri;
+
 import com.orm.SugarRecord;
+import com.orm.dsl.Ignore;
 
 /**
  * Created by User on 25/6/2016.
@@ -20,6 +23,8 @@ public class eventinf extends SugarRecord {
     String action_time;
     String pause_time;
     String round;
+
+
 
     public eventinf() {
     }

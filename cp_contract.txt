@@ -1,0 +1,7 @@
+1.Determine Uri
+
+Eventinf (DIR)
+content://pom.poly.com.tabatatimer/eventinf
+
+Eventinf with Date(DIR)
+content://pom.poly.com.tabatatimer/eventinf/date
