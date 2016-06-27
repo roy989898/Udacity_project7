@@ -8,4 +8,7 @@
     <dimen name="action_timer_size">36sp</dimen>
 
     <dimen name="ball_padding">5dp</dimen>
+    <!--fragment_dialogFragment-->
+    <dimen name="fragment_dialogFragment_Finish_textsize">45sp</dimen>
+    <dimen name="fragment_dialogFragment__textsize">30sp</dimen>
 </resources>

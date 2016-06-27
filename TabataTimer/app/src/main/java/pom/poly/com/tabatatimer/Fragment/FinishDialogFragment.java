@@ -2,6 +2,7 @@ package pom.poly.com.tabatatimer.Fragment;
 
 
 import android.app.Dialog;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
@@ -33,6 +34,7 @@ public class FinishDialogFragment extends DialogFragment {
     TextView tvfinishTime;
     @BindView(R.id.tvTotal_time)
     TextView tvTotalTime;
+
     private Eventinf eventif;
 
     public FinishDialogFragment() {
@@ -68,8 +70,13 @@ public class FinishDialogFragment extends DialogFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //set the font family
+       /* Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "jinxed.ttf");
+        tvFinish.setTypeface(font);
+        tvFinish.setTextSize(50);*/
+
         tvfinishTime.setText(eventif.getFinish_time());
-        tvTotalTime.setText(eventif.getTotalTime()+"");
+        tvTotalTime.setText(eventif.getTotalTime() + "");
     }
 
     @OnClick({R.id.btDialogCancel, R.id.btDialogSave})

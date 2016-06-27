@@ -2,17 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
-    android:orientation="vertical">
+    android:background="@color/colorPrimaryLight"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin">
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:text="@string/dialogFragment_finish" />
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
@@ -20,12 +19,14 @@
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dialogFragment_finish_time" />
+            android:text="@string/dialogFragment_finish_time"
+            android:textSize="@dimen/fragment_dialogFragment__textsize" />
 
         <TextView
             android:id="@+id/tvfinish_time"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/fragment_dialogFragment__textsize" />
     </LinearLayout>
 
     <LinearLayout
@@ -37,30 +38,41 @@
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dialogFragment_total_time" />
+            android:text="@string/dialogFragment_total_time"
+            android:textSize="@dimen/fragment_dialogFragment__textsize" />
 
         <TextView
             android:id="@+id/tvTotal_time"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/fragment_dialogFragment__textsize" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center_horizontal">
 
         <Button
             android:id="@+id/btDialogCancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dialogFragment_button_cancel" />
+            android:background="@drawable/loginbtnbackground"
+            android:text="@string/dialogFragment_button_cancel"
+            android:textColor="@color/loginPageText"
+            android:layout_margin="10dp"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/btDialogSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/dialogFragment_button_save" />
+            android:layout_margin="10dp"
+            android:background="@drawable/loginbtnbackground"
+            android:text="@string/dialogFragment_button_save"
+            android:textColor="@color/loginPageText"
+            android:textSize="18sp" />
     </LinearLayout>
 
 </LinearLayout>
