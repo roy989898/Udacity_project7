@@ -19,7 +19,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/title_activity_main"></activity>
+            android:label="@string/title_activity_main" />
         <activity android:name=".SettingActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -41,21 +41,21 @@
             </intent-filter>
         </activity>
 
-
-        <!--Sugar ORM config-->
+        <!-- Sugar ORM config -->
         <meta-data
             android:name="DATABASE"
             android:value="sugar_orm.db" />
         <meta-data
             android:name="VERSION"
-            android:value="0" />
+            android:value="1" />
         <meta-data
             android:name="QUERY_LOG"
             android:value="true" />
         <meta-data
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="pom.poly.com.tabatatimer.ContentProvider" />
-        <!--Sugar ORM config-->
+        <!-- Sugar ORM config -->
+        <activity android:name=".CongratulationActivity"></activity>
     </application>
 
 </manifest>

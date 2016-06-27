@@ -135,6 +135,7 @@ public class TimerFragment extends Fragment {
 
                 } else if (msg.what == 2) {
                     stopNadResetTimerandCount();
+                    //TODO start  the Congratulation  Activity
                 }
             }
         };
