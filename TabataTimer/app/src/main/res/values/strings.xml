@@ -87,6 +87,13 @@
 
     <!--Timer activity to Congratulation key-->
     <string name="timerFragment_CongratulationBundleKey">TCBK</string>
+
+    <!--fragment_dialogfragment string-->
+    <string name="dialogFragment_finish">Finish!!</string>
+    <string name="dialogFragment_finish_time">Finish Time:</string>
+    <string name="dialogFragment_total_time">Total Time(s):</string>
+    <string name="dialogFragment_button_cancel">Cancel</string>
+    <string name="dialogFragment_button_save">Save</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

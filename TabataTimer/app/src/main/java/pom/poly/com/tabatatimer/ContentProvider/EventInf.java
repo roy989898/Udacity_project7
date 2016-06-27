@@ -116,4 +116,10 @@ public class Eventinf extends SugarRecord implements Parcelable {
         dest.writeBundle(val);
 
     }
+
+    public int getTotalTime() {
+        int total = (getAction_time() + getPause_time()) * getRound();
+
+        return total;
+    }
 }
