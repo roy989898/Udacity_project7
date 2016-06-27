@@ -2,11 +2,13 @@ package pom.poly.com.tabatatimer.Fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +16,17 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pom.poly.com.tabatatimer.CongratulationActivity;
+import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.R;
 import pom.poly.com.tabatatimer.Utility.SoundLibrary;
 import pom.poly.com.tabatatimer.View.myBallView;
@@ -61,9 +68,13 @@ public class TimerFragment extends Fragment {
     private Handler mHandler;
     private Timer timer;
     private SoundLibrary sound;
-    private int pauseDeadline = 10;
+/*    private int pauseDeadline = 10;
     private int actionDeadLine = 20;
-    private int countDeadLine = 8;
+    private int countDeadLine = 8;*///TODO recovery
+
+    private int pauseDeadline = 1;
+    private int actionDeadLine = 1;
+    private int countDeadLine = 1;
 
 
     public TimerFragment() {
@@ -136,11 +147,33 @@ public class TimerFragment extends Fragment {
                 } else if (msg.what == 2) {
                     stopNadResetTimerandCount();
                     //TODO start  the Congratulation  Activity
+                    /*Intent intent = new Intent(getContext(), CongratulationActivity.class);
+                    intent.putExtra(getString(R.string.timerFragment_CongratulationBundleKey), eventinf);
+                    startActivity(intent);*/
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    Eventinf eventinf = new Eventinf(actionDeadLine, getTodayDate(), getNowTime(), pauseDeadline, countDeadLine);
+                    FinishDialogFragment fragment = FinishDialogFragment.newInstance(eventinf);
+                    fragment.show(fm,"finish_dialog");
+
                 }
             }
         };
 
         sound = new SoundLibrary(getContext());
+    }
+
+    private String getTodayDate() {
+//        yyyy/MM/dd HH:mm:ss
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        Calendar cal = Calendar.getInstance();
+        return dateFormat.format(cal.getTime()); //2014/08/06 16:00:22
+    }
+
+    private String getNowTime() {
+//        yyyy/MM/dd HH:mm:ss
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        return dateFormat.format(cal.getTime()); //2014/08/06 16:00:22
     }
 
     @Override

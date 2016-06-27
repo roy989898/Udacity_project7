@@ -111,30 +111,30 @@ public class CalenderFragment extends Fragment {
 
             @Override
             public void onSelectDate(Date date, View view) {
-                Toast.makeText(getContext(), formatter.format(date),
-                        Toast.LENGTH_SHORT).show();
+               /* Toast.makeText(getContext(), formatter.format(date),
+                        Toast.LENGTH_SHORT).show();*/
             }
 
             @Override
             public void onChangeMonth(int month, int year) {
                 String text = "month: " + month + " year: " + year;
-                Toast.makeText(getContext(), text,
-                        Toast.LENGTH_SHORT).show();
+               /* Toast.makeText(getContext(), text,
+                        Toast.LENGTH_SHORT).show();*/
             }
 
             @Override
             public void onLongClickDate(Date date, View view) {
-                Toast.makeText(getContext(),
+               /* Toast.makeText(getContext(),
                         "Long click " + formatter.format(date),
-                        Toast.LENGTH_SHORT).show();
+                        Toast.LENGTH_SHORT).show();*/
             }
 
             @Override
             public void onCaldroidViewCreated() {
                 if (caldroidFragment.getLeftArrowButton() != null) {
-                    Toast.makeText(getContext(),
+                  /*  Toast.makeText(getContext(),
                             "Caldroid view is created", Toast.LENGTH_SHORT)
-                            .show();
+                            .show();*/
                 }
             }
 
