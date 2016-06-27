@@ -146,7 +146,7 @@ public class TimerFragment extends Fragment {
 
                 } else if (msg.what == 2) {
                     stopNadResetTimerandCount();
-                    //TODO start  the Congratulation  Activity
+
                     /*Intent intent = new Intent(getContext(), CongratulationActivity.class);
                     intent.putExtra(getString(R.string.timerFragment_CongratulationBundleKey), eventinf);
                     startActivity(intent);*/

@@ -10,9 +10,7 @@ import android.view.View;
 
 import pom.poly.com.tabatatimer.R;
 
-/**
- * TODO: document your custom view class.
- */
+
 public class myBallView extends View {
 
 

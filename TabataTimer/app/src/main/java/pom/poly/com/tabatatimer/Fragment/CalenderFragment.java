@@ -32,7 +32,7 @@ public class CalenderFragment extends Fragment {
     }
     private CaldroidSampleCustomFragment caldroidFragment;
 
-    private void setCustomResourceForDates() {
+    /*private void setCustomResourceForDates() {
         Calendar cal = Calendar.getInstance();
 
         // Min date is last 7 days
@@ -53,7 +53,7 @@ public class CalenderFragment extends Fragment {
             caldroidFragment.setTextColorForDate(R.color.white, greenDate);
 
         }
-    }
+    }*/
 
     private void setcaldroidArgument(CaldroidFragment caldroidFragment) {
         Bundle args = new Bundle();
@@ -99,7 +99,7 @@ public class CalenderFragment extends Fragment {
             setcaldroidArgument(caldroidFragment);
         }
 
-        setCustomResourceForDates();
+//        setCustomResourceForDates();
 
         // Attach to the activity
         FragmentTransaction t = getActivity().getSupportFragmentManager().beginTransaction();
@@ -148,7 +148,7 @@ public class CalenderFragment extends Fragment {
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
-        // TODO Auto-generated method stub
+
         super.onSaveInstanceState(outState);
 
         if (caldroidFragment != null) {
