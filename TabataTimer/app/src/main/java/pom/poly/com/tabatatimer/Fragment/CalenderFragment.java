@@ -20,11 +20,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pom.poly.com.tabatatimer.Calender.CaldroidSampleCustomFragment;
 import pom.poly.com.tabatatimer.R;
+import pom.poly.com.tabatatimer.Utility.Observer;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CalenderFragment extends Fragment {
+public class CalenderFragment extends Fragment implements Observer{
 
 
     @BindView(R.id.btRefresh)
@@ -165,9 +166,19 @@ public class CalenderFragment extends Fragment {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     @OnClick(R.id.btRefresh)
     public void onClick() {
 
+        createAndReplayCalenderFragment(null);
+    }
+
+    @Override
+    public void update() {
         createAndReplayCalenderFragment(null);
     }
 }

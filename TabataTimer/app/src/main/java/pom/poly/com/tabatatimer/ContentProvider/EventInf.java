@@ -6,6 +6,10 @@ import android.os.Parcelable;
 
 import com.orm.SugarRecord;
 
+import java.util.ArrayList;
+
+import pom.poly.com.tabatatimer.Utility.Observer;
+
 
 public class Eventinf extends SugarRecord implements Parcelable {
     /*The date
@@ -27,6 +31,7 @@ public class Eventinf extends SugarRecord implements Parcelable {
             return new Eventinf[size];
         }
     };
+    private static ArrayList<Observer> observers = new ArrayList<>();
     private final String KEY_DATE = "keydate";
     private final String KEY_FINISH_TIME = "keyfinish";
     private final String KEY_ACTION = "keyaction";
@@ -58,6 +63,41 @@ public class Eventinf extends SugarRecord implements Parcelable {
         this.pause_time = pause_time;
         this.round = round;
     }
+
+    public static void registerObserver(Observer o) {
+        observers.add(o);
+
+    }
+
+    public static void removeObservers(Observer o) {
+        observers.remove(o);
+    }
+
+    public static void removeALLObservers() {
+        observers.clear();
+    }
+
+    public static void notifyChanged() {
+
+        for (Observer observer : observers) {
+            observer.update();
+        }
+    }
+
+    @Override
+    public long save() {
+        long i = super.save();
+        notifyChanged();
+        return i;
+    }
+
+    @Override
+    public boolean delete() {
+        boolean b = super.delete();
+        notifyChanged();
+        return b;
+    }
+
 
     public int getAction_time() {
         return action_time;

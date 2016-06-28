@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.Fragment.CalenderFragment;
 import pom.poly.com.tabatatimer.Fragment.EmptyFragment;
 import pom.poly.com.tabatatimer.Fragment.TimerFragment;
@@ -149,7 +150,9 @@ public class MainActivity extends AppCompatActivity {
                     return new TimerFragment();
 
                 case 2:
-                    return new CalenderFragment();
+                    CalenderFragment calenderFragment = new CalenderFragment();
+                    Eventinf.registerObserver(calenderFragment);//register to the Eventinf as a observer,when ssave a new Eventif or delete,notify the calenderFragment,data has chanhe.
+                    return calenderFragment;
 
                 default:
                     return PlaceholderFragment.newInstance(position + 1);

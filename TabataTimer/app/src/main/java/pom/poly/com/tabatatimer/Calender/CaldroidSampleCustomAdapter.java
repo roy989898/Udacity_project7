@@ -16,7 +16,6 @@ import com.roomorama.caldroid.CaldroidGridAdapter;
 import java.util.List;
 import java.util.Map;
 
-import butterknife.BindView;
 import hirondelle.date4j.DateTime;
 import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.R;
@@ -62,10 +61,9 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 
         // Get dateTime of this cell
         final DateTime dateTime = this.datetimeList.get(position);
-//        Log.d("adaptergetview", "getView at " + dateTime.toString());//TODO delte
+
         Resources resources = context.getResources();
 
-        //TODO set  the tv2 has a icon
         /*first use dateTime to search in the Cursor,if has
         * than set is finish?if yes,have a goo icon*/
         // Set color of the dates in previous / next month
