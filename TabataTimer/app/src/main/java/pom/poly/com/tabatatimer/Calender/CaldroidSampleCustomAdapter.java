@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.roomorama.caldroid.CaldroidFragment;
@@ -15,6 +16,7 @@ import com.roomorama.caldroid.CaldroidGridAdapter;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
 import hirondelle.date4j.DateTime;
 import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.R;
@@ -23,6 +25,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 
 
     private final String YMD_FORMAT = "YYYY-MM-DD";
+
 
     public CaldroidSampleCustomAdapter(Context context, int month, int year,
                                        Map<String, Object> caldroidData,
@@ -48,10 +51,12 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
         int rightPadding = cellView.getPaddingRight();
 
         TextView tv1 = (TextView) cellView.findViewById(R.id.tv1);
-        TextView tv2 = (TextView) cellView.findViewById(R.id.tv2);
+//        TextView tv2 = (TextView) cellView.findViewById(R.id.tv2);
+        ImageView imgCell = (ImageView) cellView.findViewById(R.id.imgCell);
+
 
         //default is INVISIBLE
-        tv2.setVisibility(View.INVISIBLE);
+        imgCell.setVisibility(View.INVISIBLE);
 
         tv1.setTextColor(Color.BLACK);
 
@@ -123,7 +128,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 
 
         tv1.setText("" + dateTime.getDay());
-        tv2.setText("Hi");
+//        tv2.setText("Hi");
 
         // Somehow after setBackgroundResource, the padding collapse.
         // This is to recover the padding
@@ -140,7 +145,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
         if(!list.isEmpty()){//not empty,that mean that day has finish at least 1 time Tabata
             tv2.setVisibility(View.VISIBLE);
         }*/
-        new checkTabataDateTask().execute(tv2, dateTime);
+        new checkTabataDateTask().execute(imgCell, dateTime);
 
 
         return cellView;
