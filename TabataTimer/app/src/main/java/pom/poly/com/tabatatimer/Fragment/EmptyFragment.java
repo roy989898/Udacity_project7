@@ -19,6 +19,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.R;
+import pom.poly.com.tabatatimer.Utility.Utility;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -54,18 +55,13 @@ public class EmptyFragment extends Fragment {
         List<Eventinf> list = Eventinf.find(Eventinf.class, "date=?", dateString);
 
         for (Eventinf inf : list) {
-            Log.d("mptyFragment",inf.getDate()+" "+inf.getFinish_time());
-            Log.d("mptyFragment",inf.getDate().equals(getTodayDate())+"");
+            Log.d("mptyFragment", inf.getDate() + " " + inf.getFinish_time());
+            Log.d("mptyFragment", inf.getDate().equals(Utility.getTodayDate()) + "");
 
         }
 
 
     }
 
-    private String getTodayDate() {
-//        yyyy/MM/dd HH:mm:ss
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar cal = Calendar.getInstance();
-        return dateFormat.format(cal.getTime()); //2014/08/06 16:00:22
-    }
+
 }

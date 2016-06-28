@@ -3,7 +3,7 @@ package pom.poly.com.tabatatimer.Calender;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
-import android.util.Log;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +12,11 @@ import android.widget.TextView;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidGridAdapter;
 
+import java.util.List;
 import java.util.Map;
 
 import hirondelle.date4j.DateTime;
+import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.R;
 
 public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
@@ -131,7 +133,15 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
         // Set custom color if required
         setCustomResources(dateTime, cellView, tv1);
 
-        //check The database have the date
+        //check The database have the date,if have show the tv2
+
+       /* String cellDateString=dateTime.format("YYYY-MM-DD");
+        List<Eventinf> list = Eventinf.find(Eventinf.class, "date=?", cellDateString);
+        if(!list.isEmpty()){//not empty,that mean that day has finish at least 1 time Tabata
+            tv2.setVisibility(View.VISIBLE);
+        }*/
+        new checkTabataDateTask().execute(tv2, dateTime);
+
 
         return cellView;
     }
@@ -140,5 +150,43 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();
 
+    }
+
+    private class checkTabataDateTask extends AsyncTask<Object, Void, Boolean> {
+        View view;
+
+        @Override
+        protected Boolean doInBackground(Object... params) {
+
+            Object view = params[0];
+            Object datetime = params[1];
+
+
+            if (view instanceof View && datetime instanceof DateTime) {
+                String cellDateString = ((DateTime) datetime).format("YYYY-MM-DD");
+                List<Eventinf> list = Eventinf.find(Eventinf.class, "date=?", cellDateString);
+                this.view = (View) view;
+                if (!list.isEmpty()) {//not empty,that mean that day has finish at least 1 time Tabata
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+
+            return null;
+
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            super.onPostExecute(aBoolean);
+
+            if (aBoolean) {
+                view.setVisibility(View.VISIBLE);
+            } else {
+                view.setVisibility(View.INVISIBLE);
+            }
+
+        }
     }
 }
