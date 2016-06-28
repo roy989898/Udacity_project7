@@ -1,23 +1,23 @@
 package pom.poly.com.tabatatimer.Fragment;
 
 
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.Button;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import pom.poly.com.tabatatimer.Calender.CaldroidSampleCustomFragment;
 import pom.poly.com.tabatatimer.R;
 
@@ -27,10 +27,13 @@ import pom.poly.com.tabatatimer.R;
 public class CalenderFragment extends Fragment {
 
 
+    @BindView(R.id.btRefresh)
+    Button btRefresh;
+    private CaldroidSampleCustomFragment caldroidFragment;
+
     public CalenderFragment() {
         // Required empty public constructor
     }
-    private CaldroidSampleCustomFragment caldroidFragment;
 
     /*private void setCustomResourceForDates() {
         Calendar cal = Calendar.getInstance();
@@ -77,17 +80,7 @@ public class CalenderFragment extends Fragment {
         caldroidFragment.setArguments(args);
     }
 
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View layout=inflater.inflate(R.layout.fragment_calender, container, false);
-
-        final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-
-        // Setup caldroid fragment
-        // **** If you want normal CaldroidFragment, use below line ****
+    private void createAndReplayCalenderFragment(Bundle savedInstanceState) {
         caldroidFragment = new CaldroidSampleCustomFragment();
 
         if (savedInstanceState != null) {
@@ -105,6 +98,19 @@ public class CalenderFragment extends Fragment {
         FragmentTransaction t = getActivity().getSupportFragmentManager().beginTransaction();
         t.replace(R.id.clalender1, caldroidFragment);
         t.commit();
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View layout = inflater.inflate(R.layout.fragment_calender, container, false);
+
+//        final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+
+        // Setup caldroid fragment
+        // **** If you want normal CaldroidFragment, use below line ****
+        createAndReplayCalenderFragment(savedInstanceState);
 
         // Setup listener
         final CaldroidListener listener = new CaldroidListener() {
@@ -143,6 +149,7 @@ public class CalenderFragment extends Fragment {
         // Setup Caldroid
         caldroidFragment.setCaldroidListener(listener);
 
+        ButterKnife.bind(this, layout);
         return layout;
     }
 
@@ -156,5 +163,11 @@ public class CalenderFragment extends Fragment {
         }
 
 
+    }
+
+    @OnClick(R.id.btRefresh)
+    public void onClick() {
+
+        createAndReplayCalenderFragment(null);
     }
 }

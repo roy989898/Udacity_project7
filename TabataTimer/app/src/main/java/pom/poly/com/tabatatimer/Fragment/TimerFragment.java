@@ -164,7 +164,7 @@ public class TimerFragment extends Fragment {
 
     private String getTodayDate() {
 //        yyyy/MM/dd HH:mm:ss
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Calendar cal = Calendar.getInstance();
         return dateFormat.format(cal.getTime()); //2014/08/06 16:00:22
     }

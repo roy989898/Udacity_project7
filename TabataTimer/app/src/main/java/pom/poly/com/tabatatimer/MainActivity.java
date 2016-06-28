@@ -17,8 +17,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import pom.poly.com.tabatatimer.Fragment.CalenderFragment;
+import pom.poly.com.tabatatimer.Fragment.EmptyFragment;
 import pom.poly.com.tabatatimer.Fragment.TimerFragment;
-import pom.poly.com.tabatatimer.Fragment.mptyFragment;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -142,6 +143,8 @@ public class MainActivity extends AppCompatActivity {
             // Return a PlaceholderFragment (defined as a static inner class below).
             switch (position) {
 
+                case 0:
+                    return new EmptyFragment();
                 case 1:
                     return new TimerFragment();
 

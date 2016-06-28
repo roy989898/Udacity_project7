@@ -3,11 +3,11 @@ package pom.poly.com.tabatatimer.Calender;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidGridAdapter;
@@ -18,6 +18,7 @@ import hirondelle.date4j.DateTime;
 import pom.poly.com.tabatatimer.R;
 
 public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
+
 
     private final String YMD_FORMAT = "YYYY-MM-DD";
 
@@ -32,6 +33,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
         LayoutInflater inflater = (LayoutInflater) context
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View cellView = convertView;
+
 
         // For reuse
         if (convertView == null) {
@@ -53,11 +55,12 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 
         // Get dateTime of this cell
         final DateTime dateTime = this.datetimeList.get(position);
+//        Log.d("adaptergetview", "getView at " + dateTime.toString());//TODO delte
         Resources resources = context.getResources();
 
         //TODO set  the tv2 has a icon
         /*first use dateTime to search in the Cursor,if has
-		* than set is finish?if yes,have a goo icon*/
+        * than set is finish?if yes,have a goo icon*/
         // Set color of the dates in previous / next month
         if (dateTime.getMonth() != month) {
             tv1.setTextColor(resources
@@ -80,7 +83,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
             }
 
 			/*if (dateTime.equals(getToday())) {
-				cellView.setBackgroundResource(com.caldroid.R.drawable.red_border_gray_bg);
+                cellView.setBackgroundResource(com.caldroid.R.drawable.red_border_gray_bg);
 			}*/
 
         } else {
@@ -101,11 +104,11 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
         if (shouldResetDiabledView && shouldResetSelectedView) {
 
             // Customize for today
-			if (dateTime.equals(getToday())) {
-				cellView.setBackgroundResource(com.caldroid.R.drawable.red_border);
-			} else {
-				cellView.setBackgroundResource(R.drawable.cell_bg_yellow);
-			}
+            if (dateTime.equals(getToday())) {
+                cellView.setBackgroundResource(com.caldroid.R.drawable.red_border);
+            } else {
+                cellView.setBackgroundResource(R.drawable.cell_bg_yellow);
+            }
         }
 
 
@@ -128,7 +131,14 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
         // Set custom color if required
         setCustomResources(dateTime, cellView, tv1);
 
+        //check The database have the date
+
         return cellView;
     }
 
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+
+    }
 }

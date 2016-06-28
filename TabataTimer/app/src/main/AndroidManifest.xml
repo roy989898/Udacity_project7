@@ -45,7 +45,7 @@
         <!-- Sugar ORM config -->
         <meta-data
             android:name="DATABASE"
-            android:value="sugar_orm.db" />
+            android:value="sugar_ormv2.db" />
         <meta-data
             android:name="VERSION"
             android:value="1" />
