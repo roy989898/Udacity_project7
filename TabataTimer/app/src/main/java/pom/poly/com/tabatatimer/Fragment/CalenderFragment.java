@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
@@ -15,9 +14,7 @@ import com.roomorama.caldroid.CaldroidListener;
 import java.util.Calendar;
 import java.util.Date;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import pom.poly.com.tabatatimer.Calender.CaldroidSampleCustomFragment;
 import pom.poly.com.tabatatimer.R;
 import pom.poly.com.tabatatimer.Utility.Observer;
@@ -25,11 +22,9 @@ import pom.poly.com.tabatatimer.Utility.Observer;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CalenderFragment extends Fragment implements Observer{
+public class CalenderFragment extends Fragment implements Observer {
 
 
-    @BindView(R.id.btRefresh)
-    Button btRefresh;
     private CaldroidSampleCustomFragment caldroidFragment;
 
     public CalenderFragment() {
@@ -171,11 +166,6 @@ public class CalenderFragment extends Fragment implements Observer{
         super.onResume();
     }
 
-    @OnClick(R.id.btRefresh)
-    public void onClick() {
-
-        createAndReplayCalenderFragment(null);
-    }
 
     @Override
     public void update() {

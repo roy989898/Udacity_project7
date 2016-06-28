@@ -79,7 +79,7 @@
     <string name="sharedpreferencekey_count">spCount</string>
     <string name="sharedpreferencekey_isPauseTimerON">spPausetimeron</string>
     <string name="sharedpreferencekey_isStartButton">spstartButton</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="imageStoreURL">Hello blank fragment</string>
     <string name="preference_uploadPicture_title">Profile Picture</string>
     <string name="bt_lagout_string">Logout</string>
@@ -94,6 +94,6 @@
     <string name="dialogFragment_total_time">Total Time(s):</string>
     <string name="dialogFragment_button_cancel">Cancel</string>
     <string name="dialogFragment_button_save">Save</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

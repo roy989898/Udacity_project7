@@ -6,16 +6,10 @@
     tools:context="pom.poly.com.tabatatimer.Fragment.CalenderFragment">
 
     <LinearLayout
-        android:orientation="horizontal"
+        android:id="@+id/clalender1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/clalender1"></LinearLayout>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/btRefresh" />
+        android:orientation="horizontal"></LinearLayout>
 
 
 </LinearLayout>

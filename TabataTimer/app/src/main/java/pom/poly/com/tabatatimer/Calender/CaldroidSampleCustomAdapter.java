@@ -54,7 +54,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
         ImageView imgCell = (ImageView) cellView.findViewById(R.id.imgCell);
 
 
-        //default is INVISIBLE
+        //the thumb up icon default is INVISIBLE
         imgCell.setVisibility(View.INVISIBLE);
 
         tv1.setTextColor(Color.BLACK);
@@ -156,7 +156,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
     }
 
     private class checkTabataDateTask extends AsyncTask<Object, Void, Boolean> {
-        View view;
+        View thumbupIcon;
 
         @Override
         protected Boolean doInBackground(Object... params) {
@@ -166,9 +166,9 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
 
 
             if (view instanceof View && datetime instanceof DateTime) {
-                String cellDateString = ((DateTime) datetime).format("YYYY-MM-DD");
+                String cellDateString = ((DateTime) datetime).format(YMD_FORMAT);
                 List<Eventinf> list = Eventinf.find(Eventinf.class, "date=?", cellDateString);
-                this.view = (View) view;
+                this.thumbupIcon = (View) view;
                 if (!list.isEmpty()) {//not empty,that mean that day has finish at least 1 time Tabata
                     return true;
                 } else {
@@ -185,9 +185,9 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
             super.onPostExecute(aBoolean);
 
             if (aBoolean) {
-                view.setVisibility(View.VISIBLE);
+                thumbupIcon.setVisibility(View.VISIBLE);
             } else {
-                view.setVisibility(View.INVISIBLE);
+                thumbupIcon.setVisibility(View.INVISIBLE);
             }
 
         }
