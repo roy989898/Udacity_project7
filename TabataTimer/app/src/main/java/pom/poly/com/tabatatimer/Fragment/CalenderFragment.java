@@ -100,19 +100,6 @@ public class CalenderFragment extends Fragment implements Observer {
         FragmentTransaction t = getActivity().getSupportFragmentManager().beginTransaction();
         t.replace(R.id.clalender1, caldroidFragment);
         t.commit();
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View layout = inflater.inflate(R.layout.fragment_calender, container, false);
-
-//        final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-
-        // Setup caldroid fragment
-        // **** If you want normal CaldroidFragment, use below line ****
-        createAndReplayCalenderFragment(savedInstanceState);
 
         // Setup listener
         final CaldroidListener listener = new CaldroidListener() {
@@ -153,6 +140,21 @@ public class CalenderFragment extends Fragment implements Observer {
 
         // Setup the click action
         caldroidFragment.setCaldroidListener(listener);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View layout = inflater.inflate(R.layout.fragment_calender, container, false);
+
+//        final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+
+        // Setup caldroid fragment
+        // **** If you want normal CaldroidFragment, use below line ****
+        createAndReplayCalenderFragment(savedInstanceState);
+
+
 
         ButterKnife.bind(this, layout);
         return layout;

@@ -95,5 +95,11 @@
     <string name="dialogFragment_button_cancel">Cancel</string>
     <string name="dialogFragment_button_save">Save</string>
 
+    <!--detail dialog cell string-->
+    <string name="detail_cell_date">Date:</string>
+    <string name="detail_dialog_Total">Total(s):</string>
+    <string name="detail_dialog_finish">Finish time:</string>
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
