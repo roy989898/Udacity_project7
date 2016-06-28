@@ -19,8 +19,6 @@ public class CaldroidSampleCustomFragment extends CaldroidFragment {
         return adapter;
     }
 
-    public void refreshAdapter(){
-        adapter.notifyDataSetChanged();
-    }
+
 
 }

@@ -1,21 +1,27 @@
 package pom.poly.com.tabatatimer.Fragment;
 
 
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import butterknife.ButterKnife;
 import pom.poly.com.tabatatimer.Calender.CaldroidSampleCustomFragment;
+import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.R;
 import pom.poly.com.tabatatimer.Utility.Observer;
 
@@ -113,6 +119,9 @@ public class CalenderFragment extends Fragment implements Observer {
 
             @Override
             public void onSelectDate(Date date, View view) {
+
+                final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                new showDetailINFTask().execute(formatter.format(date)); //to show the detail information dialog,if have detail information
                /* Toast.makeText(getContext(), formatter.format(date),
                         Toast.LENGTH_SHORT).show();*/
             }
@@ -142,7 +151,7 @@ public class CalenderFragment extends Fragment implements Observer {
 
         };
 
-        // Setup Caldroid
+        // Setup the click action
         caldroidFragment.setCaldroidListener(listener);
 
         ButterKnife.bind(this, layout);
@@ -170,5 +179,40 @@ public class CalenderFragment extends Fragment implements Observer {
     @Override
     public void update() {
         createAndReplayCalenderFragment(null);
+    }
+
+    private class showDetailINFTask extends AsyncTask<String, Void, List<Eventinf>> {
+
+        @Override
+        protected List<Eventinf> doInBackground(String... params) {
+            List<Eventinf> list;
+            if (params.length > 0) {
+                list = Eventinf.find(Eventinf.class, "date=?", params[0]);
+            } else {
+                return null;
+            }
+
+            if (!list.isEmpty()) {
+                return list;
+            } else {
+                return null;
+            }
+
+
+        }
+
+        @Override
+        protected void onPostExecute(List<Eventinf> eventinfs) {
+            //if eventinfs is null,that mean no event at this date
+            if (eventinfs != null) {
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                DetailDialogFragment ddf=DetailDialogFragment.newInstance(eventinfs);
+                ddf.show(fm,"detailDialogFragment");
+
+            }
+            //TODO  show the  selected date detail
+            super.onPostExecute(eventinfs);
+
+        }
     }
 }
