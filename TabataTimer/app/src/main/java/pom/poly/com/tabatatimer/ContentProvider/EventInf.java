@@ -65,6 +65,7 @@ public class Eventinf extends SugarRecord implements Parcelable {
     }
 
     public static void registerObserver(Observer o) {
+        removeALLObservers();
         observers.add(o);
 
     }

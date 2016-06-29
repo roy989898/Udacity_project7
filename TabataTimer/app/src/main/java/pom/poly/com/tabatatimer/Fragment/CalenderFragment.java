@@ -1,9 +1,12 @@
 package pom.poly.com.tabatatimer.Fragment;
 
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
@@ -30,6 +33,13 @@ import pom.poly.com.tabatatimer.Utility.Observer;
  */
 public class CalenderFragment extends Fragment implements Observer {
 
+    private Context mContext;
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext=context;
+    }
 
     private CaldroidSampleCustomFragment caldroidFragment;
 
@@ -83,6 +93,9 @@ public class CalenderFragment extends Fragment implements Observer {
     }
 
     private void createAndReplayCalenderFragment(Bundle savedInstanceState) {
+
+        FragmentActivity activity = getActivity();
+ 
         caldroidFragment = new CaldroidSampleCustomFragment();
 
         if (savedInstanceState != null) {
@@ -97,8 +110,9 @@ public class CalenderFragment extends Fragment implements Observer {
 //        setCustomResourceForDates();
 
         // Attach to the activity
-        FragmentTransaction t = getActivity().getSupportFragmentManager().beginTransaction();
+        FragmentTransaction t = activity.getSupportFragmentManager().beginTransaction();
         t.replace(R.id.clalender1, caldroidFragment);
+
         t.commit();
 
         // Setup listener
