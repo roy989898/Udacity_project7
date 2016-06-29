@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.util.TimeUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +22,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.nio.charset.UnmappableCharacterException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -100,7 +106,7 @@ public class FinishDialogFragment extends DialogFragment {
 
         //for save to the firebase use
         profilePURL = getContext().getSharedPreferences(getString(R.string.name_sharepreference), Context.MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), "");
-        name= PreferenceManager.getDefaultSharedPreferences(getContext()).getString(getString(R.string.preference_name_key),getString(R.string.preference_name_defaultvalue));
+        name = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(getString(R.string.preference_name_key), getString(R.string.preference_name_defaultvalue));
     }
 
     @OnClick({R.id.btDialogCancel, R.id.btDialogSave})
@@ -132,11 +138,11 @@ public class FinishDialogFragment extends DialogFragment {
         mAuth = FirebaseAuth.getInstance();
 
         //get the email first
-         email = mAuth.getCurrentUser().getEmail();
-        useID=mAuth.getCurrentUser().getUid();
-        
+        email = mAuth.getCurrentUser().getEmail();
+        useID = mAuth.getCurrentUser().getUid();
+
         //get the reference at the login user email
-         idREF = mDatabase.child("Users").child(useID);
+        idREF = mDatabase.child("Users").child(useID);
         //read it one times by listener
 
         ValueEventListener listener = new ValueEventListener() {
@@ -148,11 +154,32 @@ public class FinishDialogFragment extends DialogFragment {
                     //create a new one
 
                     String id = mAuth.getCurrentUser().getProviderId();
+                    long millionSecond = getTotalTabataTime();
 
-                    User newuser=new User(email,0,profilePURL,eventif.getTotalTime(),id,name);
+                    User newuser = new User(email, 0, profilePURL, millionSecond, id, name);
                     idREF.setValue(newuser);
                 } else {
-                    //update  exiting one//TODO
+                    //update  exiting one//
+                    /*first chec is the use appear on the firebase
+        * if no
+        * hust save to the Firebase database
+        * if yes
+        * update children
+        * update
+        * 1name
+        * 2
+        * 3time*/
+                    long millionSecond = getTotalTabataTime();
+                    HashMap<String,Object> map=new HashMap<>();
+                    map.put("totaltime",millionSecond);
+                    map.put("userName",name);
+
+                    idREF.updateChildren(map);
+
+
+
+
+
                 }
             }
 
@@ -164,6 +191,19 @@ public class FinishDialogFragment extends DialogFragment {
 
         idREF.addListenerForSingleValueEvent(listener);
 
+    }
+
+    private long getTotalTabataTime(){//in million second
+        List<Eventinf> eventList = Eventinf.listAll(Eventinf.class);
+        long second=0;
+        for (Eventinf event:eventList) {
+            second+=event.getTotalTime();
+
+        }
+
+        long millionSecond = TimeUnit.SECONDS.toMillis(second);
+
+        return millionSecond;
     }
 
     @Override
