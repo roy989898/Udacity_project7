@@ -18,7 +18,7 @@
     <string name="preference_name_dialogTitle">Input your name</string>
     <string name="preference_name_defaultvalue">user</string>
 
-    <!--preference_name_string-->
+    <!--preference_Notification on off_string-->
     <string name="preference_nof_key">pkeyNOF</string>
     <string name="preference_nof_title">Notification ON/OFF</string>
     <string name="preference_nofe_defaultvalue">false</string>
