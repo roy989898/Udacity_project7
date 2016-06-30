@@ -40,8 +40,10 @@ public class UserDownloadAndSaveServic extends IntentService {
                 Log.e("read users", "The read failed: " + databaseError.getMessage());
             }
         };
-        ref.addListenerForSingleValueEvent(eventLister);
+        ref.addListenerForSingleValueEvent(eventLister);//read the use data
 
 
     }
+
+
 }
