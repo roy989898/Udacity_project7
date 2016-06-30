@@ -34,11 +34,11 @@ public class UserProvider extends ContentProvider {
             case USER:
                 String queryS = uri.getQuery();
                 if (queryS != null) {
-                    recursor = getUserData(db,projection, sortOrder);
-                } else {
                     String id = uri.getQueryParameter(Contract.UserEntry.KEY_ID);
                     recursor = getUserDataWithUserID(db,id, projection, sortOrder);
+                } else {
 
+                    recursor = getUserData(db,projection, sortOrder);
                 }
 
                 break;

@@ -2,9 +2,15 @@ package pom.poly.com.tabatatimer.Fragment;
 
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,6 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pom.poly.com.tabatatimer.ContentProvider.Contract;
 import pom.poly.com.tabatatimer.Firebase.User;
 import pom.poly.com.tabatatimer.Preference.TimePickerPreference;
 import pom.poly.com.tabatatimer.R;
@@ -35,7 +42,9 @@ import pom.poly.com.tabatatimer.Service.UserDownloadAndSaveServic;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EmptyFragment extends Fragment {
+public class EmptyFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+
+    final private int  MY_LODER_ID=101;
 
 
     @BindView(R.id.btCheck)
@@ -48,6 +57,11 @@ public class EmptyFragment extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+       getLoaderManager().initLoader(MY_LODER_ID,savedInstanceState,this);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,4 +89,23 @@ public class EmptyFragment extends Fragment {
     }
 
 
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        Uri uri= Contract.UserEntry.CONTENT_URI;
+        return new CursorLoader(getContext(),uri,null,null,null,null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        if(data.moveToNext()){
+            int count=data.getCount();
+            Log.i("Loder",count+"");
+        }
+
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        //TODO
+    }
 }
