@@ -33,8 +33,12 @@ public class Contract {
         public static final String CONTENT_TYPE= ContentResolver.CURSOR_ITEM_BASE_TYPE+"/"+CONTENT_AUTHORITY+"/"+PATH_USER;//multi iteam
         public static final String CONTENT_ITEAM_TYPE=ContentResolver.CURSOR_DIR_BASE_TYPE+"/"+CONTENT_AUTHORITY+"/"+PATH_USER;
 
-        public static Uri buildUserWithID(String id){
+        public static Uri buildUserWithsUserID(String id){
            return CONTENT_URI.buildUpon().appendQueryParameter(KEY_ID,id).build();
+        }
+
+        public static Uri buildUserWithID(long id){
+            return CONTENT_URI.buildUpon().appendPath(id+"").build();
         }
 
         public static Uri buildUserWithEmail(String email){
