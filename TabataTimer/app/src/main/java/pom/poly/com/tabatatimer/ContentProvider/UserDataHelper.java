@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class UserDataHelper extends SQLiteOpenHelper {
 
-    static final String DATABASE_NAME = "weather.db";
+    static final String DATABASE_NAME = "user.db";
     private static final int DATABASE_VERSION = 2;
 
     public UserDataHelper(Context context) {
@@ -24,7 +24,7 @@ public class UserDataHelper extends SQLiteOpenHelper {
                 Contract.UserEntry.COLUMN_NAME + " TEXT NOT NULL, " +
                 Contract.UserEntry.COLUMN_PROFILE_LINK + " TEXT NOT NULL, " +
                 Contract.UserEntry.COLUMN_TOTAL_TIME + " REAL NOT NULL, " +
-                Contract.UserEntry.COLUMN_USERID + " TEXT NOT NULL, ";
+                Contract.UserEntry.COLUMN_USERID + " TEXT NOT NULL) ";
 
         db.execSQL(SQL_CREAT_USERTABLE);
 
