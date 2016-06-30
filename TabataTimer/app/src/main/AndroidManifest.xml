@@ -5,11 +5,11 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name="com.orm.SugarApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:name="com.orm.SugarApp"
         android:theme="@style/AppTheme">
         <activity android:name=".LoginActivity">
             <intent-filter>
@@ -56,11 +56,15 @@
             android:name="DOMAIN_PACKAGE_NAME"
             android:value="pom.poly.com.tabatatimer.ContentProvider" />
         <!-- Sugar ORM config -->
-        <activity android:name=".CongratulationActivity"></activity>
+        <activity android:name=".CongratulationActivity" />
 
         <provider
             android:name=".ContentProvider.UserProvider"
             android:authorities="pom.poly.com.tabatatimer" />
+
+        <service
+            android:name=".Service.UserDownloadAndSaveServic"
+            android:exported="false"></service>
     </application>
 
 </manifest>

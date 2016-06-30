@@ -1,25 +1,36 @@
 package pom.poly.com.tabatatimer.Fragment;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.List;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
+import pom.poly.com.tabatatimer.Firebase.User;
+import pom.poly.com.tabatatimer.Preference.TimePickerPreference;
 import pom.poly.com.tabatatimer.R;
-import pom.poly.com.tabatatimer.Utility.Utility;
+import pom.poly.com.tabatatimer.Service.UserDownloadAndSaveServic;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -29,6 +40,9 @@ public class EmptyFragment extends Fragment {
 
     @BindView(R.id.btCheck)
     Button btCheck;
+    @BindView(R.id.tv)
+    TextView tv;
+    private DatabaseReference ref;
 
     public EmptyFragment() {
         // Required empty public constructor
@@ -41,24 +55,21 @@ public class EmptyFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_mpty, container, false);
         ButterKnife.bind(this, view);
+
+
+
+
         return view;
     }
 
     @OnClick(R.id.btCheck)
     public void onClick() {
 
-//        yyyy/MM/dd HH:mm:ss
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        Calendar cal = Calendar.getInstance();
-        String dateString = dateFormat.format(cal.getTime()); //2014/08/06 16:00:22
-//mptyFragment
-        List<Eventinf> list = Eventinf.find(Eventinf.class, "date=?", dateString);
+        Intent intent=new Intent(getActivity(), UserDownloadAndSaveServic.class);
+        getActivity().startService(intent);
 
-        for (Eventinf inf : list) {
-            Log.d("mptyFragment", inf.getDate() + " " + inf.getFinish_time());
-            Log.d("mptyFragment", inf.getDate().equals(Utility.getTodayDate()) + "");
 
-        }
+
 
 
     }
