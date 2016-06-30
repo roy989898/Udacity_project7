@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
-import android.support.v4.util.TimeUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,7 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.nio.charset.UnmappableCharacterException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -153,10 +151,10 @@ public class FinishDialogFragment extends DialogFragment {
                 if (user == null) {
                     //create a new one
 
-                    String id = mAuth.getCurrentUser().getProviderId();
+
                     long millionSecond = getTotalTabataTime();
 
-                    User newuser = new User(email, 0, profilePURL, millionSecond, id, name);
+                    User newuser = new User(email, 0, profilePURL, millionSecond, useID, name);
                     idREF.setValue(newuser);
                 } else {
                     //update  exiting one//
@@ -170,14 +168,11 @@ public class FinishDialogFragment extends DialogFragment {
         * 2
         * 3time*/
                     long millionSecond = getTotalTabataTime();
-                    HashMap<String,Object> map=new HashMap<>();
-                    map.put("totaltime",millionSecond);
-                    map.put("userName",name);
+                    HashMap<String, Object> map = new HashMap<>();
+                    map.put("totaltime", millionSecond);
+                    map.put("userName", name);
 
                     idREF.updateChildren(map);
-
-
-
 
 
                 }
@@ -193,11 +188,11 @@ public class FinishDialogFragment extends DialogFragment {
 
     }
 
-    private long getTotalTabataTime(){//in million second
+    private long getTotalTabataTime() {//in million second
         List<Eventinf> eventList = Eventinf.listAll(Eventinf.class);
-        long second=0;
-        for (Eventinf event:eventList) {
-            second+=event.getTotalTime();
+        long second = 0;
+        for (Eventinf event : eventList) {
+            second += event.getTotalTime();
 
         }
 

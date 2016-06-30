@@ -95,7 +95,7 @@ public class CalenderFragment extends Fragment implements Observer {
     private void createAndReplayCalenderFragment(Bundle savedInstanceState) {
 
         FragmentActivity activity = getActivity();
- 
+
         caldroidFragment = new CaldroidSampleCustomFragment();
 
         if (savedInstanceState != null) {
