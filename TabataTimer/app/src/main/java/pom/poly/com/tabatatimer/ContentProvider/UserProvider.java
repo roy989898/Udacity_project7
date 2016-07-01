@@ -120,7 +120,7 @@ public class UserProvider extends ContentProvider {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         int matchInt = uriMather.match(uri);
         if (matchInt == USER) {
-            int number = db.delete(Contract.UserEntry.TABLE_NAME, selection + "=?", selectionArgs);
+            int number = db.delete(Contract.UserEntry.TABLE_NAME, selection, selectionArgs);
             if (number > 0){
                 getContext().getContentResolver().notifyChange(uri, null);
                 return number;

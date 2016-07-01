@@ -1,5 +1,7 @@
 package pom.poly.com.tabatatimer;
 
+import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -9,6 +11,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,9 +19,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import pom.poly.com.tabatatimer.ContentProvider.Contract;
 import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
+import pom.poly.com.tabatatimer.Firebase.User;
 import pom.poly.com.tabatatimer.Fragment.CalenderFragment;
-import pom.poly.com.tabatatimer.Fragment.EmptyFragment;
+import pom.poly.com.tabatatimer.Fragment.RankingFragment;
 import pom.poly.com.tabatatimer.Fragment.TimerFragment;
 
 
@@ -38,6 +50,147 @@ public class MainActivity extends AppCompatActivity {
      * The {@link ViewPager} that will host the section contents.
      */
     private ViewPager mViewPager;
+    private ContentResolver resolver;
+    private ValueEventListener eventLister;
+    private ChildEventListener childListener;
+    private DatabaseReference ref;
+
+
+    @Override
+    protected void onPause() {
+        Log.d("MainActivity","in onPause");
+        removeallTheFireBaseListener();
+        super.onPause();
+
+
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.d("MainActivity","in onStop");
+    }
+
+    private void removeallTheFireBaseListener() {
+        Log.d("MainActivity","removeallTheFireBaseListener");
+        if (eventLister != null && ref != null) {
+            ref.removeEventListener(eventLister);
+            Log.d("MainActivity","removeEventListener");
+
+        }
+        if ((childListener != null && ref != null)) {
+            ref.removeEventListener(childListener);
+            Log.d("MainActivity","removeEventListener");
+        }
+    }
+
+    private void deleteAllUserData(ContentResolver resolver) {
+        resolver.delete(Contract.UserEntry.CONTENT_URI, null, null);
+
+    }
+
+    private void deleteUser(ContentResolver resolver, User user) {
+        resolver.delete(Contract.UserEntry.CONTENT_URI, Contract.UserEntry.COLUMN_EMAIL + "=?", new String[]{user.email + ""});
+    }
+
+    private void readAllFromFirebase(final ContentResolver resolver) {
+
+        ref = FirebaseDatabase.getInstance().getReference().child("Users");
+        eventLister = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Iterable<DataSnapshot> children = dataSnapshot.getChildren();
+                for (DataSnapshot ds : children) {
+                    User user = ds.getValue(User.class);
+                    Log.i("Firebase", user.userName);
+
+                    insertUserData(resolver, user);
+
+
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.e("read users", "The read failed: " + databaseError.getMessage());
+            }
+        };
+//        ref.addListenerForSingleValueEvent(eventLister);//read the use data
+        ref.addValueEventListener(eventLister);
+    }
+
+    private void insertUserData(ContentResolver resolver, User user) {
+        ContentValues values = new ContentValues();
+        values.put(Contract.UserEntry.COLUMN_EMAIL, user.email);
+        values.put(Contract.UserEntry.COLUMN_LIKENUMBER, user.likeNumber);
+        values.put(Contract.UserEntry.COLUMN_PROFILE_LINK, user.profileLink);
+        values.put(Contract.UserEntry.COLUMN_TOTAL_TIME, user.totaltime);
+        values.put(Contract.UserEntry.COLUMN_USERID, user.userID);
+        values.put(Contract.UserEntry.COLUMN_NAME, user.userName);
+
+        resolver.insert(Contract.UserEntry.CONTENT_URI, values);
+    }
+
+    private void updateUserDate(ContentResolver resolver, User user) {
+        ContentValues values = new ContentValues();
+        values.put(Contract.UserEntry.COLUMN_EMAIL, user.email);
+        values.put(Contract.UserEntry.COLUMN_LIKENUMBER, user.likeNumber);
+        values.put(Contract.UserEntry.COLUMN_PROFILE_LINK, user.profileLink);
+        values.put(Contract.UserEntry.COLUMN_TOTAL_TIME, user.totaltime);
+        values.put(Contract.UserEntry.COLUMN_USERID, user.userID);
+        values.put(Contract.UserEntry.COLUMN_NAME, user.userName);
+
+//        resolver.insert(Contract.UserEntry.CONTENT_URI, values);
+        resolver.update(Contract.UserEntry.CONTENT_URI, values, Contract.UserEntry.COLUMN_EMAIL + "=?", new String[]{user.email + ""});
+    }
+
+    private void readWhenupdate(final ContentResolver resolver) {
+
+        ref = FirebaseDatabase.getInstance().getReference().child("Users");
+
+//        ref.addListenerForSingleValueEvent(eventLister);//read the use data
+        childListener = new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+//             Must call this one time at the first time
+                User user = dataSnapshot.getValue(User.class);
+                insertUserData(resolver, user);
+
+                Log.i("Firebase", "onChildAdded: " + user.userName);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+                User user = dataSnapshot.getValue(User.class);
+                updateUserDate(resolver, user);
+
+                Log.i("Firebase", "onChildChanged: " + user.userName);
+
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+                deleteUser(resolver, user);
+
+                Log.i("Firebase", "onChildRemoved: " + user.userName);
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w("Firebase", "postComments:onCancelled", databaseError.toException());
+            }
+        };
+        ref.addChildEventListener(childListener);
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +219,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 */
+
+        resolver = getContentResolver();
+        deleteAllUserData(resolver);
+        readWhenupdate(resolver);
+
     }
 
 
@@ -145,7 +303,7 @@ public class MainActivity extends AppCompatActivity {
             switch (position) {
 
                 case 0:
-                    return new EmptyFragment();
+                    return new RankingFragment();
                 case 1:
                     return new TimerFragment();
 

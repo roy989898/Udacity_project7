@@ -32,5 +32,6 @@ public class MyApplication extends SugarApp {
 
 // Initialize Stetho with the Initializer
         Stetho.initialize(initializer);
+        //TODO remeber to delete the Stetho when publish the app
     }
 }

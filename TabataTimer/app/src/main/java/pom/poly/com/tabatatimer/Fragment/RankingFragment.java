@@ -42,7 +42,7 @@ import pom.poly.com.tabatatimer.Service.UserDownloadAndSaveServic;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class EmptyFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class RankingFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 
     final private int  MY_LODER_ID=101;
 
@@ -53,7 +53,7 @@ public class EmptyFragment extends Fragment implements LoaderManager.LoaderCallb
     TextView tv;
     private DatabaseReference ref;
 
-    public EmptyFragment() {
+    public RankingFragment() {
         // Required empty public constructor
     }
 
@@ -67,7 +67,7 @@ public class EmptyFragment extends Fragment implements LoaderManager.LoaderCallb
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_mpty, container, false);
+        View view = inflater.inflate(R.layout.fragment_rank, container, false);
         ButterKnife.bind(this, view);
 
 
@@ -79,8 +79,8 @@ public class EmptyFragment extends Fragment implements LoaderManager.LoaderCallb
     @OnClick(R.id.btCheck)
     public void onClick() {
 
-        Intent intent=new Intent(getActivity(), UserDownloadAndSaveServic.class);
-        getActivity().startService(intent);
+        /*Intent intent=new Intent(getActivity(), UserDownloadAndSaveServic.class);
+        getActivity().startService(intent);*/
 
 
 
