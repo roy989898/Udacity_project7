@@ -47,10 +47,7 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
     final private int  MY_LODER_ID=101;
 
 
-    @BindView(R.id.btCheck)
-    Button btCheck;
-    @BindView(R.id.tv)
-    TextView tv;
+
     private DatabaseReference ref;
 
     public RankingFragment() {
