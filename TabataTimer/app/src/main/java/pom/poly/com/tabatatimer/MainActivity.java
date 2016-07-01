@@ -222,6 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
         resolver = getContentResolver();
         deleteAllUserData(resolver);
+        //TODO recover,delete command
         readWhenupdate(resolver);
 
     }

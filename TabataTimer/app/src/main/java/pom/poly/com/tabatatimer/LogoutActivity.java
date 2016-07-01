@@ -31,7 +31,7 @@ public class LogoutActivity extends AppCompatActivity {
         delthesaveEmailAndPassAndProfileImgUrl();
         //go to the login page//
         Intent intent = new Intent(this, LoginActivity.class);
-        //del the profile picture img//TODO
+        //del the profile picture img//
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
 
         FirebaseAuth.getInstance().signOut();

@@ -7,6 +7,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 
 public class UserProvider extends ContentProvider {
@@ -60,6 +61,7 @@ public class UserProvider extends ContentProvider {
 
     private Cursor getUserData(SQLiteDatabase db, String[] projection, String sortOrder) {
         Cursor cursor = db.query(Contract.UserEntry.TABLE_NAME, projection, null, null, null, null, sortOrder);
+        Log.d("getUserData",cursor.getCount()+"");
         return cursor;
     }
 
