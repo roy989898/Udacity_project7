@@ -80,23 +80,26 @@ public class Eventinf extends SugarRecord implements Parcelable {
     }
 
     public static void notifyChanged() {
-
-        for (Observer observer : observers) {
-            try {
+        try {
+            for (Observer observer : observers) {
                 observer.update();
-            }catch (Exception exp){
-
-                Log.d("Eventinf.notifyChanged",exp.toString());
-
             }
+        } catch (Exception exp) {
+            Log.d("Eventinf.notifyChanged", exp.toString());
 
         }
+
     }
 
     @Override
     public long save() {
         long i = super.save();
-        notifyChanged();
+        try {
+            notifyChanged();
+        } catch (Exception e) {
+            Log.d("Eventinf,save", e.toString());
+        }
+
         return i;
     }
 

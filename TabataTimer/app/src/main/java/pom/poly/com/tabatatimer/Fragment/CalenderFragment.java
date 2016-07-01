@@ -110,8 +110,13 @@ public class CalenderFragment extends Fragment implements Observer {
 //        setCustomResourceForDates();
 
         // Attach to the activity
-        FragmentTransaction t = activity.getSupportFragmentManager().beginTransaction();
-        t.replace(R.id.clalender1, caldroidFragment);
+//        FragmentTransaction t = activity.getSupportFragmentManager().beginTransaction();
+
+        FragmentTransaction t = getChildFragmentManager().beginTransaction();
+        try{
+          t.replace(R.id.clalender1, caldroidFragment);
+        }catch (Exception e){}
+
 
         t.commit();
 
@@ -156,6 +161,8 @@ public class CalenderFragment extends Fragment implements Observer {
         caldroidFragment.setCaldroidListener(listener);
     }
 
+
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -184,6 +191,12 @@ public class CalenderFragment extends Fragment implements Observer {
         }
 
 
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        Eventinf.registerObserver(this);
     }
 
     @Override
