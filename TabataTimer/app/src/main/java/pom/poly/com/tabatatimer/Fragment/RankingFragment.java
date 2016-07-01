@@ -102,10 +102,14 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
             Log.i("Loder",count+"");
         }
 
+//        mForecastAdapter.swapCursor(data);
+
+
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        //TODO
+        //TODO mForecastAdapter.swapCursor(null);
+
     }
 }
