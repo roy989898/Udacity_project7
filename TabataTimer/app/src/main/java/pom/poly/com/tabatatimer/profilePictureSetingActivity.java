@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.facebook.common.util.UriUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -27,12 +29,15 @@ import java.io.File;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class profilePictureSetingActivity extends AppCompatActivity {
 
-    @BindView(R.id.imProfile)
-    CircleImageView imProfile;
+
+    @BindView(R.id.sdvShow)
+    SimpleDraweeView sdvShow;
+
+    private Uri defaulrUri;
+    private String defaulrUriString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,31 +45,24 @@ public class profilePictureSetingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_picture_seting);
         ButterKnife.bind(this);
 
-        //Load the profile picture
-        String profilePURL = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), "");
-        if (!profilePURL.equals("")) {
-            Picasso picasso = Picasso.with(this);
-            picasso.load(profilePURL).into(new Target() {
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    imProfile.setImageBitmap(bitmap);
-                }
 
-                @Override
-                public void onBitmapFailed(Drawable errorDrawable) {
-
-                }
-
-                @Override
-                public void onPrepareLoad(Drawable placeHolderDrawable) {
-
-                }
-            });
-        }
 
     }
 
-    @OnClick(R.id.imProfile)
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Load the profile picture
+        Log.i("PictureSetingActivity","onStart");
+        defaulrUri = new Uri.Builder().scheme(UriUtil.LOCAL_RESOURCE_SCHEME).path(String.valueOf(R.drawable.ic_account_circle_white_24dp)).build();
+        defaulrUriString=defaulrUri.toString();
+        String profilePURL = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), defaulrUri.toString());
+        Log.i("PictureSetingActivity",profilePURL);
+        sdvShow.setImageURI(profilePURL);
+
+    }
+
+    @OnClick(R.id.sdvShow)
     public void onClick() {
         //choose a profile picture
         Crop.pickImage(this);
@@ -86,27 +84,13 @@ public class profilePictureSetingActivity extends AppCompatActivity {
     }
 
     private void handleCrop(int resultCode, Intent result) {
-        Target target = new Target() {
-            @Override
-            public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom loadedFrom) {
-                imProfile.setImageBitmap(bitmap);
 
-            }
-
-            @Override
-            public void onBitmapFailed(Drawable errorDrawable) {    //當圖片加載失敗時調用
-            }
-
-            @Override
-            public void onPrepareLoad(Drawable placeHolderDrawable) {     //當任務被提交時調用
-            }
-        };
         if (resultCode == RESULT_OK) {
 //            resultView.setImageURI(Crop.getOutput(result));
 //            Picasso.with(this).load(Crop.getOutput(result)).into(target);
-            imProfile.setImageURI(null);
+            sdvShow.setImageURI(defaulrUri);
             Uri url = Crop.getOutput(result);
-            imProfile.setImageURI(url);
+            sdvShow.setImageURI(url);
             Log.d("image Url", Crop.getOutput(result).toString());
 
             //upload the profile picture
@@ -156,7 +140,8 @@ public class profilePictureSetingActivity extends AppCompatActivity {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
-                Log.d("downloadUrl", downloadUrl.toString());
+                sdvShow.setImageURI(downloadUrl);
+                Log.d("PictureSetingActivity", "downloadUrl: "+downloadUrl.toString());
                 saveTheLinkinSP(downloadUrl.toString());
             }
         });

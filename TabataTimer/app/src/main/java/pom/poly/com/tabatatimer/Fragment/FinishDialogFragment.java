@@ -171,6 +171,7 @@ public class FinishDialogFragment extends DialogFragment {
                     HashMap<String, Object> map = new HashMap<>();
                     map.put("totaltime", millionSecond);
                     map.put("userName", name);
+                    map.put("profileLink",profilePURL);
 
                     idREF.updateChildren(map);
 

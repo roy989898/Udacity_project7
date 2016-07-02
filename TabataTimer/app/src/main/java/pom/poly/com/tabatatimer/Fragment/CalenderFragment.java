@@ -113,9 +113,8 @@ public class CalenderFragment extends Fragment implements Observer {
 //        FragmentTransaction t = activity.getSupportFragmentManager().beginTransaction();
 
         FragmentTransaction t = getChildFragmentManager().beginTransaction();
-        try{
+
           t.replace(R.id.clalender1, caldroidFragment);
-        }catch (Exception e){}
 
 
         t.commit();

@@ -2,6 +2,7 @@ package pom.poly.com.tabatatimer.Application;
 
 import android.app.Application;
 
+import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.stetho.Stetho;
 import com.orm.SugarApp;
 
@@ -33,5 +34,7 @@ public class MyApplication extends SugarApp {
 // Initialize Stetho with the Initializer
         Stetho.initialize(initializer);
         //TODO remeber to delete the Stetho when publish the app
+
+        Fresco.initialize(this);
     }
 }
