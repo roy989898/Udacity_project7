@@ -11,4 +11,9 @@
     <!--fragment_dialogFragment-->
     <dimen name="fragment_dialogFragment_Finish_textsize">45sp</dimen>
     <dimen name="fragment_dialogFragment__textsize">30sp</dimen>
+
+    <!--rank cell-->
+    <dimen name="rank_cell_card_margin">5dp</dimen>
+    <dimen name="rank_cell_card_cardCornerRadius">4dp</dimen>
+    <dimen name="rank_cell_card_SimpleDraweeView_margin">2dp</dimen>
 </resources>
