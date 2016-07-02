@@ -17,6 +17,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -25,6 +27,8 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -143,9 +147,20 @@ public class profilePictureSetingActivity extends AppCompatActivity {
                 sdvShow.setImageURI(downloadUrl);
                 Log.d("PictureSetingActivity", "downloadUrl: "+downloadUrl.toString());
                 saveTheLinkinSP(downloadUrl.toString());
+                //update the profile downloadUrl to the firebase
+                upLoadtheProfileLink(downloadUrl.toString());
             }
         });
 
+    }
+
+    private void upLoadtheProfileLink(String url){
+        DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
+        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        DatabaseReference userREF = baseRef.child("Users").child(userID);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("profileLink",url);
+        userREF.updateChildren(map);
     }
 
     private void saveTheLinkinSP(String downloadUrl) {
