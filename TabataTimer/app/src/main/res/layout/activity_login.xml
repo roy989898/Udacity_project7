@@ -23,40 +23,26 @@
         android:textColor="@color/loginPageText"
         android:textSize="48dp" />
 
-    <TextView
-        android:id="@+id/tvUserId"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="@string/user_id"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/loginPageText" />
-
     <EditText
         android:id="@+id/edtUserID"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:drawableBottom="@color/loginPageText"
         android:ems="10"
+        android:hint="Email Address"
         android:inputType="textEmailAddress"
-        android:textColor="@color/loginPageText" />
-
-    <TextView
-        android:id="@+id/tvPassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:text="@string/password"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/loginPageText" />
+        android:textColor="@color/loginPageText"
+        android:textColorHint="@color/colorPrimaryLight" />
 
     <EditText
         android:id="@+id/edtPassW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Password"
         android:inputType="textPassword"
-        android:textColor="@color/loginPageText" />
+        android:textColor="@color/loginPageText"
+        android:textColorHint="@color/colorPrimaryLight" />
 
     <Button
         android:id="@+id/btLogin"
@@ -72,9 +58,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/loginbtnbackground"
-        android:textColor="@color/loginPageText"
-        android:textSize="18sp"
         android:text="@string/create_ACC"
-        />
+        android:textColor="@color/loginPageText"
+        android:textSize="18sp" />
 
 </LinearLayout>
