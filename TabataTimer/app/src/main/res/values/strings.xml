@@ -2,16 +2,22 @@
     <string name="app_name">Tabata timer</string>
     <string name="user_id">User ID</string>
     <string name="password">Password</string>
-    <string name="create_ACC">Create Account</string>
+    <string name="create_ACC">Sig up</string>
     <string name="login">Login</string>
     <string name="sigup">Do no have an account?Sign up!</string>
+    <string name="activity_sigup_createAccount_string">Already have an account?Log in!</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_emailAddress">Email Address</string>
+    <string name="hint_re_emailAddress">Re-Enter Password</string>
     <string name="emptyMessage">Required</string>
     <string name="notAemail">Is not a email.</string>
-    <string name="passwordErrorMessage">The password should be longer than 6 unit.Can include number,letter,@,~and ! .</string>
+    <string name="passwordErrorMessage">The password should be longer than 6 unit.Can include number and letter.</string>
     <string name="authenticationFailed">Authentication failed.</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="sigupactivity_password_not_match_error">Two password are not match</string>
 
     <!--preference_name_string-->
     <string name="preference_name_key">pkeyName</string>

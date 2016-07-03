@@ -340,7 +340,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         {
             @Override
             public void onClick(View widget) {
-                Toast.makeText(LoginActivity.this,"click",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(LoginActivity.this,SigUpActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
             }
         };
         mySpannable.setSpan(myClickableSpan, 22, 28 + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);

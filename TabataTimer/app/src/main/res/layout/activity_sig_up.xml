@@ -44,15 +44,17 @@
         android:textColor="@color/loginPageText"
         android:textColorHint="@color/colorPrimaryLight" />
 
-    <Button
-        android:id="@+id/btLogin"
+    <EditText
+        android:id="@+id/edre_PassW"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/loginbtnbackground"
-        android:text="@string/login"
-        android:layout_marginTop="@dimen/activity_login_button_topmargin"
+        android:ems="10"
+        android:hint="@string/hint_re_emailAddress"
+        android:inputType="textPassword"
         android:textColor="@color/loginPageText"
-        android:textSize="@dimen/activity_login_button_textSize" />
+        android:textColorHint="@color/colorPrimaryLight" />
+
+
 
     <Button
         android:id="@+id/btVreate"
@@ -61,15 +63,25 @@
         android:layout_height="wrap_content"
         android:background="@drawable/loginbtnbackground"
         android:text="@string/create_ACC"
-        android:visibility="invisible"
+
         android:textColor="@color/loginPageText"
-        android:textSize="18sp" />
+        android:textSize="@dimen/activity_login_button_textSize" />
+    <Button
+        android:id="@+id/btLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/loginbtnbackground"
+        android:text="@string/login"
+        android:visibility="invisible"
+        android:layout_marginTop="@dimen/activity_login_button_topmargin"
+        android:textColor="@color/loginPageText"
+        android:textSize="@dimen/activity_login_button_textSize" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/loginPageText"
-        android:text="@string/sigup"
+        android:text="@string/activity_sigup_createAccount_string"
         android:id="@+id/tvSigup" />
 
 </LinearLayout>
