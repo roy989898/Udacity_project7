@@ -4,6 +4,7 @@
     <string name="password">Password</string>
     <string name="create_ACC">Create Account</string>
     <string name="login">Login</string>
+    <string name="sigup">Do no have an account?Sign up!</string>
     <string name="emptyMessage">Required</string>
     <string name="notAemail">Is not a email.</string>
     <string name="passwordErrorMessage">The password should be longer than 6 unit.Can include number,letter,@,~and ! .</string>

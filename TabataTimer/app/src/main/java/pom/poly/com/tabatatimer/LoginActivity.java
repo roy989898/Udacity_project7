@@ -7,7 +7,10 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Spannable;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -39,6 +42,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button btVreate;
     @BindView(R.id.btLogin)
     Button btLogin;
+    @BindView(R.id.tvSigup)
+    TextView tvSigup;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -276,7 +281,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.activity_loginv2);
         ButterKnife.bind(this);
 
         //set the custom font Billabong to the App name show at the login page
@@ -324,6 +329,21 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Log.d("LoginActivity",canAutoLogin()+" "+email+" "+password);
             signIn(email, password);
         }*/
+        //Set the clickable sigup text
+
+        String myString = "Do no have an account?Sign up!";
+
+        tvSigup.setMovementMethod(LinkMovementMethod.getInstance());
+        tvSigup.setText(myString, TextView.BufferType.SPANNABLE);
+        Spannable mySpannable = (Spannable)tvSigup.getText();
+        ClickableSpan myClickableSpan = new ClickableSpan()
+        {
+            @Override
+            public void onClick(View widget) {
+                Toast.makeText(LoginActivity.this,"click",Toast.LENGTH_SHORT).show();
+            }
+        };
+        mySpannable.setSpan(myClickableSpan, 22, 28 + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
 
     }
