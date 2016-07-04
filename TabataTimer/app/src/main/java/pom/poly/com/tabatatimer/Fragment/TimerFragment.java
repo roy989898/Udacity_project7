@@ -14,9 +14,14 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -24,6 +29,7 @@ import java.util.concurrent.TimeUnit;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.R;
 import pom.poly.com.tabatatimer.Utility.SoundLibrary;
 
@@ -54,6 +60,8 @@ public class TimerFragment extends Fragment {
     private Handler mHandler;
     private Timer timer;
     private boolean isPauseButton = false;
+    private DatabaseReference mDatabase;
+    private FirebaseAuth mAuth;
 
 
     public TimerFragment() {
@@ -132,23 +140,50 @@ public class TimerFragment extends Fragment {
                     //show the Action tomer
 
                 } else if (msg.what == 2) {
-//                    stopNadResetTimerandCount();
-
-                    /*Intent intent = new Intent(getContext(), CongratulationActivity.class);
-                    intent.putExtra(getString(R.string.timerFragment_CongratulationBundleKey), eventinf);
-                    startActivity(intent);*/
+//
                     stopAndResetTheTimer();
 
-                    //TODO show the  dialog and sevae
-                    /*FragmentManager fm = getActivity().getSupportFragmentManager();
-                    Eventinf eventinf = new Eventinf(actionDeadLine, getTodayDate(), getNowTime(), pauseDeadline, countDeadLine);
-                    FinishDialogFragment fragment = FinishDialogFragment.newInstance(eventinf);
-                    fragment.show(fm, "finish_dialog");*/
+                    //TODO show the  save and upload to firebase
+
+
+                    Eventinf eventinf = new Eventinf(actionTimerDeadline, getTodayDate(), getNowTime(), restTimerDeadline, cycletimerDeadline);
+                    eventinf.save();
+                    updatetoFirebase();
 
                 }
             }
         };
 
+    }
+
+    private void updatetoFirebase() {
+
+        if (mDatabase == null) {
+            mDatabase = FirebaseDatabase.getInstance().getReference();
+        }
+
+        if (mAuth == null) {
+            mAuth = FirebaseAuth.getInstance();
+        }
+
+        String useID = mAuth.getCurrentUser().getUid();
+
+        //get the reference at the login user email
+        DatabaseReference idREF = mDatabase.child("Users").child(useID).child("totaltime");
+        idREF.setValue(getTotalTabataTime());
+    }
+
+    private long getTotalTabataTime() {//in million second
+        List<Eventinf> eventList = Eventinf.listAll(Eventinf.class);
+        long second = 0;
+        for (Eventinf event : eventList) {
+            second += event.getTotalTime();
+
+        }
+
+        long millionSecond = TimeUnit.SECONDS.toMillis(second);
+
+        return millionSecond;
     }
 
    /* private void stopNadResetTimerandCount() {
@@ -291,6 +326,7 @@ public class TimerFragment extends Fragment {
         }
         isPauseButton = false;
         PauseButtonToStartButton();
+        saveTimerAndCount(pauseTimer,actionTimer,totaltime,timerCount,isPauseTimerOn);
     }
 
     private void pauseandSavetheTime() {
