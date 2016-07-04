@@ -34,7 +34,7 @@ public class RankingCursorAdapter extends CursorAdapter {
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View view = LayoutInflater.from(context).inflate(R.layout.rank_cellv2, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.rank_cellv3, parent, false);
         ViewHolder vh = new ViewHolder(view);
         view.setTag(vh);
 
@@ -49,7 +49,7 @@ public class RankingCursorAdapter extends CursorAdapter {
         long totalTime = cursor.getLong(cursor.getColumnIndex(Contract.UserEntry.COLUMN_TOTAL_TIME));
         final int likeNumber = cursor.getInt(cursor.getColumnIndex(Contract.UserEntry.COLUMN_LIKENUMBER));
         String userID = cursor.getString(cursor.getColumnIndex(Contract.UserEntry.COLUMN_USERID));
-        vh.userID=userID;
+        vh.userID = userID;
         Log.i("userID", userID);
         vh.tvName.setText(name);
         vh.txTotalTime.setText(totalTime + "");
@@ -98,6 +98,7 @@ public class RankingCursorAdapter extends CursorAdapter {
 
 
     static class ViewHolder {
+        public String userID;
         @BindView(R.id.tvName)
         TextView tvName;
         @BindView(R.id.profile_picture)
@@ -108,8 +109,6 @@ public class RankingCursorAdapter extends CursorAdapter {
         TextView txLikeNumber;
         @BindView(R.id.txTotalTime)
         TextView txTotalTime;
-
-        public String userID;
 
 
         ViewHolder(View view) {
