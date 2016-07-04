@@ -2,18 +2,16 @@ package pom.poly.com.tabatatimer.Fragment;
 
 
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.text.DateFormat;
@@ -21,60 +19,40 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.TimeUnit;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import pom.poly.com.tabatatimer.CongratulationActivity;
-import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.R;
 import pom.poly.com.tabatatimer.Utility.SoundLibrary;
-import pom.poly.com.tabatatimer.View.myBallView;
 
 
 public class TimerFragment extends Fragment {
 
 
-    @BindView(R.id.ball1)
-    myBallView ball1;
-    @BindView(R.id.ball2)
-    myBallView ball2;
-    @BindView(R.id.ball3)
-    myBallView ball3;
-    @BindView(R.id.ball4)
-    myBallView ball4;
-    @BindView(R.id.ball5)
-    myBallView ball5;
-    @BindView(R.id.ball6)
-    myBallView ball6;
-    @BindView(R.id.ball7)
-    myBallView ball7;
-    @BindView(R.id.ball8)
-    myBallView ball8;
-    @BindView(R.id.tvPauseTimer)
-    TextView tvPauseTimer;
-    @BindView(R.id.tvActionTimer)
-    TextView tvActionTimer;
-    @BindView(R.id.btStart)
-    Button btStart;
-    @BindView(R.id.btReset)
-    Button btReset;
-    private myBallView[] ballArray;
-    private boolean isStartButton = true;
+    @BindView(R.id.tvState)
+    TextView tvState;
+    @BindView(R.id.tvTimer)
+    TextView tvTimer;
+    @BindView(R.id.tvCycle)
+    TextView tvCycle;
+    @BindView(R.id.tvTotalTime)
+    TextView tvTotalTime;
+    @BindView(R.id.btPlayNpause)
+    ImageButton btPlayNpause;
+
+    private int restTimerDeadline = 10;
+    private int actionTimerDeadline = 20;
+    private int cycletimerDeadline = 8;
     private boolean pauseTimerOn = true;
     private int pauseTimer = 0;
     private int actionTimer = 0;
-    private int timerCount = 0;
+    private int totaltime = 0;
+    private SoundLibrary sound;
+    private int timerCount;
     private Handler mHandler;
     private Timer timer;
-    private SoundLibrary sound;
-/*    private int pauseDeadline = 10;
-    private int actionDeadLine = 20;
-    private int countDeadLine = 8;*///TODO recovery
-
-    private int pauseDeadline = 1;
-    private int actionDeadLine = 1;
-    private int countDeadLine = 1;
 
 
     public TimerFragment() {
@@ -83,54 +61,25 @@ public class TimerFragment extends Fragment {
 
     }
 
-    private myBallView[] initialBallArray() {
-        myBallView[] ballArray = new myBallView[8];
-        ballArray[0] = ball1;
-        ballArray[1] = ball2;
-        ballArray[2] = ball3;
-        ballArray[3] = ball4;
-        ballArray[4] = ball5;
-        ballArray[5] = ball6;
-        ballArray[6] = ball7;
-        ballArray[7] = ball8;
-
-        return ballArray;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        restoreTimerandCount();
-        showTheTimerandCount(pauseTimer, actionTimer, timerCount, isStartButton);
-    }
-
-    @Override
-    public void onPause() {
-        pauseAndSaveTimerandCount();
-        super.onPause();
-
-    }
-
-    private void setTheBallOn(int index, myBallView[] ballArray) {
-        if (index < ballArray.length && index >= 0) {
-            for (myBallView ball : ballArray) {
-                ball.setmSetOnOff(false); //set all off first
-            }
-            ballArray[index].setmSetOnOff(true); //set a specific on On
-        } else {
-            for (myBallView ball : ballArray) {
-                ball.setmSetOnOff(false); //set all off
-            }
+    private String breadThesecondtoMoinutesandSecond(int s) {
+        if (s < 0) {
+            throw new IllegalArgumentException("Duration must be greater than zero!");
         }
 
+        long minutes = TimeUnit.SECONDS.toMinutes(s);
+        s -= TimeUnit.MINUTES.toSeconds(minutes);
+        long seconds = s;
+
+        String timeString = String.format("%02d:%02d", minutes, seconds);
+
+
+        return timeString;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
+        sound = new SoundLibrary(getContext());
         mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
@@ -141,26 +90,62 @@ public class TimerFragment extends Fragment {
                     int pauseTime = bundle.getInt(getString(R.string.bundle_key_pause));
                     int actionTime = bundle.getInt(getString(R.string.bundle_key_action));
                     int count = bundle.getInt(getString(R.string.bundle_key_count));
+                    int ttTime = bundle.getInt(getString(R.string.bundle_key_totaltime));
+                    String totalTime = breadThesecondtoMoinutesandSecond(ttTime);
+                    boolean pausetierON = bundle.getBoolean(getString(R.string.bundle_key_isPauseTimer));
+                    tvCycle.setText(count + "");
+                    tvTotalTime.setText(totalTime);
+                    if (pausetierON) {
+                        //chnage Timercolor to white,and show pauseTime
+                        int white = getResources().getColor(R.color.fragment_time_normaltext_color);
+                        tvState.setTextColor(white);
+                        tvTimer.setTextColor(white);
+                        tvState.setText("rest");
+                        String pauseString=breadThesecondtoMoinutesandSecond(pauseTime);
+                        tvTimer.setText(pauseString + "");
 
-                    showTheTimerandCount(pauseTime, actionTime, count, isStartButton);
+
+                    } else {
+                        //change the Timer color to AccentColor,and showa ctionTime
+                        int accentColor = getResources().getColor(R.color.colorAccent);
+                        tvState.setTextColor(accentColor);
+                        tvTimer.setTextColor(accentColor);
+                        tvState.setText("action");
+                        String actionString=breadThesecondtoMoinutesandSecond(actionTime);
+                        tvTimer.setText(actionString + "");
+                    }
+
+                    //show the Action tomer
 
                 } else if (msg.what == 2) {
-                    stopNadResetTimerandCount();
+//                    stopNadResetTimerandCount();
 
                     /*Intent intent = new Intent(getContext(), CongratulationActivity.class);
                     intent.putExtra(getString(R.string.timerFragment_CongratulationBundleKey), eventinf);
                     startActivity(intent);*/
-                    FragmentManager fm = getActivity().getSupportFragmentManager();
+
+                    //TODO show the  dialog
+                    /*FragmentManager fm = getActivity().getSupportFragmentManager();
                     Eventinf eventinf = new Eventinf(actionDeadLine, getTodayDate(), getNowTime(), pauseDeadline, countDeadLine);
                     FinishDialogFragment fragment = FinishDialogFragment.newInstance(eventinf);
-                    fragment.show(fm,"finish_dialog");
+                    fragment.show(fm, "finish_dialog");*/
 
                 }
             }
         };
 
-        sound = new SoundLibrary(getContext());
     }
+
+   /* private void stopNadResetTimerandCount() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+        actionTimer = pauseTimer = timerCount = 0;
+        isStartButton = true;
+        showTheTimerandCount(pauseTimer, actionTimer, timerCount, isStartButton);
+    }*/
+
 
     private String getTodayDate() {
 //        yyyy/MM/dd HH:mm:ss
@@ -180,54 +165,11 @@ public class TimerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_ime, container, false);
+        View view = inflater.inflate(R.layout.fragment_imev2, container, false);
         ButterKnife.bind(this, view);
-        ballArray = initialBallArray();
         return view;
     }
 
-    @OnClick({R.id.btStart, R.id.btReset})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.btStart:
-                if (isStartButton) {
-                    //start button
-                    startTimerandCount();
-                    setStartbuttonToPauseButton();
-                } else {
-                    //pause button
-                    setPausePuttontoStartButton();
-                    pauseAndSaveTimerandCount();
-                }
-
-                break;
-            case R.id.btReset:
-                stopNadResetTimerandCount();
-
-                break;
-        }
-    }
-
-    private void setStartbuttonToPauseButton() {
-        isStartButton = false;
-        btStart.setText(getString(R.string.bt_start_pause));
-    }
-
-    private void setPausePuttontoStartButton() {
-        isStartButton = true;
-        btStart.setText(getString(R.string.bt_start));
-    }
-
-
-    private void pauseAndSaveTimerandCount() {
-        if (timer != null) {
-            timer.cancel();
-
-            timer = null;
-        }
-        saveTimerAndCount();
-
-    }
 
     private void saveTimerAndCount() {
         SharedPreferences sharedPreference = getActivity().getSharedPreferences(getString(R.string.timer_fragment_sharedPreference_name), Context.MODE_PRIVATE);
@@ -251,31 +193,30 @@ public class TimerFragment extends Fragment {
     }
 
     private void startTimerandCount() {
+
         if (timer == null) {
             timer = new Timer(true);
             timer.schedule(new myTimerTask(), 1000, 1000);
         }
     }
 
-    private void stopNadResetTimerandCount() {
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
+    @OnClick({R.id.btPlayNpause, R.id.btReset})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btPlayNpause:
+                startTimerandCount();
+                break;
+            case R.id.btReset:
+                resetTimer();
+                break;
         }
-        actionTimer = pauseTimer = timerCount = 0;
-        isStartButton = true;
-        showTheTimerandCount(pauseTimer, actionTimer, timerCount, isStartButton);
     }
 
-    private void showTheTimerandCount(int pauseTimer, int ActionTimer, int count, Boolean isStartButton) {
-        tvPauseTimer.setText(pauseTimer + "");
-        tvActionTimer.setText(ActionTimer + "");
-        setTheBallOn(count, ballArray);
-        if (isStartButton) {
-            setPausePuttontoStartButton();
-        } else {
-            setStartbuttonToPauseButton();
-        }
+    private void startotStopThetimer() {
+
+    }
+
+    private void resetTimer() {
 
     }
 
@@ -287,26 +228,35 @@ public class TimerFragment extends Fragment {
 
             if (pauseTimerOn) {
                 pauseTimer++;
+                if(pauseTimer<=restTimerDeadline){
+                    totaltime++;
+                }
+
             } else {
                 actionTimer++;
+                if(actionTimer<=actionTimerDeadline){
+                    totaltime++;
+                }
+
             }
 
-            if (pauseTimer > pauseDeadline - 3 && pauseTimer <= pauseDeadline) {
+
+            if (pauseTimer > restTimerDeadline - 3 && pauseTimer <= restTimerDeadline) {
                 sound.playStartSound();
             }
-            if (actionTimer == actionDeadLine) {
+            if (actionTimer == actionTimerDeadline) {
                 sound.playEndSound();
             }
 
-            if (pauseTimer > pauseDeadline) {
+            if (pauseTimer > restTimerDeadline) {
                 pauseTimerOn = false;
                 pauseTimer = 0;
-            } else if (actionTimer > actionDeadLine) {
+            } else if (actionTimer > actionTimerDeadline) {
                 pauseTimerOn = true;
                 actionTimer = 0;
                 timerCount++;
             }
-            if (timerCount >= countDeadLine) {
+            if (timerCount >= cycletimerDeadline) {
                 //send message to the handler,tell ot to sop the timer and reset
                 Message message = new Message();
                 message.what = 2;
@@ -317,13 +267,15 @@ public class TimerFragment extends Fragment {
                 databundle.putInt(getString(R.string.bundle_key_pause), pauseTimer);
                 databundle.putInt(getString(R.string.bundle_key_action), actionTimer);
                 databundle.putInt(getString(R.string.bundle_key_count), timerCount);
+                databundle.putInt(getString(R.string.bundle_key_totaltime), totaltime);
+                databundle.putBoolean(getString(R.string.bundle_key_isPauseTimer), pauseTimerOn);
                 message.setData(databundle);
                 message.what = 1;
                 mHandler.sendMessage(message);
             }
 
 
-            Log.d("Timer", "action " + actionTimer + " pause " + pauseTimer + " count " + timerCount);
+            Log.d("Timer", "action " + actionTimer + " pause " + pauseTimer + " count " + timerCount+" total"+totaltime);
 
 
         }

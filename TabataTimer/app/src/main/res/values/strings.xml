@@ -79,6 +79,8 @@
     <string name="bundle_key_action">bka</string>
     <string name="bundle_key_pause">bkp</string>
     <string name="bundle_key_count">bkc</string>
+    <string name="bundle_key_isPauseTimer">bkisat</string>
+    <string name="bundle_key_totaltime">bktt</string>
 
     <string name="timer_fragment_sharedPreference_name">spName_timerFragment</string>
     <string name="sharedpreferencekey_action">spAction</string>
