@@ -271,8 +271,8 @@ public class TimerFragment extends Fragment {
         this.totaltime = totaltime;
         this.timerCount = timerCount;
         this.pauseTimerOn = isPauseTimerOn;
+        tvCycle.setText(timerCount + "");
         tvTotalTime.setText(breadThesecondtoMoinutesandSecond(totaltime));
-        tvCycle.setText(0 + "");
 
 
         if (isPauseTimerOn) {
@@ -298,7 +298,7 @@ public class TimerFragment extends Fragment {
             timer.cancel();
             timer = null;
         }
-        saveTimerAndCount(pauseTimer,actionTimer,totaltime,timerCount,pauseTimerOn);
+        saveTimerAndCount(pauseTimer, actionTimer, totaltime, timerCount, pauseTimerOn);
 
 
     }
