@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        Log.d("MainActivity","in onPause");
+        Log.d("MainActivity", "in onPause");
         removeallTheFireBaseListener();
         super.onPause();
 
@@ -69,19 +69,19 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d("MainActivity","in onStop");
+        Log.d("MainActivity", "in onStop");
     }
 
     private void removeallTheFireBaseListener() {
-        Log.d("MainActivity","removeallTheFireBaseListener");
+        Log.d("MainActivity", "removeallTheFireBaseListener");
         if (eventLister != null && ref != null) {
             ref.removeEventListener(eventLister);
-            Log.d("MainActivity","removeEventListener");
+            Log.d("MainActivity", "removeEventListener");
 
         }
         if ((childListener != null && ref != null)) {
             ref.removeEventListener(childListener);
-            Log.d("MainActivity","removeEventListener");
+            Log.d("MainActivity", "removeEventListener");
         }
     }
 
@@ -214,6 +214,10 @@ public class MainActivity extends AppCompatActivity {
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(mViewPager);
 
+        //set the tab icon
+        setTabIcon(tabLayout);
+
+
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         /*fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -229,6 +233,12 @@ public class MainActivity extends AppCompatActivity {
         //TODO recover,delete command
         readWhenupdate(resolver);
 
+    }
+
+    private void setTabIcon(TabLayout tabLayout) {
+        tabLayout.getTabAt(0).setIcon(R.drawable.ic_stars_white_24px);
+        tabLayout.getTabAt(1).setIcon(R.drawable.ic_timer_white_24px);
+        tabLayout.getTabAt(2).setIcon(R.drawable.ic_date_range_white_24px);
     }
 
 
@@ -332,14 +342,17 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public CharSequence getPageTitle(int position) {
             switch (position) {
-                case 0:
+                /*case 0:
                     return "SECTION 1";
                 case 1:
                     return "SECTION 2";
                 case 2:
                     return "SECTION 3";
+                */
+                default:
+                    return "";
             }
-            return null;
+
         }
     }
 }
