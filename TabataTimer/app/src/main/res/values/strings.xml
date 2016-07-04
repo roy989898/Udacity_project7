@@ -86,6 +86,7 @@
     <string name="sharedpreferencekey_action">spAction</string>
     <string name="sharedpreferencekey_pause">spPause</string>
     <string name="sharedpreferencekey_count">spCount</string>
+    <string name="sharedpreferencekey_totaltime">sptttime</string>
     <string name="sharedpreferencekey_isPauseTimerON">spPausetimeron</string>
     <string name="sharedpreferencekey_isStartButton">spstartButton</string>
 

@@ -62,6 +62,19 @@ public class TimerFragment extends Fragment {
 
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        pauseandSavetheTime();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        restoreTimerandCount();
+
+    }
+
     private String breadThesecondtoMoinutesandSecond(int s) {
         if (s < 0) {
             throw new IllegalArgumentException("Duration must be greater than zero!");
@@ -124,8 +137,9 @@ public class TimerFragment extends Fragment {
                     /*Intent intent = new Intent(getContext(), CongratulationActivity.class);
                     intent.putExtra(getString(R.string.timerFragment_CongratulationBundleKey), eventinf);
                     startActivity(intent);*/
+                    stopAndResetTheTimer();
 
-                    //TODO show the  dialog
+                    //TODO show the  dialog and sevae
                     /*FragmentManager fm = getActivity().getSupportFragmentManager();
                     Eventinf eventinf = new Eventinf(actionDeadLine, getTodayDate(), getNowTime(), pauseDeadline, countDeadLine);
                     FinishDialogFragment fragment = FinishDialogFragment.newInstance(eventinf);
@@ -172,13 +186,14 @@ public class TimerFragment extends Fragment {
     }
 
 
-    private void saveTimerAndCount() {
+    private void saveTimerAndCount(int pauseTimer, int actionTimer, int totaltime, int timerCount, boolean isPauseTimerOn) {
         SharedPreferences sharedPreference = getActivity().getSharedPreferences(getString(R.string.timer_fragment_sharedPreference_name), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreference.edit();
         editor.putInt(getString(R.string.sharedpreferencekey_action), actionTimer);
         editor.putInt(getString(R.string.sharedpreferencekey_pause), pauseTimer);
         editor.putInt(getString(R.string.sharedpreferencekey_count), timerCount);
-        editor.putBoolean(getString(R.string.sharedpreferencekey_isPauseTimerON), pauseTimerOn);
+        editor.putInt(getString(R.string.sharedpreferencekey_totaltime), totaltime);
+        editor.putBoolean(getString(R.string.sharedpreferencekey_isPauseTimerON), isPauseTimerOn);
 //        editor.putBoolean(getString(R.string.sharedpreferencekey_isStartButton), isStartButton);
         editor.commit();
     }
@@ -189,6 +204,9 @@ public class TimerFragment extends Fragment {
         pauseTimer = sharedPreference.getInt(getString(R.string.sharedpreferencekey_pause), 0);
         timerCount = sharedPreference.getInt(getString(R.string.sharedpreferencekey_count), 0);
         pauseTimerOn = sharedPreference.getBoolean(getString(R.string.sharedpreferencekey_isPauseTimerON), true);
+        totaltime = sharedPreference.getInt(getString(R.string.sharedpreferencekey_totaltime), 0);
+
+        resetTheWholeTimer(pauseTimer, actionTimer, totaltime, timerCount, pauseTimerOn);
 
 
     }
@@ -241,21 +259,37 @@ public class TimerFragment extends Fragment {
             timer = null;
         }
 
-        resetTheWholeTimer();
+        resetTheWholeTimer(0, 0, 0, 0, true);
 
 
     }
 
-    private void resetTheWholeTimer(){
-        pauseTimer = actionTimer = totaltime = timerCount = 0;
+    private void resetTheWholeTimer(int pauseTimer, int actionTimer, int totaltime, int timerCount, boolean isPauseTimerOn) {
+
+        this.pauseTimer = pauseTimer;
+        this.actionTimer = actionTimer;
+        this.totaltime = totaltime;
+        this.timerCount = timerCount;
+        this.pauseTimerOn = isPauseTimerOn;
         tvTotalTime.setText(breadThesecondtoMoinutesandSecond(totaltime));
         tvCycle.setText(0 + "");
-        tvTimer.setText(breadThesecondtoMoinutesandSecond(pauseTimer));
-        int white = getResources().getColor(R.color.fragment_time_normaltext_color);
-        tvState.setTextColor(white);
-        tvTimer.setTextColor(white);
-        tvState.setText("rest");
-        isPauseButton=false;
+
+
+        if (isPauseTimerOn) {
+            int white = getResources().getColor(R.color.fragment_time_normaltext_color);
+            tvState.setTextColor(white);
+            tvTimer.setTextColor(white);
+            tvState.setText("rest");
+            tvTimer.setText(breadThesecondtoMoinutesandSecond(pauseTimer));
+
+        } else {
+            int accentColor = getResources().getColor(R.color.colorAccent);
+            tvState.setTextColor(accentColor);
+            tvTimer.setTextColor(accentColor);
+            tvState.setText("action");
+            tvTimer.setText(breadThesecondtoMoinutesandSecond(actionTimer));
+        }
+        isPauseButton = false;
         PauseButtonToStartButton();
     }
 
@@ -263,13 +297,11 @@ public class TimerFragment extends Fragment {
         if (timer != null) {
             timer.cancel();
             timer = null;
-            saveTimerAndCount();
         }
+        saveTimerAndCount(pauseTimer,actionTimer,totaltime,timerCount,pauseTimerOn);
 
 
     }
-
-
 
 
     private class myTimerTask extends TimerTask {
