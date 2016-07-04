@@ -107,6 +107,8 @@
     <string name="detail_dialog_Total">Total(s):</string>
     <string name="detail_dialog_finish">Finish time:</string>
 
+    <!--sig up activity -->
+    <string name="sigup_activity_sigup_success">Sigup success!</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

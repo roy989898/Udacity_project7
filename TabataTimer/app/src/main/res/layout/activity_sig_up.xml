@@ -82,6 +82,6 @@
         android:layout_height="wrap_content"
         android:textColor="@color/loginPageText"
         android:text="@string/activity_sigup_createAccount_string"
-        android:id="@+id/tvSigup" />
+        android:id="@+id/tvLogin" />
 
 </LinearLayout>

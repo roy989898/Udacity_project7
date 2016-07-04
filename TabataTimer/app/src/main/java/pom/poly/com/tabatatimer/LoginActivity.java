@@ -359,7 +359,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 break;
 
             case R.id.btVreate:
-                createAccount(edtUserID.getText().toString(), edtPassW.getText().toString());
+//                createAccount(edtUserID.getText().toString(), edtPassW.getText().toString());
                 break;
         }
     }
