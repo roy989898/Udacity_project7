@@ -24,4 +24,13 @@
     <dimen name="activity_login_loginpage_title">48sp</dimen>
     <dimen name="activity_login_button_topmargin">10dp</dimen>
     <dimen name="activity_login_button_textSize">18sp</dimen>
+
+    <!--Timer fragment-->
+    <dimen name="fragment_timev2_tvState_textSize">40dp</dimen>
+    <dimen name="fragment_timev2_tvTimer_textSize">80dp</dimen>
+    <dimen name="fragment_timev2_margin">16dp</dimen>
+    <dimen name="fragment_timev2_cycle_textSize">20dp</dimen>
+    <dimen name="fragment_timev2_tvcycle_textSize">40dp</dimen>
+    <dimen name="fragment_timev2_totaltextsize_textSize">20dp</dimen>
+    <dimen name="fragment_timev2_tvtotalTime_textSize">40dp</dimen>
 </resources>

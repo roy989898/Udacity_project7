@@ -22,7 +22,7 @@
             android:layout_marginRight="16dp"
             android:text="rest"
             android:textColor="@color/fragment_time_normaltext_color"
-            android:textSize="40dp" />
+            android:textSize="@dimen/fragment_timev2_tvState_textSize" />
     </LinearLayout>
 
     <LinearLayout
@@ -38,15 +38,15 @@
             android:gravity="center"
             android:text="00:00"
             android:textColor="@color/fragment_time_normaltext_color"
-            android:textSize="80dp"
+            android:textSize="@dimen/fragment_timev2_tvTimer_textSize"
             android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="@dimen/fragment_timev2_margin"
+        android:layout_marginRight="@dimen/fragment_timev2_margin"
         android:layout_weight="3"
         android:orientation="horizontal">
 
@@ -58,12 +58,11 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="cycles"
+                android:text="@string/fragment_ime2v_cycles_string"
                 android:textColor="@color/fragment_time_normaltext_color"
-                android:textSize="20dp" />
+                android:textSize="@dimen/fragment_timev2_cycle_textSize" />
 
             <TextView
                 android:id="@+id/tvCycle"
@@ -71,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:text="00"
                 android:textColor="@color/fragment_time_normaltext_color"
-                android:textSize="40dp"
+                android:textSize="@dimen/fragment_timev2_tvcycle_textSize"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -83,12 +82,11 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView8"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="total time"
+                android:text="@string/fragment_ime2v_totaltime_string"
                 android:textColor="@color/fragment_time_normaltext_color"
-                android:textSize="20dp" />
+                android:textSize="@dimen/fragment_timev2_totaltextsize_textSize" />
 
             <TextView
                 android:id="@+id/tvTotalTime"
@@ -96,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:text="00:00"
                 android:textColor="@color/fragment_time_normaltext_color"
-                android:textSize="40dp"
+                android:textSize="@dimen/fragment_timev2_tvtotalTime_textSize"
                 android:textStyle="bold" />
         </LinearLayout>
     </LinearLayout>
@@ -104,8 +102,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="@dimen/fragment_timev2_margin"
+        android:layout_marginRight="@dimen/fragment_timev2_margin"
         android:layout_weight="1"
         android:orientation="horizontal">
 

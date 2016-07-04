@@ -122,7 +122,7 @@ public class TimerFragment extends Fragment {
                         int white = getResources().getColor(R.color.fragment_time_normaltext_color);
                         tvState.setTextColor(white);
                         tvTimer.setTextColor(white);
-                        tvState.setText("rest");
+                        tvState.setText(getString(R.string.timerFragment_rest));
                         String pauseString = breadThesecondtoMoinutesandSecond(pauseTime);
                         tvTimer.setText(pauseString + "");
 
@@ -132,7 +132,7 @@ public class TimerFragment extends Fragment {
                         int accentColor = getResources().getColor(R.color.colorAccent);
                         tvState.setTextColor(accentColor);
                         tvTimer.setTextColor(accentColor);
-                        tvState.setText("action");
+                        tvState.setText(getString(R.string.timerFragment_action));
                         String actionString = breadThesecondtoMoinutesandSecond(actionTime);
                         tvTimer.setText(actionString + "");
                     }
@@ -314,14 +314,14 @@ public class TimerFragment extends Fragment {
             int white = getResources().getColor(R.color.fragment_time_normaltext_color);
             tvState.setTextColor(white);
             tvTimer.setTextColor(white);
-            tvState.setText("rest");
+            tvState.setText(getString(R.string.timerFragment_rest));
             tvTimer.setText(breadThesecondtoMoinutesandSecond(pauseTimer));
 
         } else {
             int accentColor = getResources().getColor(R.color.colorAccent);
             tvState.setTextColor(accentColor);
             tvTimer.setTextColor(accentColor);
-            tvState.setText("action");
+            tvState.setText(getString(R.string.timerFragment_action));
             tvTimer.setText(breadThesecondtoMoinutesandSecond(actionTimer));
         }
         isPauseButton = false;

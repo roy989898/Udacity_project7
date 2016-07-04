@@ -94,6 +94,13 @@
     <string name="preference_uploadPicture_title">Profile Picture</string>
     <string name="bt_lagout_string">Logout</string>
 
+    <string name="fragment_ime2v_cycles_string">cycles</string>
+    <string name="fragment_ime2v_totaltime_string">total time</string>
+
+    <!--TimerFragment -->
+    <string name="timerFragment_action">action</string>
+    <string name="timerFragment_rest">rest</string>
+
 
     <!--Timer activity to Congratulation key-->
     <string name="timerFragment_CongratulationBundleKey">TCBK</string>
