@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:text="00:04"
+            android:text="00:00"
             android:textColor="@color/fragment_time_normaltext_color"
             android:textSize="80dp"
             android:textStyle="bold" />
@@ -94,7 +94,7 @@
                 android:id="@+id/tvTotalTime"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="04:04"
+                android:text="00:00"
                 android:textColor="@color/fragment_time_normaltext_color"
                 android:textSize="40dp"
                 android:textStyle="bold" />

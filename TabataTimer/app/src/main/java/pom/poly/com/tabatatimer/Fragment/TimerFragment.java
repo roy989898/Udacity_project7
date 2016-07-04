@@ -53,6 +53,7 @@ public class TimerFragment extends Fragment {
     private int timerCount;
     private Handler mHandler;
     private Timer timer;
+    private boolean isPauseButton = false;
 
 
     public TimerFragment() {
@@ -101,7 +102,7 @@ public class TimerFragment extends Fragment {
                         tvState.setTextColor(white);
                         tvTimer.setTextColor(white);
                         tvState.setText("rest");
-                        String pauseString=breadThesecondtoMoinutesandSecond(pauseTime);
+                        String pauseString = breadThesecondtoMoinutesandSecond(pauseTime);
                         tvTimer.setText(pauseString + "");
 
 
@@ -111,7 +112,7 @@ public class TimerFragment extends Fragment {
                         tvState.setTextColor(accentColor);
                         tvTimer.setTextColor(accentColor);
                         tvState.setText("action");
-                        String actionString=breadThesecondtoMoinutesandSecond(actionTime);
+                        String actionString = breadThesecondtoMoinutesandSecond(actionTime);
                         tvTimer.setText(actionString + "");
                     }
 
@@ -200,11 +201,33 @@ public class TimerFragment extends Fragment {
         }
     }
 
+    private void StartbuttonToPauseButton() {
+        btPlayNpause.setImageResource(R.drawable.ic_pause_white_48dp);
+        isPauseButton = true;
+
+    }
+
+    private void PauseButtonToStartButton() {
+        btPlayNpause.setImageResource(R.drawable.ic_play_arrow_white_48dp);
+        isPauseButton = false;
+    }
+
     @OnClick({R.id.btPlayNpause, R.id.btReset})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btPlayNpause:
-                startTimerandCount();
+                if (isPauseButton) {
+                    //Pause button
+                    PauseButtonToStartButton();
+                    pauseandSavetheTime();
+                } else {
+                    //Start putton
+                    StartbuttonToPauseButton();
+                    startTimerandCount();
+
+
+                }
+
                 break;
             case R.id.btReset:
                 resetTimer();
@@ -212,9 +235,15 @@ public class TimerFragment extends Fragment {
         }
     }
 
-    private void startotStopThetimer() {
+
+    private void pauseandSavetheTime() {
+        if (timer != null) {
+            timer.cancel();
+            saveTimerAndCount();
+        }
 
     }
+
 
     private void resetTimer() {
 
@@ -228,13 +257,13 @@ public class TimerFragment extends Fragment {
 
             if (pauseTimerOn) {
                 pauseTimer++;
-                if(pauseTimer<=restTimerDeadline){
+                if (pauseTimer <= restTimerDeadline) {
                     totaltime++;
                 }
 
             } else {
                 actionTimer++;
-                if(actionTimer<=actionTimerDeadline){
+                if (actionTimer <= actionTimerDeadline) {
                     totaltime++;
                 }
 
@@ -275,7 +304,7 @@ public class TimerFragment extends Fragment {
             }
 
 
-            Log.d("Timer", "action " + actionTimer + " pause " + pauseTimer + " count " + timerCount+" total"+totaltime);
+            Log.d("Timer", "action " + actionTimer + " pause " + pauseTimer + " count " + timerCount + " total" + totaltime);
 
 
         }
