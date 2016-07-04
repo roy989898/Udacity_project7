@@ -5,4 +5,14 @@
     <dimen name="rank_cell_card_name_textsize">17sp</dimen>
     <dimen name="rank_cell_card_totaltime_textsize">11sp</dimen>
     <dimen name="rank_cell_card_likenumer_textsize">12sp</dimen>
+
+
+    <!--Timer fragment-->
+    <dimen name="fragment_timev2_tvState_textSize">35dp</dimen>
+    <dimen name="fragment_timev2_tvTimer_textSize">75dp</dimen>
+    <dimen name="fragment_timev2_margin">16dp</dimen>
+    <dimen name="fragment_timev2_cycle_textSize">15dp</dimen>
+    <dimen name="fragment_timev2_tvcycle_textSize">35dp</dimen>
+    <dimen name="fragment_timev2_totaltextsize_textSize">15dp</dimen>
+    <dimen name="fragment_timev2_tvtotalTime_textSize">35dp</dimen>
 </resources>
