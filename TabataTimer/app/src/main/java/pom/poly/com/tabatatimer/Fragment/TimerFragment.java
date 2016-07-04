@@ -50,7 +50,7 @@ public class TimerFragment extends Fragment {
     private int actionTimer = 0;
     private int totaltime = 0;
     private SoundLibrary sound;
-    private int timerCount;
+    private int timerCount = 0;
     private Handler mHandler;
     private Timer timer;
     private boolean isPauseButton = false;
@@ -230,24 +230,47 @@ public class TimerFragment extends Fragment {
 
                 break;
             case R.id.btReset:
-                resetTimer();
+                stopAndResetTheTimer();
                 break;
         }
     }
 
+    private void stopAndResetTheTimer() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
+
+        resetTheWholeTimer();
+
+
+    }
+
+    private void resetTheWholeTimer(){
+        pauseTimer = actionTimer = totaltime = timerCount = 0;
+        tvTotalTime.setText(breadThesecondtoMoinutesandSecond(totaltime));
+        tvCycle.setText(0 + "");
+        tvTimer.setText(breadThesecondtoMoinutesandSecond(pauseTimer));
+        int white = getResources().getColor(R.color.fragment_time_normaltext_color);
+        tvState.setTextColor(white);
+        tvTimer.setTextColor(white);
+        tvState.setText("rest");
+        isPauseButton=false;
+        PauseButtonToStartButton();
+    }
 
     private void pauseandSavetheTime() {
         if (timer != null) {
             timer.cancel();
+            timer = null;
             saveTimerAndCount();
         }
 
-    }
-
-
-    private void resetTimer() {
 
     }
+
+
+
 
     private class myTimerTask extends TimerTask {
 
