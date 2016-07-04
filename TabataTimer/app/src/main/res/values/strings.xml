@@ -111,4 +111,10 @@
     <string name="sigup_activity_sigup_success">Sigup success!</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!--ranl cell string-->
+    <string name="rank_cell_hours">Hours</string>
+    <string name="rank_cell_minutes">Minutes</string>
+    <string name="rank_cell_seconds">Seconds</string>
 </resources>

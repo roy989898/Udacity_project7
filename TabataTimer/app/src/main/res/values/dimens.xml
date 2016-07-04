@@ -17,7 +17,8 @@
     <dimen name="rank_cell_card_cardCornerRadius">4dp</dimen>
     <dimen name="rank_cell_card_SimpleDraweeView_margin">2dp</dimen>
     <dimen name="rank_cell_card_name_textsize">20sp</dimen>
-    <dimen name="rank_cell_card_totaltime_textsize">20sp</dimen>
+    <dimen name="rank_cell_card_totaltime_textsize">14sp</dimen>
+    <dimen name="rank_cell_card_likenumer_textsize">15sp</dimen>
 
     <!--Login Page-->
     <dimen name="activity_login_loginpage_title">48sp</dimen>

@@ -18,6 +18,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 
+import java.util.concurrent.TimeUnit;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import pom.poly.com.tabatatimer.Firebase.User;
@@ -30,6 +32,23 @@ public class RankingCursorAdapter extends CursorAdapter {
 
     public RankingCursorAdapter(Context context, Cursor c) {
         super(context, c);
+    }
+
+    public static long[] getDurationBreakdown(long millis) {
+        if (millis < 0) {
+            throw new IllegalArgumentException("Duration must be greater than zero!");
+        }
+
+
+        long hours = TimeUnit.MILLISECONDS.toHours(millis);
+        millis -= TimeUnit.HOURS.toMillis(hours);
+        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
+        millis -= TimeUnit.MINUTES.toMillis(minutes);
+        long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
+
+        long[] la = new long[]{hours, minutes, seconds};
+
+        return la;
     }
 
     @Override
@@ -52,16 +71,22 @@ public class RankingCursorAdapter extends CursorAdapter {
         vh.userID = userID;
         Log.i("userID", userID);
         vh.tvName.setText(name);
-        vh.txTotalTime.setText(totalTime + "");
+        //format the total time hourd:minutes:seconds
+        long[] timeArray = getDurationBreakdown(totalTime);
+        vh.tvHours.setText(timeArray[0] + "");
+        vh.tvMinutes.setText(timeArray[1] + "");
+        vh.tvSeconds.setText(timeArray[2] + "");
+
         vh.txLikeNumber.setText(likeNumber + "");
+        vh.profilePicture.setImageURI(profileLink);
+
 
 //        load the profileLink picture
-        vh.profilePicture.setImageURI(profileLink);
+
 
         View.OnClickListener clickListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO like numer +1 at Firebase
                 DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
 
 
@@ -99,17 +124,20 @@ public class RankingCursorAdapter extends CursorAdapter {
 
     static class ViewHolder {
         public String userID;
-        @BindView(R.id.tvName)
-        TextView tvName;
         @BindView(R.id.profile_picture)
         SimpleDraweeView profilePicture;
+        @BindView(R.id.tvName)
+        TextView tvName;
         @BindView(R.id.imageButton)
         ImageButton imageButton;
         @BindView(R.id.txLikeNumber)
         TextView txLikeNumber;
-        @BindView(R.id.txTotalTime)
-        TextView txTotalTime;
-
+        @BindView(R.id.tvHours)
+        TextView tvHours;
+        @BindView(R.id.tvMinutes)
+        TextView tvMinutes;
+        @BindView(R.id.tvSeconds)
+        TextView tvSeconds;
 
         ViewHolder(View view) {
             ButterKnife.bind(this, view);

@@ -30,9 +30,11 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/profile_picture"
                     android:layout_width="0dp"
+                    android:layout_gravity="bottom"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="11dp"
                     android:layout_margin="@dimen/rank_cell_card_SimpleDraweeView_margin"
-                    android:layout_span="1"
+                    android:layout_span="2"
                     fresco:placeholderImage="@drawable/ic_account_circle_black_24dp"
                     fresco:placeholderImageScaleType="centerCrop"
                     fresco:roundAsCircle="true"
@@ -41,7 +43,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_span="7"
+                    android:layout_span="6"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -53,21 +55,23 @@
                             android:id="@+id/tvName"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_span="16"
+                            android:paddingLeft="10dp"
                             android:text="New Text"
+
+                            android:textColor="@color/colorAccent"
                             android:textSize="@dimen/rank_cell_card_name_textsize" />
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:orientation="horizontal">
 
                         <ImageButton
                             android:id="@+id/imageButton"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_span="4"
                             android:layout_weight="1"
                             android:background="@null"
                             android:scaleType="fitCenter"
@@ -77,23 +81,102 @@
                             android:id="@+id/txLikeNumber"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_span="3"
                             android:layout_weight="1"
-                            android:gravity="right"
+                            android:gravity="left"
                             android:padding="4dp"
                             android:text="New Text"
-                            android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+                            android:textColor="@color/ranking_cell_normal_text_color"
+                            android:textSize="@dimen/rank_cell_card_likenumer_textsize" />
 
-                        <TextView
-                            android:id="@+id/txTotalTime"
+
+                        <LinearLayout
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_span="7"
-                            android:layout_weight="1"
-                            android:gravity="right"
-                            android:padding="4dp"
-                            android:text="New Text"
-                            android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+                            android:layout_weight="2"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="left"
+                                    android:padding="4dp"
+                                    android:text="@string/rank_cell_hours"
+                                    android:textColor="@color/ranking_cell_normal_text_color"
+                                    android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+
+                                <TextView
+                                    android:id="@+id/tvHours"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="left"
+                                    android:padding="4dp"
+                                    android:textColor="@color/ranking_cell_normal_text_color"
+                                    android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="left"
+                                    android:padding="4dp"
+                                    android:text="@string/rank_cell_minutes"
+                                    android:textColor="@color/ranking_cell_normal_text_color"
+                                    android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+
+                                <TextView
+                                    android:id="@+id/tvMinutes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="left"
+                                    android:padding="4dp"
+                                    android:textColor="@color/ranking_cell_normal_text_color"
+                                    android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="left"
+                                    android:padding="4dp"
+                                    android:text="@string/rank_cell_seconds"
+                                    android:textColor="@color/ranking_cell_normal_text_color"
+                                    android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+
+                                <TextView
+                                    android:id="@+id/tvSeconds"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="left"
+                                    android:padding="4dp"
+                                    android:textColor="@color/ranking_cell_normal_text_color"
+                                    android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+                            </LinearLayout>
+
+                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>

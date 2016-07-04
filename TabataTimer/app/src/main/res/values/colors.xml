@@ -11,6 +11,7 @@
     <color name="loginPageText">#ffffff</color>
     <color name="loginPageEdittextBottomLine">#ffffff</color>
     <color name="loginPageInputTextColor">#ffffff</color>
+    <color name="ranking_cell_normal_text_color">#ffffff</color>
     <color name="logoutButtonBackground">#c62828</color>
     <color name="logoutButtonBackground_pressed">#3e2723</color>
 
