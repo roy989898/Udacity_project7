@@ -235,6 +235,7 @@ public class CalenderFragment extends Fragment implements Observer {
             if (eventinfs != null) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 DetailDialogFragment ddf=DetailDialogFragment.newInstance(eventinfs);
+
                 ddf.show(fm,"detailDialogFragment");
 
             }

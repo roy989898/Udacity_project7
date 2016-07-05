@@ -6,11 +6,17 @@
     android:orientation="vertical"
     tools:context="pom.poly.com.tabatatimer.Fragment.CalenderFragment">
 
-    <LinearLayout
-        android:id="@+id/clalender1"
-        android:layout_width="match_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"></LinearLayout>
+        android:id="@+id/scrollView" >
+
+        <LinearLayout
+            android:id="@+id/clalender1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"></LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>
