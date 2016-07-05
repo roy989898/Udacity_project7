@@ -12,6 +12,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 
 public class LogoutActivity extends AppCompatActivity {
 
@@ -29,6 +30,7 @@ public class LogoutActivity extends AppCompatActivity {
     public void onClick() {
         //del the password and email
         delthesaveEmailAndPassAndProfileImgUrl();
+        deleteAllEveneinf();
         //go to the login page//
         Intent intent = new Intent(this, LoginActivity.class);
         //del the profile picture img//
@@ -46,6 +48,10 @@ public class LogoutActivity extends AppCompatActivity {
         editor.putString(getString(R.string.SharePreferenceDownloadLinkKey), "empty");
         editor.commit();
 
+    }
+
+    private void deleteAllEveneinf(){
+        Eventinf.deleteAll(Eventinf.class);
     }
 
 
