@@ -1,7 +1,11 @@
 package pom.poly.com.tabatatimer.Utility;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.text.TextUtils;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.AuthResult;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -85,4 +89,21 @@ public class Utility {
 
         return valid;
     }
+
+    static public void saveEmail(String email,Context context) {
+        SharedPreferences preference = context.getSharedPreferences(context.getString(R.string.name_sharepreference), context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preference.edit();
+        editor.putString(context.getString(R.string.sharedpreference_email_key), email);
+        editor.commit();
+    }
+
+    static public  void saveTheLinkinSP(String downloadUrl,Context context) {
+        SharedPreferences preference = context.getSharedPreferences(context.getString(R.string.name_sharepreference), context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preference.edit();
+        editor.putString(context.getString(R.string.SharePreferenceDownloadLinkKey), downloadUrl);
+        editor.commit();
+    }
+
+
+
 }

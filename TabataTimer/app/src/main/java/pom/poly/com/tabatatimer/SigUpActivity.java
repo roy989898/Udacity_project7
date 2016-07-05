@@ -22,6 +22,11 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,6 +34,8 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pom.poly.com.tabatatimer.Firebase.User;
+import pom.poly.com.tabatatimer.Utility.Utility;
 
 public class SigUpActivity extends AppCompatActivity {
 
@@ -223,11 +230,39 @@ public class SigUpActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             String success = getString(R.string.sigup_activity_sigup_success);
+
+                            Utility.saveEmail(email, getApplicationContext());
                             Toast.makeText(getApplicationContext(), success, Toast.LENGTH_SHORT).show();
-                            //go back to login page to login
-                            Intent intent = new Intent(SigUpActivity.this, LoginActivity.class);
-                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            startActivity(intent);
+
+                            String uid = mAuth.getCurrentUser().getUid();
+                            //to check is the use in Firebase dataBase?
+                            DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
+                            DatabaseReference userRef = baseRef.child("Users").child(uid);
+                            userRef.addListenerForSingleValueEvent(new ValueEventListener() { //start to check
+                                @Override
+                                public void onDataChange(DataSnapshot dataSnapshot) {
+                                    User user = dataSnapshot.getValue(User.class);
+
+                                    if (user == null) {//not in FireBase
+                                        //create a user
+                                        String email = edtUserID.getText().toString();
+                                        String uid = mAuth.getCurrentUser().getUid();
+                                        createAnewUseronFireBaseDatbase(email, uid);
+                                    }
+
+                                    //go back to login page to login
+                                    Intent intent = new Intent(SigUpActivity.this, LoginActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    startActivity(intent);
+                                }
+
+                                @Override
+                                public void onCancelled(DatabaseError databaseError) {
+
+                                }
+                            });
+
+
                         }
 
 
@@ -235,6 +270,15 @@ public class SigUpActivity extends AppCompatActivity {
                 });
         // [END create_user_with_email]
     }
+
+    private void createAnewUseronFireBaseDatbase(String email, String uid) {
+        DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference userRef = baseRef.child("Users").child(uid);
+        User user = new User(email, 0, "empty", 0, uid, getString(R.string.preference_name_defaultvalue));
+        userRef.setValue(user);
+
+    }
+
 
     private void showProgressDialog() {
         progress = ProgressDialog.show(this, "",

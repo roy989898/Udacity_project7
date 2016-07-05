@@ -29,6 +29,7 @@ import java.util.regex.Pattern;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pom.poly.com.tabatatimer.Utility.Utility;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -162,14 +163,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return valid;
     }
 
-   
 
-    private void saveEmail(String email) {
-        SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE);
-        SharedPreferences.Editor editor = preference.edit();
-        editor.putString(getString(R.string.sharedpreference_email_key), email);
-        editor.commit();
-    }
+
 
 
 
@@ -210,7 +205,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             Toast.makeText(LoginActivity.this, authenticationFailed,
                                     Toast.LENGTH_SHORT).show();
                         } else {
-                            saveEmail(email);
+                            Utility.saveEmail(email,getApplicationContext());
 
                             goToTheMainActivity();
                         }
@@ -299,12 +294,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         tvSigup.setMovementMethod(LinkMovementMethod.getInstance());
         tvSigup.setText(myString, TextView.BufferType.SPANNABLE);
-        Spannable mySpannable = (Spannable)tvSigup.getText();
-        ClickableSpan myClickableSpan = new ClickableSpan()
-        {
+        Spannable mySpannable = (Spannable) tvSigup.getText();
+        ClickableSpan myClickableSpan = new ClickableSpan() {
             @Override
             public void onClick(View widget) {
-                Intent intent=new Intent(LoginActivity.this,SigUpActivity.class);
+                Intent intent = new Intent(LoginActivity.this, SigUpActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

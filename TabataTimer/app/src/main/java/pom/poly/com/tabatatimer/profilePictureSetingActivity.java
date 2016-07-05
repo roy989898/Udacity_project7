@@ -33,6 +33,7 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import pom.poly.com.tabatatimer.Utility.Utility;
 
 public class profilePictureSetingActivity extends AppCompatActivity {
 
@@ -151,7 +152,7 @@ public class profilePictureSetingActivity extends AppCompatActivity {
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 sdvShow.setImageURI(downloadUrl);
                 Log.d("PictureSetingActivity", "downloadUrl: "+downloadUrl.toString());
-                saveTheLinkinSP(downloadUrl.toString());
+                Utility.saveTheLinkinSP(downloadUrl.toString(),getApplicationContext());
                 //update the profile downloadUrl to the firebase
                 upLoadtheProfileLink(downloadUrl.toString());
             }
@@ -168,12 +169,7 @@ public class profilePictureSetingActivity extends AppCompatActivity {
         userREF.updateChildren(map);
     }
 
-    private void saveTheLinkinSP(String downloadUrl) {
-        SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE);
-        SharedPreferences.Editor editor = preference.edit();
-        editor.putString(getString(R.string.SharePreferenceDownloadLinkKey), downloadUrl);
-        editor.commit();
-    }
+
 
 
 }
