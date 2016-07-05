@@ -162,43 +162,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return valid;
     }
 
-    private void createAccount(final String email, final String password) {
-        Log.d(TAG, "createAccount:" + email);
-        if (!validateForm(email, password)) {
-            return;
-        }
-
-        showProgressDialog();
-
-        // [START create_user_with_email]
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        Log.d(TAG, "createUserWithEmail:onComplete:" + task.isSuccessful());
-
-                        // If sign in fails, display a message to the user. If sign in succeeds
-                        // the auth state listener will be notified and logic to handle the
-                        // signed in user can be handled in the listener.
-                        // [START_EXCLUDE]
-
-                        //Finish create account
-
-                        hideProgressDialog();
-                        // [END_EXCLUDE]
-                        if (!task.isSuccessful()) {
-                            String authenticationFailed = getResources().getString(R.string.authenticationFailed);
-                            Toast.makeText(LoginActivity.this, authenticationFailed,
-                                    Toast.LENGTH_SHORT).show();
-                        } else {
-                            signIn(email, password);
-                        }
-
-
-                    }
-                });
-        // [END create_user_with_email]
-    }
+   
 
     private void saveEmail(String email) {
         SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE);
