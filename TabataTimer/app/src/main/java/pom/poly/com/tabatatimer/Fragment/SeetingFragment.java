@@ -1,9 +1,16 @@
 package pom.poly.com.tabatatimer.Fragment;
 
 import android.os.Bundle;
+import android.preference.EditTextPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 import pom.poly.com.tabatatimer.R;
 
@@ -23,7 +30,7 @@ public class SeetingFragment extends PreferenceFragment implements Preference.On
 
     }
 
-    private void bindPreferenceChangeListener(Preference preference){
+    private void bindPreferenceChangeListener(Preference preference) {
         preference.setOnPreferenceChangeListener(this);
 
         //trigger the onPreferenceChange
@@ -34,6 +41,16 @@ public class SeetingFragment extends PreferenceFragment implements Preference.On
     public boolean onPreferenceChange(Preference preference, Object newValue) {
         String stringValue = newValue.toString();
         preference.setSummary(stringValue);
+
+        if (preference instanceof EditTextPreference) {
+            //upload the new user name
+            DatabaseReference baseref = FirebaseDatabase.getInstance().getReference();
+            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            DatabaseReference userRef = baseref.child("Users").child(uid);
+            HashMap<String, Object> map = new HashMap<>();
+            map.put("userName", stringValue);
+            userRef.updateChildren(map);
+        }
         return true;
     }
 }
