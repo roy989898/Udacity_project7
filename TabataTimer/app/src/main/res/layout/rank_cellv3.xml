@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
-
+        card_view:cardBackgroundColor="@color/colorPrimaryLight"
         android:layout_margin="@dimen/rank_cell_card_margin"
         android:elevation="4dp"
         card_view:cardCornerRadius="@dimen/rank_cell_card_cardCornerRadius">
@@ -19,7 +19,6 @@
             xmlns:fresco="http://schemas.android.com/apk/res-auto"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:background="@color/colorPrimaryLight"
             android:stretchColumns="0,1,2,3,4,5,6,7">
 
 

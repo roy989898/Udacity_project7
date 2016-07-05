@@ -15,6 +15,7 @@
     <color name="logoutButtonBackground">#c62828</color>
     <color name="logoutButtonBackground_pressed">#3e2723</color>
     <color name="fragment_time_normaltext_color">#ffffff</color>
+    <color name="detaildialog_cell_text_color">#ffffff</color>
 
 
     <color name="this_month_date">#F57F17</color>

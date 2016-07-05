@@ -51,6 +51,13 @@
 
     <style name="CaldroidYellowSquareCell" parent="CaldroidYellowDarkCell" />
 
+    <!--detaildialt text style-->
+    <style name="detailDialog_cell_text_style" >
+        <item name="android:textColor">@color/detaildialog_cell_text_color</item>
+        <item name="android:textSize">@dimen/detaildialog_cell_text_size</item>
+
+    </style>
+
 
 
 

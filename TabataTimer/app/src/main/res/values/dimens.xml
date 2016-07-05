@@ -33,4 +33,7 @@
     <dimen name="fragment_timev2_tvcycle_textSize">40dp</dimen>
     <dimen name="fragment_timev2_totaltextsize_textSize">20dp</dimen>
     <dimen name="fragment_timev2_tvtotalTime_textSize">40dp</dimen>
+
+    <!--Detail Dialog-->
+    <dimen name="detaildialog_cell_text_size">15sp</dimen>
 </resources>
