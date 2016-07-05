@@ -1,32 +1,68 @@
 package pom.poly.com.tabatatimer;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 
 public class LogoutActivity extends AppCompatActivity {
 
-    @BindView(R.id.btLogout)
-    Button btLogout;
+    private DialogInterface.OnClickListener listerner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logout);
         ButterKnife.bind(this);
+        createAndSjowDialog();
+
+
     }
 
-    @OnClick(R.id.btLogout)
+    private void createAndSjowDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+        dialog.setTitle(getString(R.string.logout_activity_dialog_title));
+        dialog.setMessage(getString(R.string.logout_activity_dialog_Message));
+        listerner = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case AlertDialog.BUTTON_POSITIVE:
+                        //go bac to setting pahe
+                        //logout//TODO
+                        delthesaveEmailAndPassAndProfileImgUrl();
+                        deleteAllEveneinf();
+                        //go to the login page//
+                        Intent intent = new Intent(LogoutActivity.this, LoginActivity.class);
+                        //del the profile picture img//
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                        FirebaseAuth.getInstance().signOut();
+                        startActivity(intent);
+                        break;
+                    case AlertDialog.BUTTON_NEGATIVE:
+                        finish();
+                        break;
+
+
+                }
+
+
+            }
+        };
+        dialog.setPositiveButton(R.string.logout_activity_Logout_button_text, listerner);
+        dialog.setNegativeButton(R.string.logout_activity_Cancel_button_text, listerner);
+        dialog.create().show();
+    }
+
+    /*@OnClick(R.id.btLogout)
     public void onClick() {
         //del the password and email
         delthesaveEmailAndPassAndProfileImgUrl();
@@ -38,10 +74,10 @@ public class LogoutActivity extends AppCompatActivity {
 
         FirebaseAuth.getInstance().signOut();
         startActivity(intent);
-    }
+    }*/
 
     private void delthesaveEmailAndPassAndProfileImgUrl() {
-        SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference),MODE_PRIVATE);
+        SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE);
         SharedPreferences.Editor editor = preference.edit();
         editor.putString(getString(R.string.sharedpreference_email_key), "empty");
 //        editor.putString(getString(R.string.sharedPreference_password_key), "empty");
@@ -50,7 +86,7 @@ public class LogoutActivity extends AppCompatActivity {
 
     }
 
-    private void deleteAllEveneinf(){
+    private void deleteAllEveneinf() {
         Eventinf.deleteAll(Eventinf.class);
     }
 

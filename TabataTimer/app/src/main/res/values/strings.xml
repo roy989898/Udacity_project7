@@ -127,4 +127,10 @@
     <string name="rank_cell_hours">Hours</string>
     <string name="rank_cell_minutes">Minutes</string>
     <string name="rank_cell_seconds">Seconds</string>
+
+    <!--Logout activity-->
+    <string name="logout_activity_Logout_button_text">Logout</string>
+    <string name="logout_activity_Cancel_button_text">Cancel</string>
+    <string name="logout_activity_dialog_title">Warning!</string>
+    <string name="logout_activity_dialog_Message">Logout will delete your all sport records and user information form the phone. </string>
 </resources>
