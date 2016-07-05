@@ -57,7 +57,7 @@ public class CaldroidSampleCustomAdapter extends CaldroidGridAdapter {
         //the thumb up icon default is INVISIBLE
         imgCell.setVisibility(View.INVISIBLE);
 
-        tv1.setTextColor(Color.BLACK);
+        tv1.setTextColor(Color.WHITE);
 
         // Get dateTime of this cell
         final DateTime dateTime = this.datetimeList.get(position);
