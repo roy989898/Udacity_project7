@@ -49,6 +49,8 @@ public class profilePictureSetingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile_picture_seting);
         ButterKnife.bind(this);
 
+        Crop.pickImage(this);
+
 
 
     }
@@ -60,7 +62,10 @@ public class profilePictureSetingActivity extends AppCompatActivity {
         Log.i("PictureSetingActivity","onStart");
         defaulrUri = new Uri.Builder().scheme(UriUtil.LOCAL_RESOURCE_SCHEME).path(String.valueOf(R.drawable.ic_account_circle_white_24dp)).build();
         defaulrUriString=defaulrUri.toString();
-        String profilePURL = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), defaulrUri.toString());
+        String profilePURL = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), defaulrUriString);
+        if(profilePURL.equals("empty")){
+            profilePURL=defaulrUriString;
+        }
         Log.i("PictureSetingActivity",profilePURL);
         sdvShow.setImageURI(profilePURL);
 
