@@ -5,6 +5,7 @@
     <string name="create_ACC">Sig up</string>
     <string name="login">Login</string>
     <string name="sigup">Do no have an account?Sign up!</string>
+    <string name="noLogin_directuse">Don't want to login?Enter the app directly!</string>
     <string name="activity_sigup_createAccount_string">Already have an account?Log in!</string>
     <string name="hint_password">Password</string>
     <string name="hint_emailAddress">Email Address</string>

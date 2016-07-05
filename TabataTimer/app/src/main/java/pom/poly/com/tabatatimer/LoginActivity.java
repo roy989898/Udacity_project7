@@ -162,7 +162,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         return valid;
     }
 
-   
+
 
     private void saveEmail(String email) {
         SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE);
@@ -295,7 +295,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }*/
         //Set the clickable sigup text
 
-        String myString = "Do no have an account?Sign up!";
+        setTheSigUpcanClick();
+
+
+    }
+
+    private void setTheSigUpcanClick(){
+        String myString =getString(R.string.sigup);
 
         tvSigup.setMovementMethod(LinkMovementMethod.getInstance());
         tvSigup.setText(myString, TextView.BufferType.SPANNABLE);
@@ -310,9 +316,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         };
         mySpannable.setSpan(myClickableSpan, 22, 28 + 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-
-
     }
+
+    
 
 
     @Override
