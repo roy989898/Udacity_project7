@@ -135,4 +135,7 @@
     <string name="logout_activity_Cancel_button_text">Cancel</string>
     <string name="logout_activity_dialog_title">Warning!</string>
     <string name="logout_activity_dialog_Message">Logout will delete your all sport records and user information form the phone. </string>
+
+    <!--fragment rank-->
+    <string name="emptyView_message">Can not get the user data!</string>
 </resources>

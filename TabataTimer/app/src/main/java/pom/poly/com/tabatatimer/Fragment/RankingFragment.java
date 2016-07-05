@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 
@@ -31,6 +32,8 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
     final private int MY_LODER_ID = 101;
     @BindView(R.id.lv_ranking)
     ListView lvRanking;
+    @BindView(R.id.tvEmptyMessageView)
+    TextView tvEmptyMessageView;
 
 
     private DatabaseReference ref;
@@ -52,6 +55,8 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_rank, container, false);
         ButterKnife.bind(this, view);
+
+        lvRanking.setEmptyView(tvEmptyMessageView);
 
         cursorAdapter = new RankingCursorAdapter(getContext(), null);
 

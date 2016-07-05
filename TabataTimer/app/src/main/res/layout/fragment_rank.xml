@@ -13,4 +13,13 @@
         android:divider="@null"
         android:dividerHeight="0dp"
         android:layout_gravity="center_horizontal|top" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/ranking_cell_normal_text_color"
+        android:text="@string/emptyView_message"
+        android:textSize="@dimen/empty_view_message"
+        android:id="@+id/tvEmptyMessageView"
+        android:layout_gravity="center" />
 </FrameLayout>

@@ -19,6 +19,7 @@
     <dimen name="rank_cell_card_name_textsize">20sp</dimen>
     <dimen name="rank_cell_card_totaltime_textsize">14sp</dimen>
     <dimen name="rank_cell_card_likenumer_textsize">15sp</dimen>
+    <dimen name="empty_view_message">20sp</dimen>
 
     <!--Login Page-->
     <dimen name="activity_login_loginpage_title">48sp</dimen>
