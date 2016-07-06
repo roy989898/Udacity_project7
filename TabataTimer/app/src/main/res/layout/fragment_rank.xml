@@ -32,11 +32,11 @@
             android:id="@+id/cardViewmessageBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
             android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
             android:elevation="4dp"
+            android:visibility="gone"
             app:cardBackgroundColor="@color/colorPrimaryDark">
 
             <LinearLayout
@@ -49,7 +49,8 @@
                     android:id="@+id/editText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="6" />
+                    android:layout_weight="6"
+                    android:textColor="@color/messageBox_message_text_color" />
 
                 <Button
                     android:id="@+id/btSend"
@@ -61,8 +62,8 @@
 
                 <Button
                     android:id="@+id/btCancel"
-                    android:layout_width="0dp"
                     style="@style/button_style"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:text="Cancel" />
