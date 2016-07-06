@@ -7,7 +7,12 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorControlNormal">@color/loginPageEdittextBottomLine</item>
+
+
+
     </style>
+
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -56,6 +61,11 @@
         <item name="android:textColor">@color/detaildialog_cell_text_color</item>
         <item name="android:textSize">@dimen/detaildialog_cell_text_size</item>
 
+    </style>
+
+    <style name="button_style">
+        <item name="android:background">@drawable/loginbtnbackground</item>
+        <item name="android:textColor">@color/loginPageText</item>
     </style>
 
 

@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -27,7 +28,7 @@ import pom.poly.com.tabatatimer.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class RankingFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class RankingFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>,RankingCursorAdapter.MessageHandler {
 
     final private int MY_LODER_ID = 101;
     @BindView(R.id.lv_ranking)
@@ -59,6 +60,7 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
         lvRanking.setEmptyView(tvEmptyMessageView);
 
         cursorAdapter = new RankingCursorAdapter(getContext(), null);
+        cursorAdapter.setHandler(this);
 
         getLoaderManager().initLoader(MY_LODER_ID, savedInstanceState, this);
 
@@ -92,6 +94,12 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
         cursorAdapter.swapCursor(null);
+
+    }
+
+    @Override
+    public void send(String uid) {
+
 
     }
 }

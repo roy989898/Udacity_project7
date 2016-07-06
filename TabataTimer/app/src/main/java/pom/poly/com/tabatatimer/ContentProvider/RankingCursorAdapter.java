@@ -37,7 +37,13 @@ import pom.poly.com.tabatatimer.R;
  */
 public class RankingCursorAdapter extends CursorAdapter {
 
-    private final Context mContext;
+    private  Context mContext;
+
+    private MessageHandler handler;
+
+    public void setHandler(MessageHandler handler) {
+        this.handler = handler;
+    }
 
     public RankingCursorAdapter(Context context, Cursor c) {
         super(context, c);
@@ -71,7 +77,7 @@ public class RankingCursorAdapter extends CursorAdapter {
     }
 
     @Override
-    public void bindView(View view, Context context, final Cursor cursor) {
+    public void bindView(View view, final Context context, final Cursor cursor) {
         final ViewHolder vh = (ViewHolder) view.getTag();
 
         //get the data from the cursor
@@ -110,10 +116,7 @@ public class RankingCursorAdapter extends CursorAdapter {
         View.OnClickListener messageListener = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //TODO send message to this user uid
-
-                showSendMessageBox(mContext,vh.userID);
-
+                handler.send(vh.userID);
 
             }
         };
@@ -121,31 +124,7 @@ public class RankingCursorAdapter extends CursorAdapter {
 
     }
 
-    private void showSendMessageBox(Context context, final String toID){
-        AlertDialog.Builder messageDialog=new AlertDialog.Builder(context);
-        final View view = LayoutInflater.from(context).inflate(R.layout.message_dialog_layout, null);
-        messageDialog.setTitle("Please input message").setView(view).setPositiveButton("Send", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                EditText edMessageInput = (EditText) view.findViewById(R.id.edMessageInput);
-                String content=edMessageInput.getText().toString();
 
-                //Create a message
-                Calendar calendar=Calendar.getInstance();
-                long dateTime = calendar.getTimeInMillis();
-                String FromID= FirebaseAuth.getInstance().getCurrentUser().getUid();
-                pom.poly.com.tabatatimer.Firebase.Message message=new pom.poly.com.tabatatimer.Firebase.Message(dateTime,FromID,content,toID);
-
-                sendMessage(message);
-            }
-        }).setNegativeButton("Cancel",null).show();
-    }
-
-    private void sendMessage(pom.poly.com.tabatatimer.Firebase.Message message){
-        //upload to fireBase
-        DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
-        baseRef.child("Messages").child(message.toID).push().setValue(message);
-    }
 
     private void addoneToFireBaseIteam(DatabaseReference userRef) {
         userRef.runTransaction(new Transaction.Handler() {
@@ -192,6 +171,10 @@ public class RankingCursorAdapter extends CursorAdapter {
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
+    }
+
+    public interface MessageHandler{
+        void send(String uid);
     }
 
 }
