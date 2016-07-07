@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.support.v7.widget.LinearLayoutManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import pom.poly.com.tabatatimer.Adapter.MessageRecycleAdapter;
 import pom.poly.com.tabatatimer.Firebase.Message;
 import pom.poly.com.tabatatimer.R;
 
@@ -29,12 +31,15 @@ import pom.poly.com.tabatatimer.R;
 public class UserMessageFragment extends Fragment {
 
 
+
     @BindView(R.id.revMessage)
     RecyclerView revMessage;
     private DatabaseReference messagesRef;
     private ChildEventListener childListener;
     private String uID;
     private ArrayList<Message> messageArrayList;
+    private MessageRecycleAdapter adapter;
+    private LinearLayoutManager layoutManager;
 
     public UserMessageFragment() {
         // Required empty public constructor
@@ -50,10 +55,15 @@ public class UserMessageFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Message message = dataSnapshot.getValue(Message.class);
-                String toastShow = "from: " + message.fromID + " content: " + message.message;
+
                 messageArrayList.add(message);
 
-                Log.d("messages", toastShow);
+                adapter.notifyDataSetChanged();
+
+
+                Log.d("messages", adapter.getItemCount()+"");
+                /*String toastShow = "from: " + message.fromID + " content: " + message.message;
+                Log.d("messages", toastShow);*/
             }
 
             @Override
@@ -66,12 +76,13 @@ public class UserMessageFragment extends Fragment {
             public void onChildRemoved(DataSnapshot dataSnapshot) {
                 Message message = dataSnapshot.getValue(Message.class);
                 messageArrayList.remove(message);
+                adapter.notifyDataSetChanged();
 
-                for (Message m:messageArrayList) {
+              /*  for (Message m:messageArrayList) {
                     String toastShow = "from: " + m.fromID + " content: " + m.message;
                     Log.d("messages remove: ", toastShow);
 
-                }
+                }*/
             }
 
             @Override
@@ -106,7 +117,15 @@ public class UserMessageFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_message, container, false);
         ButterKnife.bind(this, view);
 
-         messageArrayList = new ArrayList<>();
+        messageArrayList = new ArrayList<>();
+
+
+
+        layoutManager=new LinearLayoutManager(getContext());
+        revMessage.setLayoutManager(layoutManager);
+
+        adapter=new MessageRecycleAdapter(messageArrayList);
+        revMessage.setAdapter(adapter);
         return view;
     }
 
