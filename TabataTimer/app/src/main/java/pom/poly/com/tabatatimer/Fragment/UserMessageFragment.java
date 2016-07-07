@@ -3,12 +3,13 @@ package pom.poly.com.tabatatimer.Fragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v7.widget.LinearLayoutManager;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -31,9 +32,9 @@ import pom.poly.com.tabatatimer.R;
 public class UserMessageFragment extends Fragment {
 
 
-
     @BindView(R.id.revMessage)
     RecyclerView revMessage;
+
     private DatabaseReference messagesRef;
     private ChildEventListener childListener;
     private String uID;
@@ -55,13 +56,13 @@ public class UserMessageFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Message message = dataSnapshot.getValue(Message.class);
-
+                message.firebaseKey=dataSnapshot.getKey();
                 messageArrayList.add(message);
 
                 adapter.notifyDataSetChanged();
 
 
-                Log.d("messages", adapter.getItemCount()+"");
+                Log.d("messages", adapter.getItemCount() + "");
                 /*String toastShow = "from: " + message.fromID + " content: " + message.message;
                 Log.d("messages", toastShow);*/
             }
@@ -120,13 +121,48 @@ public class UserMessageFragment extends Fragment {
         messageArrayList = new ArrayList<>();
 
 
-
-        layoutManager=new LinearLayoutManager(getContext());
+        layoutManager = new LinearLayoutManager(getContext());
         revMessage.setLayoutManager(layoutManager);
 
-        adapter=new MessageRecycleAdapter(messageArrayList);
+        adapter = new MessageRecycleAdapter(messageArrayList);
         revMessage.setAdapter(adapter);
+        //set the recycle swipe action
+        ItemTouchHelper.SimpleCallback callback = createCallback(adapter);
+
+        ItemTouchHelper toouch = new ItemTouchHelper(callback);
+        toouch.attachToRecyclerView(revMessage);
+
+
         return view;
     }
+
+    private ItemTouchHelper.SimpleCallback createCallback(final MessageRecycleAdapter adapter) {
+
+        return new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
+                switch (direction) {
+                    case ItemTouchHelper.LEFT:
+                        // delete the iteamin arraylist
+                        int position=viewHolder.getPosition();
+                        String key=new String(adapter.getMessageArra().get(position).firebaseKey);
+                        adapter.remove(position);
+                        adapter.notifyItemRemoved(position);
+                        /*//TODO delete in Firebase
+                        DatabaseReference messageRef = FirebaseDatabase.getInstance().getReference().child("Messages").child(uID).child(key);
+                        messageRef.setValue(null);*/
+
+                        break;
+                }
+
+            }
+        };
+    }
+
 
 }

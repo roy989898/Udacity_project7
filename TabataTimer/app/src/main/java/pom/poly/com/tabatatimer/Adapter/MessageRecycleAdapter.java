@@ -16,7 +16,7 @@ import pom.poly.com.tabatatimer.R;
 /**
  * Created by User on 7/7/2016.
  */
-public class MessageRecycleAdapter extends RecyclerView.Adapter<MessageRecycleAdapter.ViewHolder> {
+public class MessageRecycleAdapter extends RecyclerView.Adapter<MessageRecycleAdapter.ViewHolder>   {
 
     private ArrayList<Message> messageArra;
 
@@ -66,6 +66,12 @@ public class MessageRecycleAdapter extends RecyclerView.Adapter<MessageRecycleAd
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    public void remove(int position){
+        if(messageArra!=null)
+            messageArra.remove(position);
+
     }
 
 

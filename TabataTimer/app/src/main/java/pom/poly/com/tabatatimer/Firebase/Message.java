@@ -8,6 +8,7 @@ public class Message {
     public String toID;
     public long dateTime;
     public String message;
+    public String firebaseKey;
 
     public Message(long dateTime, String fromID, String message, String toID) {
         this.dateTime = dateTime;//the datetime to send
