@@ -33,6 +33,7 @@ import pom.poly.com.tabatatimer.Firebase.User;
 import pom.poly.com.tabatatimer.Fragment.CalenderFragment;
 import pom.poly.com.tabatatimer.Fragment.RankingFragment;
 import pom.poly.com.tabatatimer.Fragment.TimerFragment;
+import pom.poly.com.tabatatimer.Fragment.UserMessageFragment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -239,6 +240,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.getTabAt(0).setIcon(R.drawable.ic_stars_white_24px);
         tabLayout.getTabAt(1).setIcon(R.drawable.ic_timer_white_24px);
         tabLayout.getTabAt(2).setIcon(R.drawable.ic_date_range_white_24px);
+        tabLayout.getTabAt(3).setIcon(R.drawable.ic_dns_white_24px);
     }
 
 
@@ -321,6 +323,9 @@ public class MainActivity extends AppCompatActivity {
                     Eventinf.registerObserver(calenderFragment);//register to the Eventinf as a observer,when ssave a new Eventif or delete,notify the calenderFragment,data has chanhe.
                     return calenderFragment;
 
+                case 3:
+                    return new UserMessageFragment();
+
                 default:
                     return null;
             }
@@ -330,7 +335,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 3;
+            return 4;
         }
 
         @Override

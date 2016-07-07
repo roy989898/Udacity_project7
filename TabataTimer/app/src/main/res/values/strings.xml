@@ -91,7 +91,6 @@
     <string name="sharedpreferencekey_isStartButton">spstartButton</string>
 
 
-
     <string name="imageStoreURL">Hello blank fragment</string>
     <string name="preference_uploadPicture_title">Profile Picture</string>
     <string name="bt_lagout_string">Logout</string>
