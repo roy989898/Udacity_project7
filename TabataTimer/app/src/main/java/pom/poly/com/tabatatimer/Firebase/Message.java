@@ -18,4 +18,18 @@ public class Message {
 
     public Message() {
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o instanceof Message) {
+            Message oMessage = (Message) o;
+            if (oMessage.fromID.equals(this.fromID) && oMessage.toID.equals(this.toID) && oMessage.dateTime == this.dateTime && oMessage.message.equals(this.message)) {
+                return true;
+            } else {
+                return false;
+            }
+        } else
+            return super.equals(o);
+
+    }
 }
