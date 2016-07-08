@@ -28,10 +28,11 @@
                     android:id="@+id/imvProfilePicture"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/message_page_profile_picture_height"
-                    fresco:actualImageScaleType="focusCrop"
+                    android:paddingTop="@dimen/message_page_profile_picture_padding_top"
+                    fresco:actualImageScaleType="centerCrop"
                     fresco:fadeDuration="300"
                     fresco:placeholderImage="@drawable/ic_account_circle_black_36px"
-                    fresco:placeholderImageScaleType="fitCenter"
+                    fresco:placeholderImageScaleType="centerCrop"
                     fresco:roundAsCircle="true"
                     fresco:viewAspectRatio="1" />
 
@@ -39,8 +40,8 @@
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/message_page_Name_text_size"
                     android:textColor="@color/message_text"
+                    android:textSize="@dimen/message_page_Name_text_size"
                     tools:text="Name" />
 
                 <LinearLayout
@@ -49,7 +50,7 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <ImageButton
+                    <ImageView
                         android:id="@+id/imageButton"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

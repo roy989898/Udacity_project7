@@ -1,6 +1,8 @@
 package pom.poly.com.tabatatimer.Fragment;
 
 
+import android.content.Context;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,13 +12,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.facebook.common.util.UriUtil;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -24,6 +30,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pom.poly.com.tabatatimer.Adapter.MessageRecycleAdapter;
 import pom.poly.com.tabatatimer.Firebase.Message;
+import pom.poly.com.tabatatimer.Firebase.User;
 import pom.poly.com.tabatatimer.R;
 
 /**
@@ -34,6 +41,13 @@ public class UserMessageFragment extends Fragment {
 
     @BindView(R.id.revMessage)
     RecyclerView revMessage;
+    @BindView(R.id.imvProfilePicture)
+    SimpleDraweeView imvProfilePicture;
+    @BindView(R.id.tvName)
+    TextView tvName;
+    @BindView(R.id.txLikeNumber)
+    TextView txLikeNumber;
+
 
     private DatabaseReference messagesRef;
     private ChildEventListener childListener;
@@ -41,15 +55,18 @@ public class UserMessageFragment extends Fragment {
     private ArrayList<Message> messageArrayList;
     private MessageRecycleAdapter adapter;
     private LinearLayoutManager layoutManager;
+    private ValueEventListener userListener;
+    private DatabaseReference userRef;
 
     public UserMessageFragment() {
         // Required empty public constructor
+
+
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         messagesRef = FirebaseDatabase.getInstance().getReference().child("Messages").child(uID);
 
         childListener = new ChildEventListener() {
@@ -104,9 +121,43 @@ public class UserMessageFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (childListener != null) {
+        if (childListener != null && messagesRef != null) {
             messagesRef.removeEventListener(childListener);
         }
+        if (userListener != null && userRef != null) {
+            userRef.removeEventListener(userListener);
+        }
+
+
+    }
+
+    private void setTheUserDataShow(Context context) {
+
+        Uri defaulrUri = new Uri.Builder().scheme(UriUtil.LOCAL_RESOURCE_SCHEME).path(String.valueOf(R.drawable.ic_account_circle_white_24dp)).build();
+        String defaulrUriString = defaulrUri.toString();
+        String profilePURL = context.getSharedPreferences(getString(R.string.name_sharepreference), context.MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), defaulrUriString);
+        imvProfilePicture.setImageURI(profilePURL);
+
+        uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uID);
+        userListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                User user = dataSnapshot.getValue(User.class);
+
+                //set the user name and like number
+                tvName.setText(user.userName);
+                txLikeNumber.setText(user.likeNumber + "");
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        };
+        userRef.addValueEventListener(userListener);
 
 
     }
@@ -131,6 +182,8 @@ public class UserMessageFragment extends Fragment {
 
         ItemTouchHelper toouch = new ItemTouchHelper(callback);
         toouch.attachToRecyclerView(revMessage);
+
+        setTheUserDataShow(getContext());
 
 
         return view;
