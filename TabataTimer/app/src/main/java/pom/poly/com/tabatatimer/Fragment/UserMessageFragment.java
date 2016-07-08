@@ -56,7 +56,7 @@ public class UserMessageFragment extends Fragment {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 Message message = dataSnapshot.getValue(Message.class);
-                message.firebaseKey=dataSnapshot.getKey();
+                message.firebaseKey = dataSnapshot.getKey();
                 messageArrayList.add(message);
 
                 adapter.notifyDataSetChanged();
@@ -115,7 +115,7 @@ public class UserMessageFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_user_message, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_messagev2, container, false);
         ButterKnife.bind(this, view);
 
         messageArrayList = new ArrayList<>();
@@ -149,8 +149,8 @@ public class UserMessageFragment extends Fragment {
                 switch (direction) {
                     case ItemTouchHelper.LEFT:
                         // delete the iteamin arraylist
-                        int position=viewHolder.getPosition();
-                        String key=new String(adapter.getMessageArra().get(position).firebaseKey);
+                        int position = viewHolder.getPosition();
+                        String key = new String(adapter.getMessageArra().get(position).firebaseKey);
                         adapter.remove(position);
                         adapter.notifyItemRemoved(position);
                         //TODO delete in Firebase
