@@ -10,11 +10,14 @@ public class Message {
     public String message;
     public String firebaseKey;
 
-    public Message(long dateTime, String fromID, String message, String toID) {
+    public String fromuserName;
+
+    public Message(long dateTime, String fromID, String message, String toID,String fromuserName) {
         this.dateTime = dateTime;//the datetime to send
         this.fromID = fromID;
         this.message = message;
         this.toID = toID;
+        this.fromuserName=fromuserName;
     }
 
     public Message() {

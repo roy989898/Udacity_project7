@@ -111,5 +111,21 @@ public class Utility {
         baseRef.child("Messages").child(message.toID).push().setValue(message);
     }
 
+    public static String formatDate(long datetime){
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTimeInMillis(datetime);
+        int year=calendar.get(Calendar.YEAR);
+        int month=calendar.get(Calendar.MONTH);
+        int day=calendar.get(Calendar.DAY_OF_MONTH);
+
+        return String.format("%d-%02d-%02d",year,month,day);
+
+
+
+
+    }
+
+
+
 
 }

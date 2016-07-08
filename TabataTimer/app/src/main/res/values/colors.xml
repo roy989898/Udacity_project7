@@ -23,4 +23,10 @@
     <color name="this_month_date">#F57F17</color>
     <color name="today_border">#D50000</color>
 
+    <color name="message_fromuser">#eeeeee</color>
+    <color name="message_content">#eeeeee</color>
+    <color name="message_bottomLine">#eeeeee</color>
+    <color name="message_date">#eeeeee</color>
+
+
 </resources>

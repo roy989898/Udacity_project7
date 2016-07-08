@@ -6,6 +6,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -16,7 +17,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
@@ -125,7 +125,10 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
             public void onClick(View v) {
                 long datetime = Calendar.getInstance().getTimeInMillis();
                 String fromID = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                Message message = new Message(datetime, fromID, editText.getText().toString(), uid);
+                //get the user name:
+                String userName = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(getString(R.string.preference_name_key), getString(R.string.preference_name_defaultvalue));
+                Message message = new Message(datetime, fromID, editText.getText().toString(), uid, userName);
+
                 Utility.sendMessage(message);
 
                 fadeout();
@@ -191,7 +194,7 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
         //close the keyboard
         View view = getActivity().getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
 

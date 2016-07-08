@@ -37,4 +37,13 @@
 
     <!--Detail Dialog-->
     <dimen name="detaildialog_cell_text_size">15sp</dimen>
+
+    <!--Message recycle adapter cell-->
+    <dimen name="message_cell_message_textsize">18sp</dimen>
+    <dimen name="message_cell_message_paddingTop">16dp</dimen>
+    <dimen name="message_cell_message_paddingBottom">16dp</dimen>
+    <dimen name="message_cell_message_paddingLeft">16dp</dimen>
+    <dimen name="message_cell_message_paddingRight">16dp</dimen>
+
+
 </resources>
