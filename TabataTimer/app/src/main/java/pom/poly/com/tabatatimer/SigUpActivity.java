@@ -274,7 +274,7 @@ public class SigUpActivity extends AppCompatActivity {
     private void createAnewUseronFireBaseDatbase(String email, String uid) {
         DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
         DatabaseReference userRef = baseRef.child("Users").child(uid);
-        User user = new User(email, 0, "empty", 0, uid, getString(R.string.preference_name_defaultvalue));
+        User user = new User(email, 0, "empty", 0, uid, getString(R.string.preference_name_defaultvalue), 0);
         userRef.setValue(user);
 
     }

@@ -20,6 +20,7 @@ public class Contract {
         public static final String COLUMN_TOTAL_TIME="Total_time";
         public static final String COLUMN_USERID="User_id";
         public static final String COLUMN_NAME="User_name";
+        public static final String COLUMN_LAST_UPDTAETIME="User_lastupdatetime_totaltime";
 
         //Content provider part
         public static final String CONTENT_AUTHORITY="pom.poly.com.tabatatimer";

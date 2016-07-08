@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class UserDataHelper extends SQLiteOpenHelper {
 
     static final String DATABASE_NAME = "user.db";
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 4;
 
     public UserDataHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -18,7 +18,7 @@ public class UserDataHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         final String SQL_CREAT_USERTABLE = "CREATE TABLE " + Contract.UserEntry.TABLE_NAME + "(" +
                 Contract.UserEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-
+                Contract.UserEntry.COLUMN_LAST_UPDTAETIME+" INTEGER NOT NULL, " +
                 Contract.UserEntry.COLUMN_EMAIL + " TEXT NOT NULL, " +
                 Contract.UserEntry.COLUMN_LIKENUMBER + " INTEGER NOT NULL, " +
                 Contract.UserEntry.COLUMN_NAME + " TEXT NOT NULL, " +

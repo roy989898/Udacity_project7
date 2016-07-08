@@ -129,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         values.put(Contract.UserEntry.COLUMN_TOTAL_TIME, user.totaltime);
         values.put(Contract.UserEntry.COLUMN_USERID, user.userID);
         values.put(Contract.UserEntry.COLUMN_NAME, user.userName);
+        values.put(Contract.UserEntry.COLUMN_LAST_UPDTAETIME, user.lastupdateTime_totalTime);
 
         resolver.insert(Contract.UserEntry.CONTENT_URI, values);
     }
