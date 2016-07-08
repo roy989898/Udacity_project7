@@ -28,5 +28,7 @@
     <color name="message_bottomLine">#eeeeee</color>
     <color name="message_date">#eeeeee</color>
 
+    <color name="message_text">#eeeeee</color>
+
 
 </resources>

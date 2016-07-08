@@ -45,5 +45,11 @@
     <dimen name="message_cell_message_paddingLeft">16dp</dimen>
     <dimen name="message_cell_message_paddingRight">16dp</dimen>
 
+    <!--Message recycle  page-->
+    <dimen name="message_page_profile_picture_height">150dp</dimen>
+    <dimen name="message_page_Name_text_size">20dp</dimen>
+    <dimen name="message_page_thumb_up_button_padding">10dp</dimen>
+    <dimen name="message_page_like_number_text_size">20dp</dimen>
+
 
 </resources>

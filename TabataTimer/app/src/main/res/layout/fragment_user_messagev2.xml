@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimaryDark"
@@ -12,19 +13,66 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:weightSum="10">
 
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Button"
-                app:layout_scrollFlags="scroll|enterAlways" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="3"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:weightSum="10">
 
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/imvProfilePicture"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/message_page_profile_picture_height"
+                    fresco:actualImageScaleType="focusCrop"
+                    fresco:fadeDuration="300"
+                    fresco:placeholderImage="@drawable/ic_account_circle_black_36px"
+                    fresco:placeholderImageScaleType="fitCenter"
+                    fresco:roundAsCircle="true"
+                    fresco:viewAspectRatio="1" />
+
+                <TextView
+                    android:id="@+id/tvName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/message_page_Name_text_size"
+                    android:textColor="@color/message_text"
+                    tools:text="Name" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/imageButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:padding="@dimen/message_page_thumb_up_button_padding"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/thumb_up_button" />
+
+                    <TextView
+                        android:id="@+id/txLikeNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/message_text"
+                        android:textSize="@dimen/message_page_like_number_text_size"
+                        tools:text="100" />
+                </LinearLayout>
+            </LinearLayout>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/revMessage"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" />
+                android:layout_height="0dp"
+                android:layout_weight="7" />
         </LinearLayout>
     </ScrollView>
 
