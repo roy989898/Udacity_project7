@@ -27,6 +27,11 @@ public class Utility {
         return dateFormat.format(cal.getTime()); //2014/08/06 16:00:22
     }
 
+    static public long getCurrentDateinMillis(){
+        Calendar calcender = Calendar.getInstance();
+        return calcender.getTimeInMillis();
+    }
+
     static public boolean isAEmail(String email) {
 
         String re1 = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";   // Email Address 1

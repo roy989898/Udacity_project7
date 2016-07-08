@@ -21,7 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -32,6 +34,7 @@ import butterknife.OnClick;
 import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.R;
 import pom.poly.com.tabatatimer.Utility.SoundLibrary;
+import pom.poly.com.tabatatimer.Utility.Utility;
 
 
 public class TimerFragment extends Fragment {
@@ -163,6 +166,8 @@ public class TimerFragment extends Fragment {
 
     private void updatetoFirebase() {
 
+        long currentDateinMillis= Utility.getCurrentDateinMillis();
+
         if (mDatabase == null) {
             mDatabase = FirebaseDatabase.getInstance().getReference();
         }
@@ -174,8 +179,13 @@ public class TimerFragment extends Fragment {
         String useID = mAuth.getCurrentUser().getUid();
 
         //get the reference at the login user email
-        DatabaseReference idREF = mDatabase.child("Users").child(useID).child("totaltime");
-        idREF.setValue(getTotalTabataTime());
+//        DatabaseReference idREF = mDatabase.child("Users").child(useID).child("totaltime");
+//        idREF.setValue(getTotalTabataTime());
+        DatabaseReference idREF = mDatabase.child("Users").child(useID);
+        HashMap<String,Object> map=new HashMap<>();
+        map.put("totaltime",getTotalTabataTime());
+        map.put("lastupdateTime_totalTime",currentDateinMillis);
+        idREF.updateChildren(map);
     }
 
     private long getTotalTabataTime() {//in million second
