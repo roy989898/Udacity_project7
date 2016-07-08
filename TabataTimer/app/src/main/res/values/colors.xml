@@ -18,7 +18,7 @@
     <color name="detaildialog_cell_text_color">#ffffff</color>
     <color name="messageBox_message_text_color">#ffffff</color>
 
-
+    <color name="black_line">#212121</color>
 
     <color name="this_month_date">#F57F17</color>
     <color name="today_border">#D50000</color>
