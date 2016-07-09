@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/rank_cell_card_margin"
+        android:elevation="4dp"
+        card_view:cardBackgroundColor="@color/colorPrimaryLight"
+        card_view:cardCornerRadius="@dimen/rank_cell_card_cardCornerRadius">
+
+        <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:fresco="http://schemas.android.com/apk/res-auto"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:stretchColumns="0,1,2,3,4,5,6,7">
+
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/profile_picture"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_margin="@dimen/rank_cell_card_SimpleDraweeView_margin"
+                    android:layout_span="1"
+                    android:paddingLeft="11dp"
+                    fresco:placeholderImage="@drawable/ic_account_circle_black_24dp"
+                    fresco:placeholderImageScaleType="centerCrop"
+                    fresco:roundAsCircle="true"
+                    fresco:viewAspectRatio="1" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="7"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvName"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingLeft="10dp"
+                            android:text="New Text"
+
+                            android:textColor="@color/colorAccent"
+                            android:textSize="@dimen/rank_cell_card_name_textsize" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageButton
+                            android:id="@+id/imageButton"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/thumb_up_button" />
+
+                        <TextView
+                            android:id="@+id/txLikeNumber"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:gravity="left"
+                            android:padding="4dp"
+                            android:text="New Text"
+                            android:textColor="@color/ranking_cell_normal_text_color"
+                            android:textSize="@dimen/rank_cell_card_likenumer_textsize" />
+                        <ImageButton
+                            android:id="@+id/imbMessage"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="@null"
+                            android:scaleType="fitCenter"
+                            android:src="@drawable/message_button" />
+
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="3"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="left"
+                                    android:padding="4dp"
+                                    android:text="@string/rank_cell_hours"
+                                    android:textColor="@color/ranking_cell_normal_text_color"
+                                    android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+
+                                <TextView
+                                    android:id="@+id/tvHours"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="left"
+                                    android:padding="4dp"
+                                    android:textColor="@color/ranking_cell_normal_text_color"
+                                    android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="left"
+                                    android:padding="4dp"
+                                    android:text="@string/rank_cell_minutes"
+                                    android:textColor="@color/ranking_cell_normal_text_color"
+                                    android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+
+                                <TextView
+                                    android:id="@+id/tvMinutes"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="left"
+                                    android:padding="4dp"
+                                    android:textColor="@color/ranking_cell_normal_text_color"
+                                    android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="1"
+                                android:orientation="horizontal">
+
+                                <TextView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="left"
+                                    android:padding="4dp"
+                                    android:text="@string/rank_cell_seconds"
+                                    android:textColor="@color/ranking_cell_normal_text_color"
+                                    android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+
+                                <TextView
+                                    android:id="@+id/tvSeconds"
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:gravity="left"
+                                    android:padding="4dp"
+                                    android:textColor="@color/ranking_cell_normal_text_color"
+                                    android:textSize="@dimen/rank_cell_card_totaltime_textsize" />
+                            </LinearLayout>
+
+                        </LinearLayout>
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </TableRow>
+
+
+        </TableLayout>
+    </android.support.v7.widget.CardView>
+
+
+</FrameLayout>
+
+
+
+
