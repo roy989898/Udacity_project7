@@ -150,8 +150,6 @@ public class SigUpActivity extends AppCompatActivity {
 
     private boolean validateForm(String email, String password) {
         boolean valid = true;
-        //TODO put all the String into xml
-
         //check the email
 
         if (TextUtils.isEmpty(email)) {

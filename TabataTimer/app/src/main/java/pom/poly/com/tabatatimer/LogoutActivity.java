@@ -36,7 +36,7 @@ public class LogoutActivity extends AppCompatActivity {
                 switch (which) {
                     case AlertDialog.BUTTON_POSITIVE:
                         //go bac to setting pahe
-                        //logout//TODO
+                        //logout
                         delthesaveEmailAndPassAndProfileImgUrl();
                         deleteAllEveneinf();
                         //go to the login page//

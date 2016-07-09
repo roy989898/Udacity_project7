@@ -239,7 +239,6 @@ public class CalenderFragment extends Fragment implements Observer {
                 ddf.show(fm,"detailDialogFragment");
 
             }
-            //TODO  show the  selected date detail
             super.onPostExecute(eventinfs);
 
         }

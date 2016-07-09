@@ -113,8 +113,6 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Uri uri = Contract.UserEntry.CONTENT_URI;
-        //TODO sort
-
         return new CursorLoader(getContext(), uri, null, null, null, order);
     }
 

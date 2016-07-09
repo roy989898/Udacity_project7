@@ -51,13 +51,13 @@ public class TimerFragment extends Fragment {
     @BindView(R.id.btPlayNpause)
     ImageButton btPlayNpause;
 
-   /* private int restTimerDeadline = 10;
-    private int actionTimerDeadline = 20;//TODO for test,recovery later
-    private int cycletimerDeadline = 8;*/
+    private int restTimerDeadline = 10;
+    private int actionTimerDeadline = 20;
+    private int cycletimerDeadline = 8;
 
-    private int restTimerDeadline = 1;
-    private int actionTimerDeadline = 1;
-    private int cycletimerDeadline = 1;
+    /*private int restTimerDeadline = 1;
+    private int actionTimerDeadline = 1;TODO for test
+    private int cycletimerDeadline = 1;*/
 
     private boolean pauseTimerOn = true;
     private int pauseTimer = 0;
@@ -150,10 +150,6 @@ public class TimerFragment extends Fragment {
                 } else if (msg.what == 2) {
 //
                     stopAndResetTheTimer();
-
-                    //TODO show the  save and upload to firebase
-
-
                     Eventinf eventinf = new Eventinf(actionTimerDeadline, getTodayDate(), getNowTime(), restTimerDeadline, cycletimerDeadline);
                     eventinf.save();
                     updatetoFirebase();

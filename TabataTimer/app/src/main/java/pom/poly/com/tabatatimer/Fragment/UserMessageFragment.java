@@ -206,7 +206,6 @@ public class UserMessageFragment extends Fragment {
                         String key = new String(adapter.getMessageArra().get(position).firebaseKey);
                         adapter.remove(position);
                         adapter.notifyItemRemoved(position);
-                        //TODO delete in Firebase
                         DatabaseReference messageRef = FirebaseDatabase.getInstance().getReference().child("Messages").child(uID).child(key);
                         messageRef.setValue(null);
 

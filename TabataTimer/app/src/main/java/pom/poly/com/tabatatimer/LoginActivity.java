@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             goToTheMainActivity();
         } else {
             //need to login again
-            Toast.makeText(this, "Need to login again", Toast.LENGTH_SHORT).show();//TODO  put in xml
+            Toast.makeText(this, "Need to login again", Toast.LENGTH_SHORT).show();//
         }
     }
 
@@ -122,8 +122,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private boolean validateForm(String email, String password) {
         boolean valid = true;
-        //TODO put all the String into xml
-
         //check the email
 
         if (TextUtils.isEmpty(email)) {
