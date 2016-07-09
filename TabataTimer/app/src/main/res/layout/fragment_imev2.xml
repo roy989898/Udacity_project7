@@ -19,7 +19,7 @@
             android:id="@+id/tvState"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="16dp"
+            android:layout_marginRight="@dimen/fragment_timev2_tvState_padding"
             android:text="rest"
             android:textColor="@color/fragment_time_normaltext_color"
             android:textSize="@dimen/fragment_timev2_tvState_textSize" />
