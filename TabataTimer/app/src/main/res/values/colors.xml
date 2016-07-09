@@ -30,5 +30,7 @@
 
     <color name="message_text">#eeeeee</color>
 
+    <color name="radio_button_textColor">#eeeeee</color>
+
 
 </resources>

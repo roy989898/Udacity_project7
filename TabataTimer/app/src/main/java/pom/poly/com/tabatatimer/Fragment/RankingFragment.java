@@ -21,6 +21,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -55,10 +56,16 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
     Button btCancel;
     @BindView(R.id.cardViewmessageBox)
     CardView cardViewmessageBox;
+    @BindView(R.id.radio_TTT)
+    RadioButton radioTTT;
+    @BindView(R.id.radio_need)
+    RadioButton radioNeed;
 
 
     private DatabaseReference ref;
     private RankingCursorAdapter cursorAdapter;
+    private String order = Contract.UserEntry.COLUMN_TOTAL_TIME + " DESC";
+    private Bundle savedInstanceState;
 
     public RankingFragment() {
         // Required empty public constructor
@@ -84,17 +91,31 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
 
         getLoaderManager().initLoader(MY_LODER_ID, savedInstanceState, this);
 
+        this.savedInstanceState = savedInstanceState;
         lvRanking.setAdapter(cursorAdapter);
+
+//        initTheSpinner();
 
 
         return view;
     }
 
+  /*  private void initTheSpinner(){
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getContext(),
+                R.array.sort_column, android.R.layout.simple_spinner_item);
+// Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spColumn.setAdapter(adapter);
+    }*/
+
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         Uri uri = Contract.UserEntry.CONTENT_URI;
-        return new CursorLoader(getContext(), uri, null, null, null, null);
+        //TODO sort
+
+        return new CursorLoader(getContext(), uri, null, null, null, order);
     }
 
     @Override
@@ -137,14 +158,33 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
 
     }
 
-    @OnClick({R.id.btCancel})
+    @OnClick({R.id.btCancel, R.id.radio_need, R.id.radio_TTT})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btCancel:
                 fadeout();
                 break;
+            case R.id.radio_need:
+                boolean checked = ((RadioButton) view).isChecked();
+                if (checked) {
+//                    Toast.makeText(getContext(), "Click", Toast.LENGTH_SHORT).show();
+                    order = Contract.UserEntry.COLUMN_TOTAL_TIME + "";
+                    getLoaderManager().restartLoader(MY_LODER_ID, savedInstanceState, this);
+                }
+
+                break;
+            case R.id.radio_TTT:
+                boolean checked2 = ((RadioButton) view).isChecked();
+                if (checked2) {
+//                    Toast.makeText(getContext(), "Click", Toast.LENGTH_SHORT).show();
+                    order = Contract.UserEntry.COLUMN_TOTAL_TIME + " DESC";
+                    getLoaderManager().restartLoader(MY_LODER_ID, savedInstanceState, this);
+                }
+
+                break;
         }
     }
+
 
     private void fadein() {
         int mShortAnimationDuration = getResources().getInteger(
@@ -199,4 +239,6 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
         }
 
     }
+
+
 }

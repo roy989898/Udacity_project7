@@ -137,4 +137,8 @@
 
     <!--fragment rank-->
     <string name="emptyView_message">Can not get the user data!</string>
+
+    <!--ranking page-->
+    <string name="radio_button_total_text">Sport total time</string>
+    <string name="radio_button_need_encouragement_text">The people need encouragement</string>
 </resources>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--ranking page-->
+    <dimen name="radio_button_text_size">15sp</dimen>
+
+    <!--Timer fragment-->
+    <dimen name="fragment_timev2_tvState_textSize">40dp</dimen>
+    <dimen name="fragment_timev2_tvTimer_textSize">80dp</dimen>
+    <dimen name="fragment_timev2_margin">16dp</dimen>
+    <dimen name="fragment_timev2_cycle_textSize">20dp</dimen>
+    <dimen name="fragment_timev2_tvcycle_textSize">40dp</dimen>
+    <dimen name="fragment_timev2_totaltextsize_textSize">20dp</dimen>
+    <dimen name="fragment_timev2_tvtotalTime_textSize">40dp</dimen>
+
+    <!--rank cell-->
+    <dimen name="rank_cell_card_margin">5dp</dimen>
+    <dimen name="rank_cell_card_cardCornerRadius">4dp</dimen>
+    <dimen name="rank_cell_card_SimpleDraweeView_margin">2dp</dimen>
+    <dimen name="rank_cell_card_name_textsize">20sp</dimen>
+    <dimen name="rank_cell_card_totaltime_textsize">14sp</dimen>
+    <dimen name="rank_cell_card_likenumer_textsize">15sp</dimen>
+    <dimen name="empty_view_message">20sp</dimen>
+</resources>
