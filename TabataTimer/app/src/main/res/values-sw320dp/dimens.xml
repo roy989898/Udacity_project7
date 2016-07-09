@@ -17,6 +17,7 @@
     <dimen name="fragment_timev2_tvtotalTime_textSize">35dp</dimen>
 
 
+
     <!--ranking page-->
     <dimen name="radio_button_text_size">10sp</dimen>
 </resources>
