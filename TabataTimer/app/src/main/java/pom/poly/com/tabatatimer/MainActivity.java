@@ -18,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.google.firebase.database.ChildEventListener;
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private ValueEventListener eventLister;
     private ChildEventListener childListener;
     private DatabaseReference ref;
+    private FrameLayout tabletContainer;
 
 
     @Override
@@ -200,6 +202,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainv2);
 
+        //fin the fragment_message_container,if,is tablet,has;
+        tabletContainer = (FrameLayout) findViewById(R.id.fragment_message_container);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
@@ -237,10 +242,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTabIcon(TabLayout tabLayout) {
-        tabLayout.getTabAt(0).setIcon(R.drawable.ic_stars_white_24px);
-        tabLayout.getTabAt(1).setIcon(R.drawable.ic_timer_white_24px);
-        tabLayout.getTabAt(2).setIcon(R.drawable.ic_date_range_white_24px);
-        tabLayout.getTabAt(3).setIcon(R.drawable.ic_dns_white_24px);
+        if (tabletContainer != null) {
+// is tablet
+            tabLayout.getTabAt(0).setIcon(R.drawable.ic_stars_white_24px);
+            tabLayout.getTabAt(1).setIcon(R.drawable.ic_timer_white_24px);
+            tabLayout.getTabAt(2).setIcon(R.drawable.ic_date_range_white_24px);
+        } else {
+//            not tablet
+            tabLayout.getTabAt(0).setIcon(R.drawable.ic_stars_white_24px);
+            tabLayout.getTabAt(1).setIcon(R.drawable.ic_timer_white_24px);
+            tabLayout.getTabAt(2).setIcon(R.drawable.ic_date_range_white_24px);
+            tabLayout.getTabAt(3).setIcon(R.drawable.ic_dns_white_24px);
+        }
+
     }
 
 
@@ -311,31 +325,58 @@ public class MainActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             // getItem is called to instantiate the fragment for the given page.
             // Return a PlaceholderFragment (defined as a static inner class below).
-            switch (position) {
+            if (tabletContainer != null) {
+//                is tablet
+                switch (position) {
 
-                case 0:
-                    return new RankingFragment();
-                case 1:
-                    return new TimerFragment();
+                    case 0:
+                        return new RankingFragment();
+                    case 1:
+                        return new TimerFragment();
 
-                case 2:
-                    CalenderFragment calenderFragment = new CalenderFragment();
-                    Eventinf.registerObserver(calenderFragment);//register to the Eventinf as a observer,when ssave a new Eventif or delete,notify the calenderFragment,data has chanhe.
-                    return calenderFragment;
+                    case 2:
+                        CalenderFragment calenderFragment = new CalenderFragment();
+                        Eventinf.registerObserver(calenderFragment);//register to the Eventinf as a observer,when ssave a new Eventif or delete,notify the calenderFragment,data has chanhe.
+                        return calenderFragment;
 
-                case 3:
-                    return new UserMessageFragment();
+                    default:
+                        return null;
+                }
+            } else {
+//                not tablet
+                switch (position) {
 
-                default:
-                    return null;
+                    case 0:
+                        return new RankingFragment();
+                    case 1:
+                        return new TimerFragment();
+
+                    case 2:
+                        CalenderFragment calenderFragment = new CalenderFragment();
+                        Eventinf.registerObserver(calenderFragment);//register to the Eventinf as a observer,when ssave a new Eventif or delete,notify the calenderFragment,data has chanhe.
+                        return calenderFragment;
+
+                    case 3:
+                        return new UserMessageFragment();
+
+                    default:
+                        return null;
+                }
             }
+
 
         }
 
         @Override
         public int getCount() {
             // Show 3 total pages.
-            return 4;
+            if (tabletContainer != null) {
+//                is tablet
+                return 3;
+            } else {
+//                not tablet
+                return 4;
+            }
         }
 
         @Override
