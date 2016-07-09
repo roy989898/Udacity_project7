@@ -34,7 +34,7 @@
                     android:layout_margin="@dimen/rank_cell_card_SimpleDraweeView_margin"
                     android:layout_span="2"
                     android:paddingLeft="11dp"
-                    fresco:placeholderImage="@drawable/ic_account_circle_black_24dp"
+                    fresco:placeholderImage="@drawable/ic_account_circle_white_48dp"
                     fresco:placeholderImageScaleType="centerCrop"
                     fresco:roundAsCircle="true"
                     fresco:viewAspectRatio="1" />

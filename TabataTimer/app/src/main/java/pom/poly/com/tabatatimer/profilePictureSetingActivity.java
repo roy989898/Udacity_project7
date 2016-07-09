@@ -61,7 +61,7 @@ public class profilePictureSetingActivity extends AppCompatActivity {
         super.onStart();
         //Load the profile picture
         Log.i("PictureSetingActivity","onStart");
-        defaulrUri = new Uri.Builder().scheme(UriUtil.LOCAL_RESOURCE_SCHEME).path(String.valueOf(R.drawable.ic_account_circle_white_24dp)).build();
+        defaulrUri = new Uri.Builder().scheme(UriUtil.LOCAL_RESOURCE_SCHEME).path(String.valueOf(R.drawable.ic_account_circle_white_48dp)).build();
         defaulrUriString=defaulrUri.toString();
         String profilePURL = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), defaulrUriString);
         if(profilePURL.equals("empty")){

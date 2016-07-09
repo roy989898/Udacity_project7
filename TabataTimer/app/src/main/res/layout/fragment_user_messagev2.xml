@@ -31,7 +31,7 @@
                     android:paddingTop="@dimen/message_page_profile_picture_padding_top"
                     fresco:actualImageScaleType="centerCrop"
                     fresco:fadeDuration="300"
-                    fresco:placeholderImage="@drawable/ic_account_circle_black_36px"
+                    fresco:placeholderImage="@drawable/ic_account_circle_white_48dp"
                     fresco:placeholderImageScaleType="centerCrop"
                     fresco:roundAsCircle="true"
                     fresco:viewAspectRatio="1" />

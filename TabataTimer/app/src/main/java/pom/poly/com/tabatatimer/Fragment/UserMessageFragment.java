@@ -133,7 +133,7 @@ public class UserMessageFragment extends Fragment {
 
     private void setTheUserDataShow(Context context) {
 
-        Uri defaulrUri = new Uri.Builder().scheme(UriUtil.LOCAL_RESOURCE_SCHEME).path(String.valueOf(R.drawable.ic_account_circle_white_24dp)).build();
+        Uri defaulrUri = new Uri.Builder().scheme(UriUtil.LOCAL_RESOURCE_SCHEME).path(String.valueOf(R.drawable.ic_account_circle_white_48dp)).build();
         String defaulrUriString = defaulrUri.toString();
         String profilePURL = context.getSharedPreferences(getString(R.string.name_sharepreference), context.MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), defaulrUriString);
         imvProfilePicture.setImageURI(profilePURL);
