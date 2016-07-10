@@ -3,6 +3,7 @@
     package="pom.poly.com.tabatatimer">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".Application.MyApplication"
@@ -71,11 +72,19 @@
         <receiver
             android:name=".BrodcastReceiver.NotificationReceiver"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true">
+            <intent-filter>
+                <action android:name="pom.poly.com.tabatatimer.BrodcastReceiver" />
+            </intent-filter>
+        </receiver>
         <receiver
             android:name=".BrodcastReceiver.BootedReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -1,8 +1,13 @@
 package pom.poly.com.tabatatimer.Utility;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -27,7 +32,7 @@ public class Utility {
         return dateFormat.format(cal.getTime()); //2014/08/06 16:00:22
     }
 
-    static public long getCurrentDateinMillis(){
+    static public long getCurrentDateinMillis() {
         Calendar calcender = Calendar.getInstance();
         return calcender.getTimeInMillis();
     }
@@ -114,21 +119,100 @@ public class Utility {
         baseRef.child("Messages").child(message.toID).push().setValue(message);
     }
 
-    public static String formatDate(long datetime){
-        Calendar calendar=Calendar.getInstance();
+    public static String formatDate(long datetime) {
+        Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(datetime);
-        int year=calendar.get(Calendar.YEAR);
-        int month=calendar.get(Calendar.MONTH);
-        int day=calendar.get(Calendar.DAY_OF_MONTH);
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        return String.format("%d-%02d-%02d",year,month,day);
-
-
+        return String.format("%d-%02d-%02d", year, month, day);
 
 
     }
 
+    public static void setTheNotification(Context context, String timeString) {
+//        use the Alarm manager to set the time,to call the specific broadcast receiver
 
+        SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
+//        boolean switchOnOff = preference.getBoolean(context.getString(R.string.preference_nof_key), false);
+//        String timeString = preference.getString(context.getString(R.string.preference_timePick_key), context.getString(R.string.preference_timePick_defaultvalue));
+
+
+        //on
+        Calendar cal = convertStringtoCalcender(timeString);
+        Log.d("setTheNotification", cancendelToString(cal));
+
+
+        Intent intent = new Intent();
+        intent.setAction("pom.poly.com.tabatatimer.BrodcastReceiver");
+
+        PendingIntent pi = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        //cancel the original one first
+        am.cancel(pi);
+
+//            long repatingTime= TimeUnit.HOURS.toMillis(24);
+
+//            set a new one
+        //TODO set to 24 hours
+        am.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 60 * 60 * 1000, pi);
+
+    }
+
+
+    public static void disableTheTheNotification(Context context) {
+        //off
+        Intent intent = new Intent();
+        intent.setAction("pom.poly.com.tabatatimer.BrodcastReceiver");
+
+        PendingIntent pi = PendingIntent.getBroadcast(context, 1, intent, PendingIntent.FLAG_CANCEL_CURRENT);
+
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        //cancel the original one first
+        am.cancel(pi);
+
+
+    }
+
+    public static Calendar convertStringtoCalcender(String time) {
+        SimpleDateFormat form = new SimpleDateFormat("HH:mm");
+        java.util.Date d1 = null;
+        Calendar tdy1;
+        Log.d("convertStringtoCalcender", "String time: " + time);
+
+
+        try {
+            d1 = form.parse(time);
+        } catch (java.text.ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        int hours = d1.getHours();
+        int minutes = d1.getMinutes();
+        Log.d("convertStringtoCalcender", "hour: " + hours + " minutes: " + minutes);
+        tdy1 = Calendar.getInstance();
+        tdy1.setTimeInMillis(System.currentTimeMillis());
+        tdy1.set(Calendar.HOUR_OF_DAY, d1.getHours());
+        tdy1.set(Calendar.MINUTE, d1.getMinutes());
+        tdy1.set(Calendar.SECOND, 0);
+
+        return tdy1;
+
+    }
+
+    public static String cancendelToString(Calendar calendar) {
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH);
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        String s = year + "/" + month + "/" + day + "/" + " " + hour + " : " + minute;
+        return s;
+
+    }
 
 
 }
