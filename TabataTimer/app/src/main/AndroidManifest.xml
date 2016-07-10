@@ -66,7 +66,16 @@
             android:name=".Service.UserDownloadAndSaveServic"
             android:exported="false" />
 
-        <activity android:name=".SigUpActivity"></activity>
+        <activity android:name=".SigUpActivity" />
+
+        <receiver
+            android:name=".BrodcastReceiver.NotificationReceiver"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver
+            android:name=".BrodcastReceiver.BootedReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
     </application>
 
 </manifest>
