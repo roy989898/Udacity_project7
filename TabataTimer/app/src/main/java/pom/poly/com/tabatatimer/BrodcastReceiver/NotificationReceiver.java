@@ -6,6 +6,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
@@ -26,27 +28,34 @@ public class NotificationReceiver extends BroadcastReceiver {
         // TODO: This method is called when the BroadcastReceiver is receiving
         // an Intent broadcast.
 //        prevent the trigger at the wrong time
-        Calendar nowCalcender=Calendar.getInstance();
+        Calendar nowCalcender = Calendar.getInstance();
         SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
         String timeString = preference.getString(context.getString(R.string.preference_timePick_key), context.getString(R.string.preference_timePick_defaultvalue));
 
 
         //on
         Calendar cal = Utility.convertStringtoCalcender(timeString);
-
-        if(nowCalcender.get(Calendar.HOUR_OF_DAY)==cal.get(Calendar.HOUR_OF_DAY)&&nowCalcender.get(Calendar.MINUTE)==cal.get(Calendar.MINUTE)){
+        Log.d("NotificationReceiver", "receive before check the time");
+        if (nowCalcender.get(Calendar.HOUR_OF_DAY) == cal.get(Calendar.HOUR_OF_DAY) && nowCalcender.get(Calendar.MINUTE) == cal.get(Calendar.MINUTE)) {
             Log.d("NotificationReceiver", "receive");
+            //TODO
             createNotification(context);
         }
 
+
     }
-    private void createNotification(Context context){
+
+    private void createNotification(Context context) {
         //TODO move the string to xml
+        Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setContentTitle("Tabata Timer")
-                        .setContentText("It is time to do tabata");
+                        .setContentText("It is time to do tabata")
+                        .setAutoCancel(true)
+                        .setSound(alarmSound);
 // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(context, MainActivity.class);
 
