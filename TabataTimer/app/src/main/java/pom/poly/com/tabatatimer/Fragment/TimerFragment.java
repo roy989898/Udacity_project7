@@ -1,7 +1,10 @@
 package pom.poly.com.tabatatimer.Fragment;
 
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -35,6 +38,7 @@ import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.R;
 import pom.poly.com.tabatatimer.Utility.SoundLibrary;
 import pom.poly.com.tabatatimer.Utility.Utility;
+import pom.poly.com.tabatatimer.Widget.TotalTimeWidget;
 
 
 public class TimerFragment extends Fragment {
@@ -51,13 +55,13 @@ public class TimerFragment extends Fragment {
     @BindView(R.id.btPlayNpause)
     ImageButton btPlayNpause;
 
-    private int restTimerDeadline = 10;
+    /*private int restTimerDeadline = 10;
     private int actionTimerDeadline = 20;
     private int cycletimerDeadline = 8;
-
-    /*private int restTimerDeadline = 1;
-    private int actionTimerDeadline = 1;TODO for test
-    private int cycletimerDeadline = 1;*/
+*/
+    private int restTimerDeadline = 1;
+    private int actionTimerDeadline = 1;   //TODO for test
+    private int cycletimerDeadline = 1;
 
     private boolean pauseTimerOn = true;
     private int pauseTimer = 0;
@@ -153,11 +157,21 @@ public class TimerFragment extends Fragment {
                     Eventinf eventinf = new Eventinf(actionTimerDeadline, getTodayDate(), getNowTime(), restTimerDeadline, cycletimerDeadline);
                     eventinf.save();
                     updatetoFirebase();
+                    updatetheWidget();
 
                 }
             }
         };
 
+    }
+
+    private void updatetheWidget() {
+        Intent intent=new Intent();
+        intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+        AppWidgetManager manager = AppWidgetManager.getInstance(getContext());
+        int[] ids = manager.getAppWidgetIds(new ComponentName(getContext(), TotalTimeWidget.class));
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
+        getActivity().sendBroadcast(intent);
     }
 
     private void updatetoFirebase() {

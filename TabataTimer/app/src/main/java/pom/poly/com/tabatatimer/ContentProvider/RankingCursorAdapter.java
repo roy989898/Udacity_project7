@@ -31,6 +31,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import pom.poly.com.tabatatimer.Firebase.User;
 import pom.poly.com.tabatatimer.R;
+import pom.poly.com.tabatatimer.Utility.Utility;
 
 /**
  * Created by User on 1/7/2016.
@@ -50,22 +51,7 @@ public class RankingCursorAdapter extends CursorAdapter {
         mContext = context;
     }
 
-    public static long[] getDurationBreakdown(long millis) {
-        if (millis < 0) {
-            throw new IllegalArgumentException("Duration must be greater than zero!");
-        }
 
-
-        long hours = TimeUnit.MILLISECONDS.toHours(millis);
-        millis -= TimeUnit.HOURS.toMillis(hours);
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(millis);
-        millis -= TimeUnit.MINUTES.toMillis(minutes);
-        long seconds = TimeUnit.MILLISECONDS.toSeconds(millis);
-
-        long[] la = new long[]{hours, minutes, seconds};
-
-        return la;
-    }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -88,7 +74,7 @@ public class RankingCursorAdapter extends CursorAdapter {
         String userID = cursor.getString(cursor.getColumnIndex(Contract.UserEntry.COLUMN_USERID));
 
         //format the total time hour:minutes:seconds
-        long[] timeArray = getDurationBreakdown(totalTime);
+        long[] timeArray = Utility.getDurationBreakdown(totalTime);
 
         //put data into view holder
         vh.userID = userID;
