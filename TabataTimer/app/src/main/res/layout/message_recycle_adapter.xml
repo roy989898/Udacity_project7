@@ -14,6 +14,8 @@
         android:paddingBottom="@dimen/message_cell_message_paddingBottom"
         android:paddingLeft="@dimen/message_cell_message_paddingLeft"
         android:paddingRight="@dimen/message_cell_message_paddingRight"
+        android:paddingStart="@dimen/message_cell_message_paddingLeft"
+        android:paddingEnd="@dimen/message_cell_message_paddingRight"
         android:paddingTop="@dimen/message_cell_message_paddingTop">
 
         <LinearLayout
