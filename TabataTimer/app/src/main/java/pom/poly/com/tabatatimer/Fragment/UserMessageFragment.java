@@ -16,6 +16,8 @@ import android.widget.TextView;
 
 import com.facebook.common.util.UriUtil;
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -47,6 +49,8 @@ public class UserMessageFragment extends Fragment {
     TextView tvName;
     @BindView(R.id.txLikeNumber)
     TextView txLikeNumber;
+    @BindView(R.id.adView)
+    AdView adView;
 
 
     private DatabaseReference messagesRef;
@@ -184,6 +188,10 @@ public class UserMessageFragment extends Fragment {
         toouch.attachToRecyclerView(revMessage);
 
         setTheUserDataShow(getContext());
+
+        //set the Admob
+        AdRequest adRequest = new AdRequest.Builder().build();
+        adView.loadAd(adRequest);
 
 
         return view;

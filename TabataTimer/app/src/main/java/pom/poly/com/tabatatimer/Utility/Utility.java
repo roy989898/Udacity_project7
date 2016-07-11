@@ -189,7 +189,7 @@ public class Utility {
         try {
             d1 = form.parse(time);
         } catch (java.text.ParseException e) {
-            // TODO Auto-generated catch block
+
             e.printStackTrace();
         }
         int hours = d1.getHours();

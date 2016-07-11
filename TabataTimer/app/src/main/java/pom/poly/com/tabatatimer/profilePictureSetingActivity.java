@@ -1,9 +1,6 @@
 package pom.poly.com.tabatatimer;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,12 +20,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.soundcloud.android.crop.Crop;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,21 +47,20 @@ public class profilePictureSetingActivity extends AppCompatActivity {
         Crop.pickImage(this);
 
 
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         //Load the profile picture
-        Log.i("PictureSetingActivity","onStart");
+        Log.i("PictureSetingActivity", "onStart");
         defaulrUri = new Uri.Builder().scheme(UriUtil.LOCAL_RESOURCE_SCHEME).path(String.valueOf(R.drawable.ic_account_circle_white_48dp)).build();
-        defaulrUriString=defaulrUri.toString();
+        defaulrUriString = defaulrUri.toString();
         String profilePURL = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), defaulrUriString);
-        if(profilePURL.equals("empty")){
-            profilePURL=defaulrUriString;
+        if (profilePURL.equals("empty")) {
+            profilePURL = defaulrUriString;
         }
-        Log.i("PictureSetingActivity",profilePURL);
+        Log.i("PictureSetingActivity", profilePURL);
         sdvShow.setImageURI(profilePURL);
 
     }
@@ -151,8 +144,8 @@ public class profilePictureSetingActivity extends AppCompatActivity {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
                 Uri downloadUrl = taskSnapshot.getDownloadUrl();
                 sdvShow.setImageURI(downloadUrl);
-                Log.d("PictureSetingActivity", "downloadUrl: "+downloadUrl.toString());
-                Utility.saveTheLinkinSP(downloadUrl.toString(),getApplicationContext());
+                Log.d("PictureSetingActivity", "downloadUrl: " + downloadUrl.toString());
+                Utility.saveTheLinkinSP(downloadUrl.toString(), getApplicationContext());
                 //update the profile downloadUrl to the firebase
                 upLoadtheProfileLink(downloadUrl.toString());
             }
@@ -160,16 +153,14 @@ public class profilePictureSetingActivity extends AppCompatActivity {
 
     }
 
-    private void upLoadtheProfileLink(String url){
+    private void upLoadtheProfileLink(String url) {
         DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
         String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         DatabaseReference userREF = baseRef.child("Users").child(userID);
         HashMap<String, Object> map = new HashMap<>();
-        map.put("profileLink",url);
+        map.put("profileLink", url);
         userREF.updateChildren(map);
     }
-
-
 
 
 }
