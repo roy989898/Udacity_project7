@@ -55,7 +55,6 @@
         android:textColorHint="@color/colorPrimaryLight" />
 
 
-
     <Button
         android:id="@+id/btVreate"
         android:layout_width="match_parent"
@@ -66,22 +65,24 @@
 
         android:textColor="@color/loginPageText"
         android:textSize="@dimen/activity_login_button_textSize" />
+
     <Button
         android:id="@+id/btLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/loginbtnbackground"
-        android:text="@string/login"
-        android:visibility="invisible"
         android:layout_marginTop="@dimen/activity_login_button_topmargin"
+        android:background="@drawable/loginbtnbackground"
+        android:contentDescription="@string/cd_sigup_button"
+        android:text="@string/login"
         android:textColor="@color/loginPageText"
-        android:textSize="@dimen/activity_login_button_textSize" />
+        android:textSize="@dimen/activity_login_button_textSize"
+        android:visibility="invisible" />
 
     <TextView
+        android:id="@+id/tvLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="@color/loginPageText"
         android:text="@string/activity_sigup_createAccount_string"
-        android:id="@+id/tvLogin" />
+        android:textColor="@color/loginPageText" />
 
 </LinearLayout>

@@ -244,15 +244,15 @@ public class MainActivity extends AppCompatActivity {
     private void setTabIcon(TabLayout tabLayout) {
         if (tabletContainer != null) {
 // is tablet
-            tabLayout.getTabAt(0).setIcon(R.drawable.ic_stars_white_24px);
-            tabLayout.getTabAt(1).setIcon(R.drawable.ic_timer_white_24px);
-            tabLayout.getTabAt(2).setIcon(R.drawable.ic_date_range_white_24px);
+            tabLayout.getTabAt(0).setIcon(R.drawable.ic_stars_white_24px).setContentDescription(getString(R.string.cd_ranking_tab));
+            tabLayout.getTabAt(1).setIcon(R.drawable.ic_timer_white_24px).setContentDescription(getString(R.string.cd_timer_tab));
+            tabLayout.getTabAt(2).setIcon(R.drawable.ic_date_range_white_24px).setContentDescription(getString(R.string.cd_calcender_tab));
         } else {
 //            not tablet
-            tabLayout.getTabAt(0).setIcon(R.drawable.ic_stars_white_24px);
-            tabLayout.getTabAt(1).setIcon(R.drawable.ic_timer_white_24px);
-            tabLayout.getTabAt(2).setIcon(R.drawable.ic_date_range_white_24px);
-            tabLayout.getTabAt(3).setIcon(R.drawable.ic_dns_white_24px);
+            tabLayout.getTabAt(0).setIcon(R.drawable.ic_stars_white_24px).setContentDescription(getString(R.string.cd_ranking_tab));
+            tabLayout.getTabAt(1).setIcon(R.drawable.ic_timer_white_24px).setContentDescription(getString(R.string.cd_timer_tab));
+            tabLayout.getTabAt(2).setIcon(R.drawable.ic_date_range_white_24px).setContentDescription(getString(R.string.cd_calcender_tab));
+            tabLayout.getTabAt(3).setIcon(R.drawable.ic_dns_white_24px).setContentDescription(getString(R.string.cd_received_message_tab));
         }
 
     }

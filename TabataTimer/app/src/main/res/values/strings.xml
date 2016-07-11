@@ -147,4 +147,26 @@
 
     <!--Admob-->
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+
+    <!--ContentDescription-->
+    <string name="cd_login_button">This is a login button</string>
+
+    <string name="cd_ranking_tab">This is a ranking page</string>
+    <string name="cd_timer_tab">This isTimer</string>
+    <string name="cd_calcender_tab">This is a login button</string>
+    <string name="cd_received_message_tab">This is received message </string>
+
+    <string name="cd_sigup_button">This is a sigup button</string>
+
+    <string name="cd_start_button">This is a timer start button</string>
+    <string name="cd_reset_button">This is a timer reset button</string>
+
+    <string name="cd_rank_sort_hightt">Sort by Higher sport total time</string>
+    <string name="cd_rank_sort_need">Sort by most need encouragement people</string>
+    <string name="cd_send_message">Send message</string>
+    <string name="cd_cancel_send">cancel send message</string>
+
+    <string name="cd_like">Give one like</string>
+    <string name="cd_create_meesage">Create a message</string>
+
 </resources>

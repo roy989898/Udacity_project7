@@ -36,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:checked="true"
-
+                android:contentDescription="@string/cd_rank_sort_hightt"
                 android:text="@string/radio_button_total_text"
                 android:textColor="@color/radio_button_textColor"
                 android:textSize="@dimen/radio_button_text_size" />
@@ -45,6 +45,7 @@
                 android:id="@+id/radio_need"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:contentDescription="@string/cd_rank_sort_need"
                 android:text="@string/radio_button_need_encouragement_text"
                 android:textColor="@color/radio_button_textColor"
                 android:textSize="@dimen/radio_button_text_size" />
@@ -107,6 +108,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
+                        android:contentDescription="@string/cd_send_message"
                         android:text="Send" />
 
                     <Button
@@ -115,6 +117,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="2"
+                        android:contentDescription="@string/cd_cancel_send"
                         android:text="Cancel" />
 
                 </LinearLayout>

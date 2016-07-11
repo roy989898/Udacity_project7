@@ -50,6 +50,7 @@
         android:layout_height="wrap_content"
         android:background="@drawable/loginbtnbackground"
         android:text="@string/login"
+        android:contentDescription="@string/cd_login_button"
         android:layout_marginTop="@dimen/activity_login_button_topmargin"
         android:textColor="@color/loginPageText"
         android:textSize="@dimen/activity_login_button_textSize" />
