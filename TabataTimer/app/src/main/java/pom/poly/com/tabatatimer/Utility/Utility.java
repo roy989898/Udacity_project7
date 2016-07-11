@@ -15,9 +15,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.R;
 
 /**
@@ -212,6 +215,19 @@ public class Utility {
         String s = year + "/" + month + "/" + day + "/" + " " + hour + " : " + minute;
         return s;
 
+    }
+
+    public static long getTotalTabataTime() {//in million second
+        List<Eventinf> eventList = Eventinf.listAll(Eventinf.class);
+        long second = 0;
+        for (Eventinf event : eventList) {
+            second += event.getTotalTime();
+
+        }
+
+        long millionSecond = TimeUnit.SECONDS.toMillis(second);
+
+        return millionSecond;
     }
 
 

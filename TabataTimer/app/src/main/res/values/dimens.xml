@@ -53,9 +53,13 @@
     <dimen name="message_page_thumb_up_button_padding">10dp</dimen>
     <dimen name="message_page_like_number_text_size">20dp</dimen>
 
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
+
     <!--ranking page-->
-
-
 
 
 </resources>

@@ -179,23 +179,12 @@ public class TimerFragment extends Fragment {
 //        idREF.setValue(getTotalTabataTime());
         DatabaseReference idREF = mDatabase.child("Users").child(useID);
         HashMap<String,Object> map=new HashMap<>();
-        map.put("totaltime",getTotalTabataTime());
+        map.put("totaltime",Utility.getTotalTabataTime());
         map.put("lastupdateTime_totalTime",currentDateinMillis);
         idREF.updateChildren(map);
     }
 
-    private long getTotalTabataTime() {//in million second
-        List<Eventinf> eventList = Eventinf.listAll(Eventinf.class);
-        long second = 0;
-        for (Eventinf event : eventList) {
-            second += event.getTotalTime();
 
-        }
-
-        long millionSecond = TimeUnit.SECONDS.toMillis(second);
-
-        return millionSecond;
-    }
 
    /* private void stopNadResetTimerandCount() {
         if (timer != null) {
