@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
@@ -37,7 +38,7 @@ public class LogoutActivity extends AppCompatActivity {
                     case AlertDialog.BUTTON_POSITIVE:
                         //go bac to setting pahe
                         //logout
-                        delthesaveEmailAndPassAndProfileImgUrl();
+                        deleteAllTheSetting();
                         deleteAllEveneinf();
                         //go to the login page//
                         Intent intent = new Intent(LogoutActivity.this, LoginActivity.class);
@@ -76,13 +77,24 @@ public class LogoutActivity extends AppCompatActivity {
         startActivity(intent);
     }*/
 
-    private void delthesaveEmailAndPassAndProfileImgUrl() {
+    private void deleteAllTheSetting() {
         SharedPreferences preference = getSharedPreferences(getString(R.string.name_sharepreference), MODE_PRIVATE);
         SharedPreferences.Editor editor = preference.edit();
         editor.putString(getString(R.string.sharedpreference_email_key), "empty");
 //        editor.putString(getString(R.string.sharedPreference_password_key), "empty");
         editor.putString(getString(R.string.SharePreferenceDownloadLinkKey), "empty");
         editor.commit();
+
+        SharedPreferences defaultPreference = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor defaultEditor = defaultPreference.edit();
+        //name
+        defaultEditor.putString(getString(R.string.preference_name_key), getString(R.string.preference_name_defaultvalue));
+//        Notification on/off
+        defaultEditor.putBoolean(getString(R.string.preference_nof_key), Boolean.parseBoolean(getString(R.string.preference_nofe_defaultvalue)));
+//        Notification time
+        defaultEditor.putString(getString(R.string.preference_timePick_key), getString(R.string.preference_timePick_defaultvalue));
+        defaultEditor.commit();
+
 
     }
 

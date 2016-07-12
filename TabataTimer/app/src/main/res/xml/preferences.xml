@@ -17,6 +17,7 @@
         android:key="@string/preference_nof_key"
         android:title="@string/preference_nof_title" />
     <pom.poly.com.tabatatimer.Preference.TimePickerPreference
+        android:defaultValue="@string/preference_timePick_defaultvalue"
         android:icon="@drawable/ic_alarm_black_36px"
         android:key="@string/preference_timePick_key"
         android:title="@string/preference_timePick_title" />
