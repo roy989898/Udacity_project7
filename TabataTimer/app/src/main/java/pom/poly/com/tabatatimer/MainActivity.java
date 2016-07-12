@@ -21,6 +21,8 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +37,7 @@ import pom.poly.com.tabatatimer.Fragment.CalenderFragment;
 import pom.poly.com.tabatatimer.Fragment.RankingFragment;
 import pom.poly.com.tabatatimer.Fragment.TimerFragment;
 import pom.poly.com.tabatatimer.Fragment.UserMessageFragment;
+import pom.poly.com.tabatatimer.Utility.Utility;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -240,6 +243,13 @@ public class MainActivity extends AppCompatActivity {
         resolver = getContentResolver();
         deleteAllUserData(resolver);
         readWhenupdate(resolver);
+
+        if (Utility.getUid() == null) {
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentuser = mAuth.getCurrentUser();
+            String uidSave = currentuser.getUid();
+            Utility.setUid(getApplicationContext(), uidSave);
+        }
 
     }
 

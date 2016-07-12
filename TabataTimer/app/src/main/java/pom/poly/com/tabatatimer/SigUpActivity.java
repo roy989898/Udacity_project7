@@ -226,6 +226,10 @@ public class SigUpActivity extends AppCompatActivity {
                         } else {
                             String success = getString(R.string.sigup_activity_sigup_success);
 
+                            //save the UID for future use
+                            FirebaseUser currentuser = mAuth.getCurrentUser();
+                            String uidSave=currentuser.getUid();
+                            Utility.setUid(getApplicationContext(),uidSave);
                             Utility.saveEmail(email, getApplicationContext());
                             Toast.makeText(getApplicationContext(), success, Toast.LENGTH_SHORT).show();
 

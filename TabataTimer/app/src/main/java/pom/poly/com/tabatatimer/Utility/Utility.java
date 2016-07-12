@@ -30,6 +30,9 @@ public class Utility {
     static public String uid;
 
     public static String getUid() {
+        if(uid==null){
+
+        }
         return uid;
     }
 
