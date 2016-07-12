@@ -119,7 +119,6 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
         if (data.moveToNext()) {
-            int count = data.getCount();
             Log.d("getUserData", "onLoadFinished " + data.getCount() + "");
         }
 
@@ -143,7 +142,7 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
             @Override
             public void onClick(View v) {
                 long datetime = Calendar.getInstance().getTimeInMillis();
-                String fromID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                String fromID = Utility.getUid();
                 //get the user name:
                 String userName = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(getString(R.string.preference_name_key), getString(R.string.preference_name_defaultvalue));
                 Message message = new Message(datetime, fromID, editText.getText().toString(), uid, userName);

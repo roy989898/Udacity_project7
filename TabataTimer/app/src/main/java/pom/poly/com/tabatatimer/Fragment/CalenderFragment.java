@@ -1,18 +1,15 @@
 package pom.poly.com.tabatatimer.Fragment;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
@@ -21,6 +18,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.ButterKnife;
 import pom.poly.com.tabatatimer.Calender.CaldroidSampleCustomFragment;
@@ -34,17 +32,16 @@ import pom.poly.com.tabatatimer.Utility.Observer;
 public class CalenderFragment extends Fragment implements Observer {
 
     private Context mContext;
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        mContext=context;
-    }
-
     private CaldroidSampleCustomFragment caldroidFragment;
 
     public CalenderFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        mContext = context;
     }
 
     /*private void setCustomResourceForDates() {
@@ -94,7 +91,6 @@ public class CalenderFragment extends Fragment implements Observer {
 
     private void createAndReplayCalenderFragment(Bundle savedInstanceState) {
 
-        FragmentActivity activity = getActivity();
 
         caldroidFragment = new CaldroidSampleCustomFragment();
 
@@ -114,7 +110,7 @@ public class CalenderFragment extends Fragment implements Observer {
 
         FragmentTransaction t = getChildFragmentManager().beginTransaction();
 
-          t.replace(R.id.clalender1, caldroidFragment);
+        t.replace(R.id.clalender1, caldroidFragment);
 
 
         t.commit();
@@ -125,7 +121,7 @@ public class CalenderFragment extends Fragment implements Observer {
             @Override
             public void onSelectDate(Date date, View view) {
 
-                final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                final SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
                 new showDetailINFTask().execute(formatter.format(date)); //to show the detail information dialog,if have detail information
                /* Toast.makeText(getContext(), formatter.format(date),
                         Toast.LENGTH_SHORT).show();*/
@@ -161,7 +157,6 @@ public class CalenderFragment extends Fragment implements Observer {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -173,7 +168,6 @@ public class CalenderFragment extends Fragment implements Observer {
         // Setup caldroid fragment
         // **** If you want normal CaldroidFragment, use below line ****
         createAndReplayCalenderFragment(savedInstanceState);
-
 
 
         ButterKnife.bind(this, layout);
@@ -234,9 +228,9 @@ public class CalenderFragment extends Fragment implements Observer {
             //if eventinfs is null,that mean no event at this date
             if (eventinfs != null) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
-                DetailDialogFragment ddf=DetailDialogFragment.newInstance(eventinfs);
+                DetailDialogFragment ddf = DetailDialogFragment.newInstance(eventinfs);
 
-                ddf.show(fm,"detailDialogFragment");
+                ddf.show(fm, "detailDialogFragment");
 
             }
             super.onPostExecute(eventinfs);

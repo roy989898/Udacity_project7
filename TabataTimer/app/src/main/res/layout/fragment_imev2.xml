@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="2"
-        android:gravity="right"
+        android:gravity="end"
         android:orientation="horizontal">
 
         <TextView
@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="@dimen/fragment_timev2_tvState_padding"
+            android:layout_marginEnd="@dimen/fragment_timev2_tvState_padding"
             android:text="rest"
             android:textColor="@color/fragment_time_normaltext_color"
             android:textSize="@dimen/fragment_timev2_tvState_textSize" />
@@ -46,6 +47,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginLeft="@dimen/fragment_timev2_margin"
+        android:baselineAligned="false"
         android:layout_marginRight="@dimen/fragment_timev2_margin"
         android:layout_marginStart="@dimen/fragment_timev2_margin"
         android:layout_marginEnd="@dimen/fragment_timev2_margin"

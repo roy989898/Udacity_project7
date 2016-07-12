@@ -88,6 +88,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onResume() {
         super.onResume();
         if (currentuser != null) {//already login
+            //save the UID for future use
+            String uid=currentuser.getUid();
+            Utility.setUid(getApplicationContext(),uid);
             goToTheMainActivity();
         } else {
             //need to login again

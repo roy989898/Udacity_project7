@@ -1,8 +1,6 @@
 package pom.poly.com.tabatatimer.Firebase;
 
-/**
- * Created by User on 6/7/2016.
- */
+
 public class Message {
     public String fromID;
     public String toID;
@@ -27,11 +25,7 @@ public class Message {
     public boolean equals(Object o) {
         if (o instanceof Message) {
             Message oMessage = (Message) o;
-            if (oMessage.fromID.equals(this.fromID) && oMessage.toID.equals(this.toID) && oMessage.dateTime == this.dateTime && oMessage.message.equals(this.message)) {
-                return true;
-            } else {
-                return false;
-            }
+            return oMessage.fromID.equals(this.fromID) && oMessage.toID.equals(this.toID) && oMessage.dateTime == this.dateTime && oMessage.message.equals(this.message);
         } else
             return super.equals(o);
 

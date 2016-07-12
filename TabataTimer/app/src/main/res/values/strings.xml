@@ -121,7 +121,7 @@
     <!--sig up activity -->
     <string name="sigup_activity_sigup_success">Sigup success!</string>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 
     <!--ranl cell string-->
@@ -142,7 +142,7 @@
     <string name="radio_button_total_text">Sport total time</string>
     <string name="radio_button_need_encouragement_text">Need encouragement</string>
     <string name="appwidget_text">00:00:00</string>
-    <string name="add_widget">Add widget</string>
+
 
 
     <!--Admob-->
@@ -168,5 +168,7 @@
 
     <string name="cd_like">Give one like</string>
     <string name="cd_create_meesage">Create a message</string>
+
+    <string name="cd_havelike">Have like</string>
 
 </resources>

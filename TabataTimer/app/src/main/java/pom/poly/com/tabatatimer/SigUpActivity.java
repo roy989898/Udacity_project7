@@ -122,10 +122,7 @@ public class SigUpActivity extends AppCompatActivity {
         boolean canCreateAccount = validateForm(edtUserID.getText().toString(), edtPassW.getText().toString());
         if (canCreateAccount) {
             createAccount(edtUserID.getText().toString(), edrePassW.getText().toString());
-        } else {
-
         }
-
     }
 
     private boolean isAEmail(String email) {
@@ -232,7 +229,7 @@ public class SigUpActivity extends AppCompatActivity {
                             Utility.saveEmail(email, getApplicationContext());
                             Toast.makeText(getApplicationContext(), success, Toast.LENGTH_SHORT).show();
 
-                            String uid = mAuth.getCurrentUser().getUid();
+                            String uid = Utility.getUid();
                             //to check is the use in Firebase dataBase?
                             DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
                             DatabaseReference userRef = baseRef.child("Users").child(uid);

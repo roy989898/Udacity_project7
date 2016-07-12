@@ -25,8 +25,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -104,7 +103,7 @@ public class TimerFragment extends Fragment {
         s -= TimeUnit.MINUTES.toSeconds(minutes);
         long seconds = s;
 
-        String timeString = String.format("%02d:%02d", minutes, seconds);
+        String timeString = String.format( Locale.US,"%02d:%02d", minutes, seconds);
 
 
         return timeString;
@@ -166,17 +165,17 @@ public class TimerFragment extends Fragment {
     }
 
     private void updatetheWidget() {
-        Intent intent=new Intent();
+        Intent intent = new Intent();
         intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
         AppWidgetManager manager = AppWidgetManager.getInstance(getContext());
         int[] ids = manager.getAppWidgetIds(new ComponentName(getContext(), TotalTimeWidget.class));
-        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS,ids);
+        intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, ids);
         getActivity().sendBroadcast(intent);
     }
 
     private void updatetoFirebase() {
 
-        long currentDateinMillis= Utility.getCurrentDateinMillis();
+        long currentDateinMillis = Utility.getCurrentDateinMillis();
 
         if (mDatabase == null) {
             mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -186,15 +185,15 @@ public class TimerFragment extends Fragment {
             mAuth = FirebaseAuth.getInstance();
         }
 
-        String useID = mAuth.getCurrentUser().getUid();
+        String useID = Utility.getUid();
 
         //get the reference at the login user email
 //        DatabaseReference idREF = mDatabase.child("Users").child(useID).child("totaltime");
 //        idREF.setValue(getTotalTabataTime());
         DatabaseReference idREF = mDatabase.child("Users").child(useID);
-        HashMap<String,Object> map=new HashMap<>();
-        map.put("totaltime",Utility.getTotalTabataTime());
-        map.put("lastupdateTime_totalTime",currentDateinMillis);
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("totaltime", Utility.getTotalTabataTime());
+        map.put("lastupdateTime_totalTime", currentDateinMillis);
         idREF.updateChildren(map);
     }
 
@@ -213,14 +212,14 @@ public class TimerFragment extends Fragment {
 
     private String getTodayDate() {
 //        yyyy/MM/dd HH:mm:ss
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         Calendar cal = Calendar.getInstance();
         return dateFormat.format(cal.getTime()); //2014/08/06 16:00:22
     }
 
     private String getNowTime() {
 //        yyyy/MM/dd HH:mm:ss
-        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss", Locale.US);
         Calendar cal = Calendar.getInstance();
         return dateFormat.format(cal.getTime()); //2014/08/06 16:00:22
     }
@@ -340,7 +339,7 @@ public class TimerFragment extends Fragment {
         }
         isPauseButton = false;
         PauseButtonToStartButton();
-        saveTimerAndCount(pauseTimer,actionTimer,totaltime,timerCount,isPauseTimerOn);
+        saveTimerAndCount(pauseTimer, actionTimer, totaltime, timerCount, isPauseTimerOn);
     }
 
     private void pauseandSavetheTime() {

@@ -10,9 +10,7 @@ import android.widget.TimePicker;
 
 import pom.poly.com.tabatatimer.R;
 
-/**
- * Created by User on 20/6/2016.
- */
+
 public class TimePickerPreference extends DialogPreference {
     private Context mcontext;
     private int hour = 0;

@@ -1,8 +1,6 @@
 package pom.poly.com.tabatatimer.Firebase;
 
-/**
- * Created by User on 29/6/2016.
- */
+
 public class User {
     public int likeNumber;
     public String userID;

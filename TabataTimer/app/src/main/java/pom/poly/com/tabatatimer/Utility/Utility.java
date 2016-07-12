@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -16,21 +15,38 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
+import pom.poly.com.tabatatimer.LoginActivity;
 import pom.poly.com.tabatatimer.R;
 
-/**
- * Created by User on 22/6/2016.
- */
+
 public class Utility {
+
+    static public String uid;
+
+    public static String getUid() {
+        return uid;
+    }
+
+    public static void setUid(Context context, String uid) {
+        Utility.uid = uid;
+
+        if (uid == null) {
+            Intent intent = new Intent(context, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            context.startActivity(intent);
+        }
+
+    }
 
     static public String getTodayDate() {
 //        yyyy/MM/dd HH:mm:ss
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
         Calendar cal = Calendar.getInstance();
         return dateFormat.format(cal.getTime()); //2014/08/06 16:00:22
     }
@@ -74,8 +90,6 @@ public class Utility {
                 /*String notaEmail = getResources().getString(R.string.notAemail);
                 edtUserID.setError(notaEmail);*/
                 valid = false;
-            } else {
-//                edtUserID.setError(null);
             }
         }
 
@@ -92,8 +106,6 @@ public class Utility {
                 /*String passwordErrorMessage = getResources().getString(R.string.passwordErrorMessage);
                 edtPassW.setError(passwordErrorMessage);*/
                 valid = false;
-            } else {
-//                edtPassW.setError(null);
             }
         }
 
@@ -102,14 +114,14 @@ public class Utility {
     }
 
     static public void saveEmail(String email, Context context) {
-        SharedPreferences preference = context.getSharedPreferences(context.getString(R.string.name_sharepreference), context.MODE_PRIVATE);
+        SharedPreferences preference = context.getSharedPreferences(context.getString(R.string.name_sharepreference), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preference.edit();
         editor.putString(context.getString(R.string.sharedpreference_email_key), email);
         editor.commit();
     }
 
     static public void saveTheLinkinSP(String downloadUrl, Context context) {
-        SharedPreferences preference = context.getSharedPreferences(context.getString(R.string.name_sharepreference), context.MODE_PRIVATE);
+        SharedPreferences preference = context.getSharedPreferences(context.getString(R.string.name_sharepreference), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preference.edit();
         editor.putString(context.getString(R.string.SharePreferenceDownloadLinkKey), downloadUrl);
         editor.commit();
@@ -129,7 +141,7 @@ public class Utility {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        return String.format("%d-%02d-%02d", year, month, day);
+        return String.format( Locale.US,"%d-%02d-%02d", year, month, day);
 
 
     }
@@ -137,7 +149,6 @@ public class Utility {
     public static void setTheNotification(Context context, String timeString) {
 //        use the Alarm manager to set the time,to call the specific broadcast receiver
 
-        SharedPreferences preference = PreferenceManager.getDefaultSharedPreferences(context);
 //        boolean switchOnOff = preference.getBoolean(context.getString(R.string.preference_nof_key), false);
 //        String timeString = preference.getString(context.getString(R.string.preference_timePick_key), context.getString(R.string.preference_timePick_defaultvalue));
 
@@ -180,7 +191,7 @@ public class Utility {
     }
 
     public static Calendar convertStringtoCalcender(String time) {
-        SimpleDateFormat form = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat form = new SimpleDateFormat("HH:mm", Locale.US);
         java.util.Date d1 = null;
         Calendar tdy1;
         Log.d("convertStringtoCalcender", "String time: " + time);

@@ -14,9 +14,7 @@ import butterknife.ButterKnife;
 import pom.poly.com.tabatatimer.ContentProvider.Eventinf;
 import pom.poly.com.tabatatimer.R;
 
-/**
- * Created by User on 28/6/2016.
- */
+
 public class DetailAdapter extends ArrayAdapter<Eventinf> {
 
     private Context mcontext;

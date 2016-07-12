@@ -58,7 +58,7 @@ public class SeetingFragment extends PreferenceFragment implements Preference.On
         if (preference instanceof EditTextPreference) {
             //upload the new user name
             DatabaseReference baseref = FirebaseDatabase.getInstance().getReference();
-            String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            String uid = Utility.getUid();
             DatabaseReference userRef = baseref.child("Users").child(uid);
             HashMap<String, Object> map = new HashMap<>();
             map.put("userName", stringValue);

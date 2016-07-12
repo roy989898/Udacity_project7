@@ -14,9 +14,7 @@ import pom.poly.com.tabatatimer.Firebase.Message;
 import pom.poly.com.tabatatimer.R;
 import pom.poly.com.tabatatimer.Utility.Utility;
 
-/**
- * Created by User on 7/7/2016.
- */
+
 public class MessageRecycleAdapter extends RecyclerView.Adapter<MessageRecycleAdapter.ViewHolder> {
 
     private ArrayList<Message> messageArra;

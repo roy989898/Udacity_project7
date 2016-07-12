@@ -112,13 +112,13 @@ public class profilePictureSetingActivity extends AppCompatActivity {
         //get the user ID
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         if (user == null) {
-            Toast.makeText(this, getString(R.string.unSuccessUploadMessageNoSigin), Toast.LENGTH_SHORT);
+            Toast.makeText(this, getString(R.string.unSuccessUploadMessageNoSigin), Toast.LENGTH_SHORT).show();
             return;
 
         }
-        String name = user.getDisplayName();
+       /* String name = user.getDisplayName();
         String email = user.getEmail();
-        Uri photoUrl = user.getPhotoUrl();
+        Uri photoUrl = user.getPhotoUrl();*/
 
         // The user's ID, unique to the Firebase project. Do NOT use this value to
         // authenticate with your backend server, if you have one. Use
@@ -155,7 +155,7 @@ public class profilePictureSetingActivity extends AppCompatActivity {
 
     private void upLoadtheProfileLink(String url) {
         DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
-        String userID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        String userID = Utility.getUid();
         DatabaseReference userREF = baseRef.child("Users").child(userID);
         HashMap<String, Object> map = new HashMap<>();
         map.put("profileLink", url);

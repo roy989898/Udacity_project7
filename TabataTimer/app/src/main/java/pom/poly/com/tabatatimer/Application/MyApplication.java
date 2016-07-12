@@ -8,9 +8,7 @@ import com.facebook.stetho.Stetho;
 import com.google.firebase.database.FirebaseDatabase;
 import com.orm.SugarApp;
 
-/**
- * Created by User on 30/6/2016.
- */
+
 public class MyApplication extends SugarApp {
 
     @Override

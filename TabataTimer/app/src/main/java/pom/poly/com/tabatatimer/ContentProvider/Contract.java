@@ -4,9 +4,7 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-/**
- * Created by User on 30/6/2016.
- */
+
 public class Contract {
 
     public static final class UserEntry implements BaseColumns {

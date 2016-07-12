@@ -6,7 +6,7 @@
 
     android:gravity="center"
     android:orientation="vertical"
-    android:padding="10dp" >
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/tv1"
@@ -15,9 +15,10 @@
         android:gravity="center" />
 
     <ImageView
+        android:id="@+id/imgCell"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_thumb_up_white_24px"
-        android:id="@+id/imgCell" />
+        android:contentDescription="@string/cd_havelike"
+        android:src="@drawable/ic_thumb_up_white_24px" />
 
 </LinearLayout>

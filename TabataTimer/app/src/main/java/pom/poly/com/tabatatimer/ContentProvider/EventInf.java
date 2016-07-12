@@ -3,7 +3,6 @@ package pom.poly.com.tabatatimer.ContentProvider;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
 
 import com.orm.SugarRecord;
 
@@ -81,9 +80,9 @@ public class Eventinf extends SugarRecord implements Parcelable {
 
     public static void notifyChanged() {
 
-            for (Observer observer : observers) {
-                observer.update();
-            }
+        for (Observer observer : observers) {
+            observer.update();
+        }
 
 
     }
@@ -92,7 +91,7 @@ public class Eventinf extends SugarRecord implements Parcelable {
     public long save() {
         long i = super.save();
 
-            notifyChanged();
+        notifyChanged();
 
 
         return i;

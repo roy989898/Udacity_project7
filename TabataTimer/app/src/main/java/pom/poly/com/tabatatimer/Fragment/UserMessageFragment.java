@@ -34,6 +34,7 @@ import pom.poly.com.tabatatimer.Adapter.MessageRecycleAdapter;
 import pom.poly.com.tabatatimer.Firebase.Message;
 import pom.poly.com.tabatatimer.Firebase.User;
 import pom.poly.com.tabatatimer.R;
+import pom.poly.com.tabatatimer.Utility.Utility;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -139,10 +140,11 @@ public class UserMessageFragment extends Fragment {
 
         Uri defaulrUri = new Uri.Builder().scheme(UriUtil.LOCAL_RESOURCE_SCHEME).path(String.valueOf(R.drawable.ic_account_circle_white_48dp)).build();
         String defaulrUriString = defaulrUri.toString();
-        String profilePURL = context.getSharedPreferences(getString(R.string.name_sharepreference), context.MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), defaulrUriString);
+        String profilePURL = context.getSharedPreferences(getString(R.string.name_sharepreference), Context.MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), defaulrUriString);
         imvProfilePicture.setImageURI(profilePURL);
 
-        uID = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        uID = Utility.getUid();
+
         userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uID);
         userListener = new ValueEventListener() {
             @Override

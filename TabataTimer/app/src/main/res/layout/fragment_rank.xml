@@ -103,6 +103,14 @@
                         android:textColor="@color/messageBox_message_text_color" />
 
                     <Button
+                        android:id="@+id/btCancel"
+                        style="@style/button_style"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2"
+                        android:contentDescription="@string/cd_cancel_send"
+                        android:text="Cancel" />
+                    <Button
                         android:id="@+id/btSend"
                         style="@style/button_style"
                         android:layout_width="0dp"
@@ -111,14 +119,7 @@
                         android:contentDescription="@string/cd_send_message"
                         android:text="Send" />
 
-                    <Button
-                        android:id="@+id/btCancel"
-                        style="@style/button_style"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:contentDescription="@string/cd_cancel_send"
-                        android:text="Cancel" />
+
 
                 </LinearLayout>
             </android.support.v7.widget.CardView>

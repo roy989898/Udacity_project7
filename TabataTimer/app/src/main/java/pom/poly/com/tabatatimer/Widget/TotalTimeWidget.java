@@ -5,7 +5,7 @@ import android.appwidget.AppWidgetProvider;
 import android.content.Context;
 import android.widget.RemoteViews;
 
-import com.facebook.stetho.common.Util;
+import java.util.Locale;
 
 import pom.poly.com.tabatatimer.R;
 import pom.poly.com.tabatatimer.Utility.Utility;
@@ -21,7 +21,7 @@ public class TotalTimeWidget extends AppWidgetProvider {
         long totalTime = Utility.getTotalTabataTime();
         //make the milsecond to hour, monutes,second
         long[] timeArray = Utility.getDurationBreakdown(totalTime);
-        String timeShow = String.format("%02d : %02d : %02d", timeArray[0], timeArray[1], timeArray[2]);
+        String timeShow = String.format( Locale.US,"%02d : %02d : %02d", timeArray[0], timeArray[1], timeArray[2]);
 
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.total_time_widget);
