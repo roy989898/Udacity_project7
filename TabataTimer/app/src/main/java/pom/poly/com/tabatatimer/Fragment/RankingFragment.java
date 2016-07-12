@@ -25,6 +25,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.crash.FirebaseCrash;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.Calendar;
