@@ -241,8 +241,7 @@ public class MainActivity extends AppCompatActivity {
 */
 
         resolver = getContentResolver();
-        deleteAllUserData(resolver);
-        readWhenupdate(resolver);
+
 
         if (Utility.getUid() == null) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -269,6 +268,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        deleteAllUserData(resolver);
+        readWhenupdate(resolver);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
