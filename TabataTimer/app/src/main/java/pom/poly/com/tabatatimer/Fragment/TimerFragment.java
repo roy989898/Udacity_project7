@@ -54,13 +54,12 @@ public class TimerFragment extends Fragment {
     @BindView(R.id.btPlayNpause)
     ImageButton btPlayNpause;
 
-    /*private int restTimerDeadline = 10;
+    private int restTimerDeadline = 10;
     private int actionTimerDeadline = 20;
     private int cycletimerDeadline = 8;
-*/
-    private int restTimerDeadline = 1;
+    /*private int restTimerDeadline = 1;
     private int actionTimerDeadline = 1;   //TODO for test
-    private int cycletimerDeadline = 1;
+    private int cycletimerDeadline = 1;*/
 
     private boolean pauseTimerOn = true;
     private int pauseTimer = 0;

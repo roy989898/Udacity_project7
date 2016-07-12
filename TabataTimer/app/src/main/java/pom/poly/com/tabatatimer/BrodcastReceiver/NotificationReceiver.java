@@ -25,7 +25,7 @@ public class NotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        // TODO: This method is called when the BroadcastReceiver is receiving
+
         // an Intent broadcast.
 //        prevent the trigger at the wrong time
         Calendar nowCalcender = Calendar.getInstance();
@@ -37,8 +37,7 @@ public class NotificationReceiver extends BroadcastReceiver {
         Calendar cal = Utility.convertStringtoCalcender(timeString);
         Log.d("NotificationReceiver", "receive before check the time");
         if (nowCalcender.get(Calendar.HOUR_OF_DAY) == cal.get(Calendar.HOUR_OF_DAY) && nowCalcender.get(Calendar.MINUTE) == cal.get(Calendar.MINUTE)) {
-            Log.d("NotificationReceiver", "receive");
-            //TODO
+
             createNotification(context);
         }
 
@@ -46,14 +45,14 @@ public class NotificationReceiver extends BroadcastReceiver {
     }
 
     private void createNotification(Context context) {
-        //TODO move the string to xml
+
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.mipmap.ic_launcher)
-                        .setContentTitle("Tabata Timer")
-                        .setContentText("It is time to do tabata")
+                        .setContentTitle(context.getString(R.string.notifiaction_title))
+                        .setContentText(context.getString(R.string.notifiaction_text))
                         .setAutoCancel(true)
                         .setSound(alarmSound);
 // Creates an explicit intent for an Activity in your app

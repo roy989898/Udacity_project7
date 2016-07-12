@@ -148,6 +148,9 @@
     <!--Admob-->
     <string name="banner_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
 
+    <!--Notification-->
+    <string name="notifiaction_title">Tabata Timer</string>
+    <string name="notifiaction_text">It is time to do tabata</string>
     <!--ContentDescription-->
     <string name="cd_login_button">This is a login button</string>
 

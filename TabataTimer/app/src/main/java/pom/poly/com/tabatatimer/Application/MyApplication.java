@@ -32,7 +32,7 @@ public class MyApplication extends SugarApp {
         Stetho.Initializer initializer = initializerBuilder.build();
 
 // Initialize Stetho with the Initializer
-        Stetho.initialize(initializer);
+//        Stetho.initialize(initializer);
         //TODO remeber to delete the Stetho when publish the app
 
         Fresco.initialize(this);

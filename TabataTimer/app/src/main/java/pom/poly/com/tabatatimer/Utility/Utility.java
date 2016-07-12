@@ -141,7 +141,7 @@ public class Utility {
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
 
-        return String.format( Locale.US,"%d-%02d-%02d", year, month, day);
+        return String.format(Locale.US, "%d-%02d-%02d", year, month, day);
 
 
     }
@@ -171,7 +171,7 @@ public class Utility {
 
 //            set a new one
         //TODO set to 24 hours
-        am.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 60 * 60 * 1000, pi);
+        am.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 24 * 60 * 60 * 1000, pi);
 
     }
 
