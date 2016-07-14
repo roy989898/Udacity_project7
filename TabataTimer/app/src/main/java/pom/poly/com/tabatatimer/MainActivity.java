@@ -136,7 +136,12 @@ public class MainActivity extends AppCompatActivity {
         values.put(Contract.UserEntry.COLUMN_NAME, user.userName);
         values.put(Contract.UserEntry.COLUMN_LAST_UPDTAETIME, user.lastupdateTime_totalTime);
 
-        resolver.insert(Contract.UserEntry.CONTENT_URI, values);
+        try {
+            resolver.insert(Contract.UserEntry.CONTENT_URI, values);
+        }catch (Exception e){
+            Log.d("insert error",e.toString());
+        }
+
     }
 
     private void updateUserDate(ContentResolver resolver, User user) {
@@ -148,8 +153,15 @@ public class MainActivity extends AppCompatActivity {
         values.put(Contract.UserEntry.COLUMN_USERID, user.userID);
         values.put(Contract.UserEntry.COLUMN_NAME, user.userName);
 
-//        resolver.insert(Contract.UserEntry.CONTENT_URI, values);
-        resolver.update(Contract.UserEntry.CONTENT_URI, values, Contract.UserEntry.COLUMN_EMAIL + "=?", new String[]{user.email + ""});
+
+
+        try {
+            //        resolver.insert(Contract.UserEntry.CONTENT_URI, values);
+            resolver.update(Contract.UserEntry.CONTENT_URI, values, Contract.UserEntry.COLUMN_EMAIL + "=?", new String[]{user.email + ""});
+        }catch (Exception e){
+            Log.d("update error",e.toString());
+        }
+
     }
 
     private void readWhenupdate(final ContentResolver resolver) {
