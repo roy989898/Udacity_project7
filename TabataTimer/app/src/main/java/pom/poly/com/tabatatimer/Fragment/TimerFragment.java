@@ -18,6 +18,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -184,7 +185,11 @@ public class TimerFragment extends Fragment {
             mAuth = FirebaseAuth.getInstance();
         }
 
-        String useID = Utility.getUid();
+
+        FirebaseUser currentuser = mAuth.getCurrentUser();
+        String useID = currentuser.getUid();
+
+
 
         //get the reference at the login user email
 //        DatabaseReference idREF = mDatabase.child("Users").child(useID).child("totaltime");

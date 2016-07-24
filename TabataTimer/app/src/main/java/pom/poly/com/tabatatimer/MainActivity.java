@@ -255,12 +255,12 @@ public class MainActivity extends AppCompatActivity {
         resolver = getContentResolver();
 
 
-        if (Utility.getUid() == null) {
+        /*if (Utility.getUid() == null) {
             FirebaseAuth mAuth = FirebaseAuth.getInstance();
             FirebaseUser currentuser = mAuth.getCurrentUser();
             String uidSave = currentuser.getUid();
             Utility.setUid(getApplicationContext(), uidSave);
-        }
+        }*/
 
     }
 

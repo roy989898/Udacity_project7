@@ -228,12 +228,10 @@ public class SigUpActivity extends AppCompatActivity {
 
                             //save the UID for future use
                             FirebaseUser currentuser = mAuth.getCurrentUser();
-                            String uidSave=currentuser.getUid();
-                            Utility.setUid(getApplicationContext(),uidSave);
+                            String uid=currentuser.getUid();
+
                             Utility.saveEmail(email, getApplicationContext());
                             Toast.makeText(getApplicationContext(), success, Toast.LENGTH_SHORT).show();
-
-                            String uid = Utility.getUid();
                             //to check is the use in Firebase dataBase?
                             DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
                             DatabaseReference userRef = baseRef.child("Users").child(uid);

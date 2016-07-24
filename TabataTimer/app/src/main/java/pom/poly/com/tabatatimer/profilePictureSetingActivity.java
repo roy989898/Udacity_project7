@@ -155,7 +155,9 @@ public class profilePictureSetingActivity extends AppCompatActivity {
 
     private void upLoadtheProfileLink(String url) {
         DatabaseReference baseRef = FirebaseDatabase.getInstance().getReference();
-        String userID = Utility.getUid();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentuser = mAuth.getCurrentUser();
+        String userID = currentuser.getUid();
         DatabaseReference userREF = baseRef.child("Users").child(userID);
         HashMap<String, Object> map = new HashMap<>();
         map.put("profileLink", url);

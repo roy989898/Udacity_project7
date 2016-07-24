@@ -19,6 +19,7 @@ import com.facebook.drawee.view.SimpleDraweeView;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,7 +35,6 @@ import pom.poly.com.tabatatimer.Adapter.MessageRecycleAdapter;
 import pom.poly.com.tabatatimer.Firebase.Message;
 import pom.poly.com.tabatatimer.Firebase.User;
 import pom.poly.com.tabatatimer.R;
-import pom.poly.com.tabatatimer.Utility.Utility;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -143,7 +143,10 @@ public class UserMessageFragment extends Fragment {
         String profilePURL = context.getSharedPreferences(getString(R.string.name_sharepreference), Context.MODE_PRIVATE).getString(getString(R.string.SharePreferenceDownloadLinkKey), defaulrUriString);
         imvProfilePicture.setImageURI(profilePURL);
 
-        uID = Utility.getUid();
+        FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        FirebaseUser currentuser = mAuth.getCurrentUser();
+        uID = currentuser.getUid();
+
 
         userRef = FirebaseDatabase.getInstance().getReference().child("Users").child(uID);
         userListener = new ValueEventListener() {

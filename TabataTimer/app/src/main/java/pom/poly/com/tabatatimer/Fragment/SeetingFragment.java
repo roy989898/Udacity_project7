@@ -9,6 +9,7 @@ import android.preference.PreferenceManager;
 import android.util.Log;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -58,7 +59,11 @@ public class SeetingFragment extends PreferenceFragment implements Preference.On
         if (preference instanceof EditTextPreference) {
             //upload the new user name
             DatabaseReference baseref = FirebaseDatabase.getInstance().getReference();
-            String uid = Utility.getUid();
+
+            FirebaseAuth mAuth = FirebaseAuth.getInstance();
+            FirebaseUser currentuser = mAuth.getCurrentUser();
+            String uid = currentuser.getUid();
+
             DatabaseReference userRef = baseref.child("Users").child(uid);
             HashMap<String, Object> map = new HashMap<>();
             map.put("userName", stringValue);

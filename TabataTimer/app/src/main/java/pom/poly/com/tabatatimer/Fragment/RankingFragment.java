@@ -25,6 +25,7 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 
 import java.util.Calendar;
@@ -142,7 +143,11 @@ public class RankingFragment extends Fragment implements LoaderManager.LoaderCal
             @Override
             public void onClick(View v) {
                 long datetime = Calendar.getInstance().getTimeInMillis();
-                String fromID = Utility.getUid();
+
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                FirebaseUser currentuser = mAuth.getCurrentUser();
+                String fromID = currentuser.getUid();
+
                 //get the user name:
                 String userName = PreferenceManager.getDefaultSharedPreferences(getContext()).getString(getString(R.string.preference_name_key), getString(R.string.preference_name_defaultvalue));
                 Message message = new Message(datetime, fromID, editText.getText().toString(), uid, userName);
