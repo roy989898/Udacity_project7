@@ -31,10 +31,11 @@ This is the capstone project of the Udacity Android Developer Nanodegree. This i
 - SQLite
 - Firebase
 - fresco
-- butterknifeS
-- Material Des
+- butterknife
+- Material Design
 - Google play service Admob
-- Material design principles
+
+  ​
 
 ## Screenshots
 
