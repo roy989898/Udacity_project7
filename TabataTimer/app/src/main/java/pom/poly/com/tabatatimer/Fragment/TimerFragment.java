@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.PowerManager;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -83,8 +84,10 @@ public class TimerFragment extends Fragment {
 
     @Override
     public void onPause() {
+        CancelkeepScreenOn();
         super.onPause();
         pauseandSavetheTime();
+
     }
 
     @Override
@@ -103,7 +106,7 @@ public class TimerFragment extends Fragment {
         s -= TimeUnit.MINUTES.toSeconds(minutes);
         long seconds = s;
 
-        String timeString = String.format( Locale.US,"%02d:%02d", minutes, seconds);
+        String timeString = String.format(Locale.US, "%02d:%02d", minutes, seconds);
 
 
         return timeString;
@@ -282,6 +285,22 @@ public class TimerFragment extends Fragment {
         isPauseButton = false;
     }
 
+    private void keepScreenOn() {
+        final PowerManager pm = (PowerManager) getActivity().getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock mWakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
+        mWakeLock.acquire();
+    }
+
+    private void CancelkeepScreenOn() {
+        final PowerManager pm = (PowerManager) getActivity().getSystemService(Context.POWER_SERVICE);
+        PowerManager.WakeLock mWakeLock = pm.newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, "My Tag");
+
+        try {
+            mWakeLock.release();
+        }catch (Throwable th){}
+
+    }
+
     @OnClick({R.id.btPlayNpause, R.id.btReset})
     public void onClick(View view) {
         switch (view.getId()) {
@@ -290,10 +309,14 @@ public class TimerFragment extends Fragment {
                     //Pause button
                     PauseButtonToStartButton();
                     pauseandSavetheTime();
+
+                    CancelkeepScreenOn();
                 } else {
                     //Start putton
                     StartbuttonToPauseButton();
                     startTimerandCount();
+
+                    keepScreenOn();
 
 
                 }
@@ -301,6 +324,7 @@ public class TimerFragment extends Fragment {
                 break;
             case R.id.btReset:
                 stopAndResetTheTimer();
+                CancelkeepScreenOn();
                 break;
         }
     }
